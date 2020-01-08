@@ -7,10 +7,13 @@
 
 package frc.robot;
 
+import com.revrobotics.ColorSensorV3;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Ports;
+import com.revrobotics.ColorSensorV3;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +27,7 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
 
   /**
    * This function is run when the robot is first started up and should be
@@ -34,6 +38,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+
+    
   }
 
   /**
@@ -93,6 +99,10 @@ public class Robot extends TimedRobot {
    * This function is called periodically during test mode.
    */
   @Override
-  public void testPeriodic() {
+  public void testPeriodic() 
+  {
+    int valProx = m_colorSensor.getProximity();
+    ColorSensorV3.RawColor valColor = m_colorSensor.getRawColor();
+    System.out.println("Proximity: " + valProx + " R:" + valColor.red + " G:" + valColor.green + " B:" + valColor.blue);
   }
 }

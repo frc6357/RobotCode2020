@@ -7,7 +7,7 @@ package frc.robot;
 public class Ports
 {
     // ***************************
-    // I2C device addresses
+    // I2C device ports
     // ***************************
-    public static final int i2cColorSensor   = 0x52;
+    public static final int i2cColorSensor   = 0;
 }
