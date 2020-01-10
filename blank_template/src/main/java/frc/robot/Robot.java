@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj.util.Color8Bit;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -101,12 +102,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    int valProx = m_colorSensor.getProximity();
+    //int valProx = m_colorSensor.getProximity();
     ColorSensorV3.RawColor valColor = m_colorSensor.getRawColor();
-    Color likelyColor = m_colorSensor.getColor();
-    int red = valColor.red;
-    int green = valColor.green;
-    int blue = valColor.blue;
+    Color normalized = guessColorWithMagnitude(valColor);
+    System.out.println(normalized.red + " " + normalized.green + " " + normalized.blue + " " + valColor.red + " " + valColor.green + " " + valColor.blue);
+
     // System.out.println("Proximity: " + valProx + " R:" + valColor.red + " G:" +
     // valColor.green + " B:" + valColor.blue + " Likely color is:" +
     // Integer.toHexString(likelyColor.hashCode()));
@@ -135,5 +135,43 @@ public class Robot extends TimedRobot {
     }
     System.out.println("R: " + red + " G: " + green + " B: " + blue + " Raw R: " + valColor.red + " G: " + valColor.green + " B: " + valColor.blue);
     */
+  }
+  
+  public static Color guessColor(ColorSensorV3.RawColor color)
+  {
+    // This code allows us to find the maximum 
+    int maximum = Math.max(Math.max(color.red, color.green), color.blue);
+    int red = 0;
+    int green = 0;
+    int blue = 0;
+    if(maximum != 0)
+    {
+      red   = (color.red * 255) / maximum;
+      green = (color.green * 255) / maximum;
+      blue  = (color.blue * 255) /maximum;
+    }
+    Color8Bit normalized = new Color8Bit(red, green, blue);
+    return new Color(normalized);
+  
+  }
+  public static Color guessColorWithMagnitude(ColorSensorV3.RawColor color)
+  {
+    //This is a hack test DO NOT KEEP!!!!
+    color.green /= 2;
+
+    // This code allows us to find the magnitude to scale answers
+    int magnitude = color.red + color.green + color.blue;
+    int red = 0;
+    int green = 0;
+    int blue = 0;
+    if(magnitude != 0)
+    {
+      red   = (color.red * 255) / magnitude;
+      green = (color.green * 255) / magnitude;
+      blue  = (color.blue * 255) /magnitude;
+    }
+    Color8Bit normalized = new Color8Bit(red, green, blue);
+    return new Color(normalized);
+  
   }
 }
