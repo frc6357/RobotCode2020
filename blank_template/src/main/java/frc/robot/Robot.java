@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
+import edu.wpi.first.wpilibj.Joystick;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import frc.robot.Ports;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,6 +32,8 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
+  private final WPI_TalonSRX motorWheel     = new WPI_TalonSRX(Ports.motorColorWheel);
+  private final Joystick joystickDriver     = new Joystick(Ports.OIDriverJoystick);
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -102,6 +107,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    // Set the wheel motor speed
+    int motorspeed = (int)(255.0 * joystickDriver.getRawAxis(Ports.OIDriverLeftDrive));
+    motorWheel.set(motorspeed);
+    
     //int valProx = m_colorSensor.getProximity();
     ColorSensorV3.RawColor valColor = m_colorSensor.getRawColor();
     Color normalized = guessColorWithMagnitude(valColor);
