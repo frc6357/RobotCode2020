@@ -14,7 +14,7 @@ public class Ports
     // ***************************
     // Color Wheel Mechanism
     // ***************************
-    public static final int motorColorWheel  = 21;  // CAN ID 21
+    public static final int motorColorWheel  = 12;  // CAN ID 12
 
     // ***************************
     // Driver Interface
