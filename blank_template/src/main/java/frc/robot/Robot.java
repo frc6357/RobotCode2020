@@ -101,6 +101,10 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
   }
+  @Override
+  public void testInit(){
+    boolean testmodestatus = SmartDashboard.putboolean("Test mode enabled", true);
+  }
 
   /**
    * This function is called periodically during test mode.
@@ -108,13 +112,17 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     // Set the wheel motor speed
-    int motorspeed = (int)(255.0 * joystickDriver.getRawAxis(Ports.OIDriverLeftDrive));
-    motorWheel.set(motorspeed);
+    //double motorspeed = joystickDriver.getRawAxis(Ports.OIDriverLeftDrive);
+   
     
     //int valProx = m_colorSensor.getProximity();
     ColorSensorV3.RawColor valColor = m_colorSensor.getRawColor();
     Color normalized = guessColorWithMagnitude(valColor);
     System.out.println(normalized.red + " " + normalized.green + " " + normalized.blue + " " + valColor.red + " " + valColor.green + " " + valColor.blue);
+    double motorspeed = SmartDashboard.getNumber("Motor Controller", 0.0);
+
+    motorWheel.set(motorspeed);
+
 
     // System.out.println("Proximity: " + valProx + " R:" + valColor.red + " G:" +
     // valColor.green + " B:" + valColor.blue + " Likely color is:" +
