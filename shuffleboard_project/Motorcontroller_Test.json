@@ -17,7 +17,7 @@
             ],
             "content": {
               "_type": "List Layout",
-              "_title": "Motorcontroler",
+              "_title": "Motorcontroller",
               "Layout/Label position": "BOTTOM",
               "_children": [
                 {
@@ -26,14 +26,21 @@
                   "Slider Settings/Min": -1.0,
                   "Slider Settings/Max": 1.0,
                   "Slider Settings/Block increment": 0.0625
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_title": "Robot on/off status",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
                 }
               ]
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Test mode enabled",
+              "_title": "Test mode enabled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -48,7 +55,28 @@
         "showGrid": true,
         "hgap": 16.0,
         "vgap": 16.0,
-        "tiles": {}
+        "tiles": {
+          "0,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Ungrouped",
+              "_title": "Ungrouped",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [12]",
+                  "_title": "Talon SRX [12]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                }
+              ]
+            }
+          }
+        }
       }
     },
     {

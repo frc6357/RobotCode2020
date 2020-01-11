@@ -11,11 +11,9 @@ import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
-import edu.wpi.first.wpilibj.Joystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Ports;
 
@@ -27,13 +25,8 @@ import frc.robot.Ports;
  * project.
  */
 public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
   private final WPI_TalonSRX motorWheel     = new WPI_TalonSRX(Ports.motorColorWheel);
-  private final Joystick joystickDriver     = new Joystick(Ports.OIDriverJoystick);
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -41,10 +34,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
-
+   
   }
 
   /**
@@ -74,9 +64,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    
   }
 
   /**
@@ -84,15 +72,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-    case kCustomAuto:
-      // Put custom auto code here
-      break;
-    case kDefaultAuto:
-    default:
-      // Put default auto code here
-      break;
-    }
+    
   }
 
   /**
@@ -103,7 +83,12 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void testInit(){
-    boolean testmodestatus = SmartDashboard.putboolean("Test mode enabled", true);
+    SmartDashboard.putBoolean("Test mode enabled", true);
+  }
+
+  @Override
+  public void disabledInit(){
+    SmartDashboard.putBoolean("Test mode enabled", false);
   }
 
   /**
@@ -111,47 +96,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    // Set the wheel motor speed
-    //double motorspeed = joystickDriver.getRawAxis(Ports.OIDriverLeftDrive);
-   
-    
-    //int valProx = m_colorSensor.getProximity();
     ColorSensorV3.RawColor valColor = m_colorSensor.getRawColor();
     Color normalized = guessColorWithMagnitude(valColor);
     System.out.println(normalized.red + " " + normalized.green + " " + normalized.blue + " " + valColor.red + " " + valColor.green + " " + valColor.blue);
-    double motorspeed = SmartDashboard.getNumber("Motor Controller", 0.0);
+    double motorspeed = SmartDashboard.getNumber("Motor Controller", 1.0);
 
     motorWheel.set(motorspeed);
-
-
-    // System.out.println("Proximity: " + valProx + " R:" + valColor.red + " G:" +
-    // valColor.green + " B:" + valColor.blue + " Likely color is:" +
-    // Integer.toHexString(likelyColor.hashCode()));
-    // System.out.printf("Proximity: %d R: %d G: %d B: %d Likely: %08x", valProx,
-    // valColor.red, valColor.green, valColor.blue, likelyColor.hashCode());
-
-    /*
-    This was our first algorithm and the problem was the green was overly higher than any other color we tested
-    Another problem problem we encountered was that any small variation got scaled into a much larger variation and any pure grey values would result in an error
-    int minimum = Math.min(Math.min(red, green), blue);
-    red -= minimum;
-    green -= minimum;
-    blue -= minimum;
-    int maximum = Math.max(Math.max(red, green), blue);
-    if(maximum)
-    {
-      red = red * 100 / maximum;
-      green = green * 100 / maximum;
-      blue = blue * 100 / maximum;
-    }
-    else
-    {
-      red = 0;
-      green = 0;
-      blue = 0;
-    }
-    System.out.println("R: " + red + " G: " + green + " B: " + blue + " Raw R: " + valColor.red + " G: " + valColor.green + " B: " + valColor.blue);
-    */
   }
   
   public static Color guessColor(ColorSensorV3.RawColor color)
