@@ -13,14 +13,27 @@
           "0,0": {
             "size": [
               2,
-              1
+              2
             ],
             "content": {
-              "_type": "Number Slider",
-              "_title": "Motor Controller",
-              "Slider Settings/Min": -1.0,
-              "Slider Settings/Max": 1.0,
-              "Slider Settings/Block increment": 0.0625
+              "_type": "List Layout",
+              "_title": "Motorcontroler",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Number Slider",
+                  "_title": "Motor Controller",
+                  "Slider Settings/Min": -1.0,
+                  "Slider Settings/Max": 1.0,
+                  "Slider Settings/Block increment": 0.0625
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_title": "Robot on/off status",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              ]
             }
           }
         }
@@ -52,9 +65,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.0,
-    "y": 0.0,
-    "width": 1521.5999755859375,
-    "height": 824.0
+    "x": -7.199999809265137,
+    "y": -7.199999809265137,
+    "width": 1550.4000244140625,
+    "height": 838.4000244140625
   }
 }
