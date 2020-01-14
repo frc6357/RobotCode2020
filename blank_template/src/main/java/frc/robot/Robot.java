@@ -15,9 +15,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
-import edu.wpi.first.wpilibj.Joystick;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import frc.robot.Ports;
+//import edu.wpi.first.wpilibj.Joystick;
+//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+//import frc.robot.Ports;
+import com.revrobotics.ColorMatchResult;
+import com.revrobotics.ColorMatch;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,8 +34,14 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
-  private final WPI_TalonSRX motorWheel     = new WPI_TalonSRX(Ports.motorColorWheel);
-  private final Joystick joystickDriver     = new Joystick(Ports.OIDriverJoystick);
+  ColorMatch m_colorMatcher = new ColorMatch();
+  //private final WPI_TalonSRX motorWheel     = new WPI_TalonSRX(Ports.motorColorWheel);
+  //private final Joystick joystickDriver     = new Joystick(Ports.OIDriverJoystick);
+
+  private Color kRedTarget    = ColorMatch.makeColor(0.42, 0.39,  0.17);
+  private Color kGreenTarget  = ColorMatch.makeColor(0.22, 0.52,  0.23);
+  private Color kCyanTarget   = ColorMatch.makeColor(0.18, 0.445, 0.38);
+  private Color kYellowTarget = ColorMatch.makeColor(0.31, 0.53,  0.15);
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -101,9 +109,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
   }
+
   @Override
-  public void testInit(){
-    boolean testmodestatus = SmartDashboard.putboolean("Test mode enabled", true);
+  public void testInit() {
+    m_colorMatcher.addColorMatch(kRedTarget);
+    m_colorMatcher.addColorMatch(kGreenTarget);
+    m_colorMatcher.addColorMatch(kCyanTarget);
+    m_colorMatcher.addColorMatch(kYellowTarget);
   }
 
   /**
@@ -112,18 +124,17 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     // Set the wheel motor speed
-    //double motorspeed = joystickDriver.getRawAxis(Ports.OIDriverLeftDrive);
-   
-    
+    //int motorspeed = (int)(255.0 * joystickDriver.getRawAxis(Ports.OIDriverLeftDrive));
+    //motorWheel.set(motorspeed);
     //int valProx = m_colorSensor.getProximity();
-    ColorSensorV3.RawColor valColor = m_colorSensor.getRawColor();
-    Color normalized = guessColorWithMagnitude(valColor);
-    System.out.println(normalized.red + " " + normalized.green + " " + normalized.blue + " " + valColor.red + " " + valColor.green + " " + valColor.blue);
-    double motorspeed = SmartDashboard.getNumber("Motor Controller", 0.0);
-
-    motorWheel.set(motorspeed);
-
-
+    //ColorSensorV3.RawColor valColor = m_colorSensor.getRawColor();
+    Color detectedColor = m_colorSensor.getColor();
+    
+    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    System.out.println("The color is: " + getColorName(match.color));
+    //Color normalized = guessColorWithMagnitude(valColor);
+    //System.out.println("R: " + detectedColor.red + " G: " + detectedColor.green + " B: " + detectedColor.blue);
+    
     // System.out.println("Proximity: " + valProx + " R:" + valColor.red + " G:" +
     // valColor.green + " B:" + valColor.blue + " Likely color is:" +
     // Integer.toHexString(likelyColor.hashCode()));
@@ -161,6 +172,7 @@ public class Robot extends TimedRobot {
     int red = 0;
     int green = 0;
     int blue = 0;
+
     if(maximum != 0)
     {
       red   = (color.red * 255) / maximum;
@@ -190,5 +202,30 @@ public class Robot extends TimedRobot {
     Color8Bit normalized = new Color8Bit(red, green, blue);
     return new Color(normalized);
   
+  }
+  
+  // Given color it will return the most likely color or "Unknown".
+  public String getColorName(Color color)
+  {
+    if(color == kCyanTarget)
+    {
+      return "Cyan";
+    }
+    else if(color == kRedTarget)
+    {
+      return "Red";
+    }
+    else if(color == kGreenTarget)
+    {
+      return "Green";
+    }
+    else if(color == kYellowTarget)
+    {
+      return "Yellow";
+    }
+    else
+    {
+      return "Unknown";
+    }
   }
 }
