@@ -26,21 +26,15 @@
                   "Slider Settings/Min": -1.0,
                   "Slider Settings/Max": 1.0,
                   "Slider Settings/Block increment": 0.0625
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Test mode enabled",
+                  "_title": "Test mode enabled",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
                 }
               ]
-            }
-          },
-          "2,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Test mode enabled",
-              "_title": "Test mode enabled",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
