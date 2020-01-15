@@ -2,3 +2,8 @@
 blank_template/.wpilib/wpilib_preferences.json
 blank_template/gradle/wrapper/gradle-wrapper.jar
 blank_template/gradle/wrapper/gradle-wrapper.jar
+production_software/.vscode/launch.json
+production_software/.vscode/launch.json
+production_software/.vscode/settings.json
+production_software/.wpilib/wpilib_preferences.json
+production_software/.vscode/settings.json
