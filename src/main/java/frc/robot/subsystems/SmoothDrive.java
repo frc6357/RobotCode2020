@@ -11,7 +11,7 @@ import frc.robot.subsystems.base.SuperClasses.*;
  */
 public class SmoothDrive
 {
-    private BaseDrive Drive;
+    private BaseDrive drive;
 
     private final int LEFT        = 0;
     private final int RIGHT       = 1;
@@ -38,14 +38,14 @@ public class SmoothDrive
      */
     public SmoothDrive(BaseDrive Drive, double accelMaxForward, double accelMaxBackward)
     {
-        this.Drive           = Drive;
+        this.drive           = Drive;
         this.accelMax[LEFT]  = accelMaxForward;
         this.accelMax[RIGHT] = accelMaxBackward;
     }
 
     public SmoothDrive(BaseDrive Drive, double accelMax)
     {
-        this.Drive           = Drive;
+        this.drive           = Drive;
         this.accelMax[LEFT]  = accelMax;
         this.accelMax[RIGHT] = accelMax;
     }
@@ -206,13 +206,13 @@ public class SmoothDrive
         // speed.
         if(speedNew[LEFT] != speedCurrent[LEFT])
         {
-            Drive.setLeftSpeed(speedNew[LEFT]);
+            drive.SetSpeed(speedNew[LEFT], speedCurrent[RIGHT]);
             speedCurrent[LEFT] = speedNew[LEFT];
         }
 
         if(speedNew[RIGHT] != speedCurrent[RIGHT])
         {
-            Drive.setRightSpeed(speedNew[RIGHT]);
+            drive.SetSpeed(speedCurrent[LEFT], speedNew[RIGHT]);
             speedCurrent[RIGHT] = speedNew[RIGHT];
         }
     }
