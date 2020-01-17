@@ -1,4 +1,4 @@
-Coding Rules
+# Coding Rules
 ------------
 
 We'll flesh this out into a real coding standard soon but, for now, here are a few rules that programmers should adopt when working in the robot_code repository.
@@ -17,9 +17,17 @@ We'll flesh this out into a real coding standard soon but, for now, here are a f
 
 7. Use the proper, God's-intended coding style of putting brackets in vertical alignment when writing ifs, elses, methods, classes, etc.
 
-8. JavaDoc documentation must be created for all classes. Each class will be preceded with a javadoc comment and be followed by a short description of the function of the class. For those interested, html commands like <p>text</p> is available. Further information on JavaDoc markup can be found at http://www.write-technical.com/126581/javadoc/javadoc-info.htm.
+8. Class Names always start with an upper class character, method and variable names start with a lower case letter. Each additional word starts with an upper class letter.
 
-9. JavaDoc documentation must be created for all class methods. Every method will have documentation according to the following format:
+9. In method names, the verb goes first. EX: setSpeed();, not speedSet();.
+
+10. All field members should be PRIVATE.
+
+11. All Enums should be named with either all capital letters such as TEST. All multiword Enums should be seperated using capital letters. Example: PRESSURE_IS_HIGH.
+
+12. JavaDoc documentation must be created for all classes. Each class will be preceded with a javadoc comment and be followed by a short description of the function of the class. For those interested, html commands like \<p>text\</p> is available. Further information on JavaDoc markup can be found at http://www.write-technical.com/126581/javadoc/javadoc-info.htm.
+
+13. JavaDoc documentation must be created for all class methods. Every method will have documentation according to the following format:
 
 /**
  * The first part of the comment will be a short description of the method's function
