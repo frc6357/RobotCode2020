@@ -23,7 +23,7 @@ We'll flesh this out into a real coding standard soon but, for now, here are a f
 
 10. All field members should be PRIVATE.
 
-11. All Enums should be named with either all capital letters such as TEST, or use a lower case prefix, and then the rest of it as upper class. Example: skCYAN.
+11. All Enums should be named with either all capital letters such as TEST. All multiword Enums should be seperated using capital letters. Example: PRESSURE_IS_HIGH.
 
 12. JavaDoc documentation must be created for all classes. Each class will be preceded with a javadoc comment and be followed by a short description of the function of the class. For those interested, html commands like \<p>text\</p> is available. Further information on JavaDoc markup can be found at http://www.write-technical.com/126581/javadoc/javadoc-info.htm.
 
