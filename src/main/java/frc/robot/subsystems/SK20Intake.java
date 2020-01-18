@@ -4,7 +4,6 @@ package frc.robot.subsystems;
 // import frc.robot.subsystems.base.BaseRoller;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-// TODO: Need to be checked
 // TODO: Need to write this class.
 /**
  * The SK20Intake class is the subsystem that interacts with the intake to both set its speed and deploy or retract it and get its status.
