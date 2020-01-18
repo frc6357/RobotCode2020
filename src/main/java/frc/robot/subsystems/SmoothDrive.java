@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.Arrays;
+
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.SuperClasses.BaseDrive;
 
@@ -111,7 +113,6 @@ public class SmoothDrive {
         boolean leftIsLarger = Math.abs(delta[LEFT]) > Math.abs(delta[RIGHT]);
         double[] speedNew = leftIsLarger ? calculateNewSpeeds(delta, LEFT, RIGHT)
                 : calculateNewSpeeds(delta, RIGHT, LEFT);
-
         drive.SetSpeed(speedNew[LEFT], speedNew[RIGHT]);
         speedCurrentTarget = speedNew;
     }
@@ -134,6 +135,9 @@ public class SmoothDrive {
      *         - It returns the speeds we need to set the new speeds of motors.
      */
     private double[] calculateNewSpeeds(double[] delta, int unscaled, int scaled) {
+        if(delta[unscaled] == 0.0) {
+            return speedCurrentTarget;
+        }
         double speedTemp = calculateSendSpeed(scaled);
         double[] speedNew = new double[2];
         speedNew[scaled] = Math.abs((delta[scaled] / delta[unscaled]) * speedTemp) * Math.signum(speedTemp);
@@ -154,7 +158,6 @@ public class SmoothDrive {
     private double calculateSendSpeed(int side) {
         double acceleration = getAccel(speedTarget[side], speedCurrentTarget[side]);
         double driveSpeed = speedCurrentTarget[side] + acceleration;
-
         // If the speed to be set has just crossed the set speed in the correct
         // direction
         // then set the speed to the setpoint.

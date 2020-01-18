@@ -35,9 +35,33 @@ public class Robot extends TimedRobot {
     private final SendableChooser<String> m_chooser = new SendableChooser<>();
     private final Joystick joystickDriver = new Joystick(Ports.OIDriverJoystick);
 
-    private final SmoothDrive smoothDrive;
+    private SmoothDrive smoothDrive;
 
-    public Robot() {
+    // public Robot() {
+    //     WPI_VictorSPX frontLeft = new WPI_VictorSPX(Ports.frontLeftDrive);
+    //     WPI_VictorSPX backLeft = new WPI_VictorSPX(Ports.backLeftDrive);
+    //     WPI_VictorSPX frontRight = new WPI_VictorSPX(Ports.frontRightDrive);
+    //     WPI_VictorSPX backRight = new WPI_VictorSPX(Ports.backRightDrive);
+    //     SpeedControllerGroup motorGroupLeft = new SpeedControllerGroup(frontLeft, backLeft);
+    //     SpeedControllerGroup motorGroupRight = new SpeedControllerGroup(frontRight, backRight);
+    //     ScaledEncoder encoderLeft = null;
+    //     ScaledEncoder encoderRight = null;
+    //     Solenoid gearShiftSolenoid = null;
+    //     ShiftPolarity shiftPolarity = ShiftPolarity.PRESSURE_IS_LOW;
+    //     BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight, gearShiftSolenoid,
+    //             shiftPolarity);
+    //     smoothDrive = new SmoothDrive(drive);
+    // }
+
+    /**
+     * This function is run when the robot is first started up and should be used
+     * for any initialization code.
+     */
+    @Override
+    public void robotInit() {
+        m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+        m_chooser.addOption("My Auto", kCustomAuto);
+        SmartDashboard.putData("Auto choices", m_chooser);
         WPI_VictorSPX frontLeft = new WPI_VictorSPX(Ports.frontLeftDrive);
         WPI_VictorSPX backLeft = new WPI_VictorSPX(Ports.backLeftDrive);
         WPI_VictorSPX frontRight = new WPI_VictorSPX(Ports.frontRightDrive);
@@ -51,17 +75,6 @@ public class Robot extends TimedRobot {
         BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight, gearShiftSolenoid,
                 shiftPolarity);
         smoothDrive = new SmoothDrive(drive);
-    }
-
-    /**
-     * This function is run when the robot is first started up and should be used
-     * for any initialization code.
-     */
-    @Override
-    public void robotInit() {
-        m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-        m_chooser.addOption("My Auto", kCustomAuto);
-        SmartDashboard.putData("Auto choices", m_chooser);
     }
 
     /**
