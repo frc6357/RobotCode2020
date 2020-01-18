@@ -1,11 +1,11 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
  * Sets the methods that are used to hold and control the balls inside of the robot.
  */
-public class SK20BallHandling extends Subsystem
+public class SK20BallHandling extends SubsystemBase
 {
 
     // private BaseRoller ballBelt;
@@ -62,11 +62,5 @@ public class SK20BallHandling extends Subsystem
     {
         
         return true;
-    }
-
-    @Override
-    protected void initDefaultCommand() 
-    {
-
     }
 }

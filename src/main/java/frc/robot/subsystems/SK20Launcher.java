@@ -1,8 +1,8 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class SK20Launcher extends Subsystem
+public class SK20Launcher extends SubsystemBase
 {
     public SK20Launcher()
     {
@@ -39,12 +39,5 @@ public class SK20Launcher extends Subsystem
     {
 
         return 1.0;
-    }
-
-    
-    @Override
-    protected void initDefaultCommand() 
-    {
-
     }
 }

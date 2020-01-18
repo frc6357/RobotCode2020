@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.I2C;
 //import frc.robot.subsystems.base.BaseRoller;
 import frc.robot.subsystems.base.ColorSensor2020;
 import frc.robot.subsystems.base.Color2020;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
  * The SK20ColorWheel class is the subsystem that interacts with roller and color sensor
@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * spinner motor, detecting color sensor reading changes, and updating the color
  * transition counter stored here.
  */
-public class SK20ColorWheel extends Subsystem
+public class SK20ColorWheel extends SubsystemBase
 {
     // TODO: Uncomment these once they are used
     //private BaseRoller spinnerRoller;
@@ -163,14 +163,5 @@ public class SK20ColorWheel extends Subsystem
     {
         // TODO: Write this.
         return false;
-    }
-
-    @Override
-    protected void initDefaultCommand() 
-    {
-        // TODO: Write this.
-        // It is expected that this command will do nothing at all. We may decide to 
-        // poll the proximity sensor here, though, purely to allow a drivers'
-        // station indicator to be updated.
     }
 }
