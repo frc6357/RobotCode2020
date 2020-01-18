@@ -11,6 +11,7 @@ import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
@@ -34,7 +35,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    //Shuffleboard.getTab("Test").add("controllerOfMotor",0.0).withSize(2,1).withPosition(0,0);
+    SmartDashboard.putNumber("controllerOfMotor", 0.0 );
+    SmartDashboard.putBoolean("Test mode enabled", true);
    
+
   }
 
   /**
@@ -83,7 +88,7 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void testInit(){
-    SmartDashboard.putBoolean("Test mode enabled", true);
+    
   }
 
   @Override
@@ -97,10 +102,10 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     ColorSensorV3.RawColor valColor = m_colorSensor.getRawColor();
-    Color normalized = guessColorWithMagnitude(valColor);
-    System.out.println(normalized.red + " " + normalized.green + " " + normalized.blue + " " + valColor.red + " " + valColor.green + " " + valColor.blue);
-    double motorspeed = SmartDashboard.getNumber("Motor Controller", 1.0);
-
+    //Color normalized = guessColorWithMagnitude(valColor);
+    //System.out.println(normalized.red + " " + normalized.green + " " + normalized.blue + " " + valColor.red + " " + valColor.green + " " + valColor.blue);
+    double motorspeed = SmartDashboard.getNumber("controllerOfMotor", 0.0);
+    //System.out.println(motorspeed);
     motorWheel.set(motorspeed);
   }
   
