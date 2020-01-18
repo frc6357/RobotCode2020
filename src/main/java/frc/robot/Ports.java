@@ -60,7 +60,7 @@ public class Ports
 
     public static final int gateStateOpen       = 10;   // DIO 10
 
-    public static final int beltSpeed           = 11;   // DIO 11
+    public static final int beltSpeedStatus     = 11;   // DIO 11
 
     ///////////////////////////////
     // Ball Launcher Addresses
