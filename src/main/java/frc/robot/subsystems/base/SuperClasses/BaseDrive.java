@@ -92,7 +92,9 @@ public class BaseDrive {
 
     /**
      * Returns if the gear is HIGH or LOW
-     * @return
+     * 
+     * @return - Returns one of the enum value (HIGH, LOW) to show what gear the
+     *         robot is on.
      */
     public Gear getGear() {
         Gear toReturn = Gear.LOW;
@@ -111,9 +113,7 @@ public class BaseDrive {
     /**
      * Returns the current set speed for the left side of the drivetrain
      * 
-     * @author David Pieper
-     * @return - Type double <br>
-     *         - Current set speed of motor controller, 1 for full forwards, -1 for
+     * @return - Current set speed of motor controller, 1 for full forwards, -1 for
      *         full back
      */
     public double getLeftSpeed() {
@@ -123,9 +123,7 @@ public class BaseDrive {
     /**
      * Returns the current set speed for the right side of the drivetrain
      * 
-     * @author David Pieper
-     * @return - Type double <br>
-     *         - Current set speed of motor controller, 1 for full forwards, -1 for
+     * @return - Current set speed of motor controller, 1 for full forwards, -1 for
      *         full back
      */
     public double getRightSpeed() {
