@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -36,8 +38,12 @@ public class Robot extends TimedRobot {
     private final SmoothDrive smoothDrive;
 
     public Robot() {
-        SpeedControllerGroup motorGroupLeft;
-        SpeedControllerGroup motorGroupRight;
+        WPI_VictorSPX frontLeft = new WPI_VictorSPX(Ports.frontLeftDrive);
+        WPI_VictorSPX backLeft = new WPI_VictorSPX(Ports.backLeftDrive);
+        WPI_VictorSPX frontRight = new WPI_VictorSPX(Ports.frontRightDrive);
+        WPI_VictorSPX backRight = new WPI_VictorSPX(Ports.backRightDrive);
+        SpeedControllerGroup motorGroupLeft = new SpeedControllerGroup(frontLeft, backLeft);
+        SpeedControllerGroup motorGroupRight = new SpeedControllerGroup(frontRight, backRight);
         ScaledEncoder encoderLeft = null;
         ScaledEncoder encoderRight = null;
         Solenoid gearShiftSolenoid = null;
@@ -69,9 +75,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
-        double leftSpeed = joystickDriver.getRawAxis(Ports.OIDriverLeftDrive);
-        double rightSpeed = joystickDriver.getRawAxis(Ports.OIDriverRightDrive);
-
     }
 
     /**
@@ -114,6 +117,11 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+        double leftSpeed = joystickDriver.getRawAxis(Ports.OIDriverLeftDrive);
+        double rightSpeed = joystickDriver.getRawAxis(Ports.OIDriverRightDrive);
+        smoothDrive.setLeftSpeed(leftSpeed);
+        smoothDrive.setRightSpeed(rightSpeed);
+        smoothDrive.SmoothDrivePeriodic();
     }
 
     /**
