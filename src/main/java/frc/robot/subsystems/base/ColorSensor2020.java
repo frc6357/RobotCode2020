@@ -2,8 +2,8 @@ package frc.robot.subsystems.base;
 
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
-import com.revrobotics.ColorMatchResult;
-import com.revrobotics.ColorMatch;
+//import com.revrobotics.ColorMatchResult;
+//import com.revrobotics.ColorMatch;
 import edu.wpi.first.wpilibj.util.Color;
 
 /**
@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.util.Color;
       */
      public ColorSensor2020(I2C.Port port)
      {
-         // TODO: Write This 
+         colSensor = new ColorSensorV3(port);
      }
      
      /**
@@ -34,7 +34,7 @@ import edu.wpi.first.wpilibj.util.Color;
      public Color getColor()
      {
          // TODO: Write This
-         return Color.kAqua;
+         return colSensor.getColor();
      }
 
      /**
