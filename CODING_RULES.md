@@ -3,6 +3,7 @@
 
 We'll flesh this out into a real coding standard soon but, for now, here are a few rules that programmers should adopt when working in the robot_code repository.
 
+## VSCode IDE Setup
 1. Do not commit any changes until VSCode shows no (absolutely none, zero) errors or warnings when building the production_software project. Errors are pretty obvious to avoid but warnings are there for a reason and, if you leave any visible, people tend to start ignoring them and, hence, miss the ones that are really important.
 
 2. Indent by 4 spaces.
@@ -15,6 +16,7 @@ We'll flesh this out into a real coding standard soon but, for now, here are a f
 
 6. Use UTF-8 text file encoding.
 
+## Code Style
 7. Use the proper, God's-intended coding style of putting brackets in vertical alignment when writing ifs, elses, methods, classes, etc.
 
 8. Class Names always start with an upper class character, method and variable names start with a lower case letter. Each additional word starts with an upper class letter.
@@ -25,6 +27,7 @@ We'll flesh this out into a real coding standard soon but, for now, here are a f
 
 11. All Enums should be named with either all capital letters such as TEST. All multiword Enums should be seperated using capital letters. Example: PRESSURE_IS_HIGH.
 
+## JavaDoc Instructions
 12. JavaDoc documentation must be created for all classes. Each class will be preceded with a javadoc comment and be followed by a short description of the function of the class. For those interested, html commands like \<p>text\</p> is available. Further information on JavaDoc markup can be found at http://www.write-technical.com/126581/javadoc/javadoc-info.htm.
 
 13. JavaDoc documentation must be created for all class methods. Every method will have documentation according to the following format:
