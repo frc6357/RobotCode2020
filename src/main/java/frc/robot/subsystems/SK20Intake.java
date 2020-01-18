@@ -2,13 +2,13 @@ package frc.robot.subsystems;
 
 // import edu.wpi.first.wpilibj.DoubleSolenoid;
 // import frc.robot.subsystems.base.BaseRoller;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 // TODO: Need to write this class.
 /**
  * The SK20Intake class is the subsystem that interacts with the intake to both set its speed and deploy or retract it and get its status.
  */
-public class SK20Intake extends Subsystem
+public class SK20Intake extends SubsystemBase
 {
     // private BaseRoller IntakeRoller;
     // private DoubleSolenoid intakeMover;
@@ -81,11 +81,5 @@ public class SK20Intake extends Subsystem
     {
 
         return true;
-    }
-
-    @Override
-    protected void initDefaultCommand() 
-    {
-
     }
 }
