@@ -7,10 +7,7 @@ import frc.robot.utils.ScaledEncoder;
 
 /**
  * The base class for any 2 or 3 motor sided drive train that has multiple
- * subclasses. There is no constructor because what would be constructors are
- * implemented by methods.
- * 
- * @author David Pieper
+ * subclasses.
  */
 public class BaseDrive {
     private final SpeedControllerGroup motorGroupLeft, motorGroupRight;
@@ -20,16 +17,20 @@ public class BaseDrive {
     private final ShiftPolarity shiftPolarity;
 
     /**
-     * Constructor of the BaseDrive
+     * Constructor of the BaseDrive and Sets up Differential Drive
      * 
-     * @param motorGroupLeft  <br>
-     *                        - Type SpeedControllerGroup <br>
-     *                        - A group containing all the motors on the left side
-     *                        of the drivetrain.
-     * @param motorGroupRight <br>
-     *                        - Type SpeedControllerGroup <br>
-     *                        - A group containing all the motors on the right side
-     *                        of the drivetrain.
+     * @param motorGroupLeft    A group containing all the motors on the left side
+     *                          of the drivetrain
+     * @param motorGroupRight   A group containing all the motors on the right side
+     *                          of the drivetrain
+     * @param encoderLeft       An encoder on the left side of the drivetrain on the
+     *                          robot
+     * @param encoderRight      An encoder on the right side of the drivetrain on
+     *                          the robot
+     * @param gearShiftSolenoid Contains the solenoid that allows for the gear
+     *                          shifts on the robot
+     * @param shiftPolarity     Tells us what the default gear setting is for the
+     *                          robot
      */
     public BaseDrive(SpeedControllerGroup motorGroupLeft, SpeedControllerGroup motorGroupRight,
             ScaledEncoder encoderLeft, ScaledEncoder encoderRight, Solenoid gearShiftSolenoid,
@@ -46,11 +47,9 @@ public class BaseDrive {
     /**
      * Sets the speed for the left and right side of the drivetrain
      * 
-     * @param speedLeft  <br>
-     *                   - A number between -1.0 and 1.0 to set speed of the left
-     *                   side of the drivetrain
-     * @param speedRight <br>
-     *                   - A number between -1.0 and 1.0 to set speed of the right
+     * @param speedLeft  A number between -1.0 and 1.0 to set speed of the left side
+     *                   of the drivetrain
+     * @param speedRight A number between -1.0 and 1.0 to set speed of the right
      *                   side of the drivetrain - The speed that the motor
      *                   controller is going to be set to, 1 for full forwards and
      *                   -1 for full back
@@ -61,6 +60,8 @@ public class BaseDrive {
 
     /**
      * Grabs the raw values from the left encoder
+     * 
+     * @return The raw int value
      */
     public int getLeftEncoderRaw() {
         return encoderLeft.getRaw();
@@ -68,6 +69,8 @@ public class BaseDrive {
 
     /**
      * Grabs the raw values from the right encoder
+     * 
+     * @return the raw int value
      */
     public int getRightEncoderRaw() {
         return encoderRight.getRaw();
@@ -76,7 +79,7 @@ public class BaseDrive {
     /**
      * Sets the speed for the left side of the drivetrain
      * 
-     * @param newGear - The speed that the motor controller is going to be set to, 1
+     * @param newGear The speed that the motor controller is going to be set to, 1
      *                for full forwards and -1 for full back
      */
     public void setGear(Gear newGear) {
@@ -93,8 +96,8 @@ public class BaseDrive {
     /**
      * Returns if the gear is HIGH or LOW
      * 
-     * @return - Returns one of the enum value (HIGH, LOW) to show what gear the
-     *         robot is on.
+     * @return Gear - One of the enum value (HIGH, LOW) to show what gear the robot
+     *         is on.
      */
     public Gear getGear() {
         Gear toReturn = Gear.LOW;
@@ -113,8 +116,8 @@ public class BaseDrive {
     /**
      * Returns the current set speed for the left side of the drivetrain
      * 
-     * @return - Current set speed of motor controller, 1 for full forwards, -1 for
-     *         full back
+     * @return double - Current set speed of motor controller, 1 for full forwards,
+     *         -1 for full back
      */
     public double getLeftSpeed() {
         return motorGroupLeft.get();
@@ -123,8 +126,8 @@ public class BaseDrive {
     /**
      * Returns the current set speed for the right side of the drivetrain
      * 
-     * @return - Current set speed of motor controller, 1 for full forwards, -1 for
-     *         full back
+     * @return double - Current set speed of motor controller, 1 for full forwards,
+     *         -1 for full back
      */
     public double getRightSpeed() {
         return motorGroupRight.get();

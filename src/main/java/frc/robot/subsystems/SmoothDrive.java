@@ -24,7 +24,7 @@ public class SmoothDrive {
      * This constructor accepts the BaseDrive object that allows it to interface the
      * robot hardware
      * 
-     * @param Drive
+     * @param drive A basicDrive type used to set up the baseDrive in SmoothDrive
      */
     public SmoothDrive(BaseDrive drive) {
         this.drive = drive;
@@ -34,7 +34,7 @@ public class SmoothDrive {
      * This method is used to send a double to the speed controller on the left side
      * of the robot.
      *
-     * @param speed - Speed is the double number between 1 and -1, usually from the
+     * @param speed Speed is the double number between 1 and -1, usually from the
      *              joystick axis.
      */
     public void setLeftSpeed(double speed) {
@@ -45,12 +45,26 @@ public class SmoothDrive {
      * This method is used to send a double to the speed controller on the right
      * side of the robot.
      *
-     * @param speed - Speed is the double number between 1 and -1, usually from the
+     * @param speed Speed is the double number between 1 and -1, usually from the
      *              joystick axis.
      */
     public void setRightSpeed(double speed) {
         speedTarget[RIGHT] = speed;
     }
+
+    /**
+     * This method sets the target speeds we want to reach for each side of the
+     * drivetrain.
+     * 
+     * @param speedLeft  Speed target we want to reach on the left side of the
+     *                   drivetrain
+     * @param speedRight Speed target we want to reach on the right side of the
+     *                   drivetrain
+     */
+    /*
+     * public void setSpeeds(double speedLeft, double speedRight) {
+     * speedTarget[LEFT] = speedLeft; speedTarget[RIGHT] = speedRight; }
+     */
 
     /**
      * This method is used to query the number of rotations the left encoder has
@@ -123,19 +137,16 @@ public class SmoothDrive {
      * scale the accel values proportionately. It then uses those scaled accel
      * values and returns the new speeds to put on the motors.
      * 
-     * @param delta    <br>
-     *                 -The change between the target speed and the current speed.
-     * @param unscaled <br>
-     *                 -The drivetrain side that will be unscaled for acceleration
+     * @param delta    The change between the target speed and the current speed.
+     * @param unscaled The drivetrain side that will be unscaled for acceleration
      *                 amount
-     * @param scaled   <br>
-     *                 - The drivetrain side that will be scaled to accelrate
+     * @param scaled   The drivetrain side that will be scaled to accelrate
      *                 proportionately with the other side
-     * @return <br>
-     *         - It returns the speeds we need to set the new speeds of motors.
+     * @return double[] - It returns the speeds we need to set the new speeds of
+     *         motors.
      */
     private double[] calculateNewSpeeds(double[] delta, int unscaled, int scaled) {
-        if(delta[unscaled] == 0.0) {
+        if (delta[unscaled] == 0.0) {
             return speedCurrentTarget;
         }
         double speedTemp = calculateSendSpeed(scaled);
@@ -151,9 +162,9 @@ public class SmoothDrive {
      * if accelerated regularly. If the acceleration would exceed the targeted
      * speed, then the speed will just be set to the targeted value.
      * 
-     * @param side - The side of the drivetrain
-     * @return - Will return the exact unscaled speed that the motors should be set
-     *         to.
+     * @param side The side of the drivetrain
+     * @return double - Will return the exact unscaled speed that the motors should
+     *         be set to.
      */
     private double calculateSendSpeed(int side) {
         double acceleration = getAccel(speedTarget[side], speedCurrentTarget[side]);
@@ -172,13 +183,10 @@ public class SmoothDrive {
      * target and find whether we are accelerating or decelerating and to see which
      * direction we are trying to target (forward or backward).
      * 
-     * @param target        <br>
-     *                      - The target speed that we are trying to reach.
-     * @param currentTarget <br>
-     *                      - The acceleration incremented speed that we last sent
-     *                      to the motors.
-     * @return <br>
-     *         - The limit for the acceleration depending on the current
+     * @param target        The target speed that we are trying to reach.
+     * @param currentTarget The acceleration incremented speed that we last sent to
+     *                      the motors.
+     * @return double - The limit for the acceleration depending on the current
      *         target we last sent to the motors and the final target we are
      *         attempting to reach.
      */
