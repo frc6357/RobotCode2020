@@ -46,9 +46,9 @@ public class FilterDeadband extends Filter
     @Override
     public double filter(double rawAxis)
     {
-        if (!(Math.abs(rawAxis) < deadband))
+        if (Math.abs(rawAxis) < deadband)
         {
-            return (slope * (rawAxis - deadband));
+            return 0.0;
         }
         else
         {

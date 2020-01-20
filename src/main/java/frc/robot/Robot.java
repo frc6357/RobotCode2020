@@ -9,17 +9,17 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Ports;
 import frc.robot.subsystems.SmoothDrive;
 import frc.robot.subsystems.base.SuperClasses.BaseDrive;
 import frc.robot.subsystems.base.SuperClasses.ShiftPolarity;
+import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.ScaledEncoder;
+import frc.robot.utils.filters.FilterDeadband;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,7 +31,7 @@ import frc.robot.utils.ScaledEncoder;
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
-    private final Joystick joystickDriver = new Joystick(Ports.OIDriverJoystick);
+    private final FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
     private SmoothDrive smoothDrive;
 
     // public Robot() {
@@ -68,6 +68,8 @@ public class Robot extends TimedRobot {
         BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight, gearShiftSolenoid,
                 shiftPolarity);
         smoothDrive = new SmoothDrive(drive);
+        joystickDriver.setFilter(1, new FilterDeadband(0.06, -1.0));
+        joystickDriver.setFilter(5, new FilterDeadband(0.06, -1.0));
     }
 
     /**
@@ -133,8 +135,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        double leftSpeed = joystickDriver.getRawAxis(Ports.OIDriverLeftDrive);
-        double rightSpeed = joystickDriver.getRawAxis(Ports.OIDriverRightDrive);
+        double leftSpeed = joystickDriver.getFilteredAxis(Ports.OIDriverLeftDrive);
+        double rightSpeed = joystickDriver.getFilteredAxis(Ports.OIDriverRightDrive);
         smoothDrive.setLeftSpeed(leftSpeed);
         smoothDrive.setRightSpeed(rightSpeed);
         smoothDrive.SmoothDrivePeriodic();
