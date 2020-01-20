@@ -112,10 +112,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit() {
-    m_colorMatcher.addColorMatch(kRedTarget);
-    m_colorMatcher.addColorMatch(kGreenTarget);
-    m_colorMatcher.addColorMatch(kCyanTarget);
-    m_colorMatcher.addColorMatch(kYellowTarget);
+    //m_colorMatcher.addColorMatch(kRedTarget);
+    //m_colorMatcher.addColorMatch(kGreenTarget);
+    //m_colorMatcher.addColorMatch(kCyanTarget);
+    //m_colorMatcher.addColorMatch(kYellowTarget);
   }
 
   /**
@@ -126,12 +126,12 @@ public class Robot extends TimedRobot {
     // Set the wheel motor speed
     //int motorspeed = (int)(255.0 * joystickDriver.getRawAxis(Ports.OIDriverLeftDrive));
     //motorWheel.set(motorspeed);
-    //int valProx = m_colorSensor.getProximity();
+    int valProx = m_colorSensor.getProximity();
     //ColorSensorV3.RawColor valColor = m_colorSensor.getRawColor();
-    Color detectedColor = m_colorSensor.getColor();
+    //Color detectedColor = m_colorSensor.getColor();
     
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
-    System.out.println("The color is: " + getColorName(match.color));
+    //ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    System.out.println(valProx);
     //Color normalized = guessColorWithMagnitude(valColor);
     //System.out.println("R: " + detectedColor.red + " G: " + detectedColor.green + " B: " + detectedColor.blue);
     
