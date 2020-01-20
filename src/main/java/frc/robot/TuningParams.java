@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.util.Color;
 
 public final class TuningParams {
 
-    public static final double ACCEL_MAX_TOWARDS_FORWARD  = 0.1;
-    public static final double ACCEL_MAX_TOWARDS_BACKWARD = 0.1;
-    public static final double DECEL_MAX_TOWARDS_FORWARD  = 0.1;
-    public static final double DECEL_MAX_TOWARDS_BACKWARD = 0.1;
+    public static final double ACCEL_MAX_TOWARDS_FORWARD  = 0.01;
+    public static final double ACCEL_MAX_TOWARDS_BACKWARD = -0.01;
+    public static final double DECEL_MAX_TOWARDS_FORWARD  = 0.01;
+    public static final double DECEL_MAX_TOWARDS_BACKWARD = -0.01;
 
     public static final Color RGB_CYAN   = new Color(0.1799, 0.4451, 0.3799);
     public static final Color RGB_GREEN  = new Color(0.2199, 0.5200, 0.2300);

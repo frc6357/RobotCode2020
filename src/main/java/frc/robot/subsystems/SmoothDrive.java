@@ -149,10 +149,9 @@ public class SmoothDrive {
         if (delta[unscaled] == 0.0) {
             return speedCurrentTarget;
         }
-        double speedTemp = calculateSendSpeed(scaled);
         double[] speedNew = new double[2];
-        speedNew[scaled] = Math.abs((delta[scaled] / delta[unscaled]) * speedTemp) * Math.signum(speedTemp);
-        speedNew[unscaled] = calculateSendSpeed(unscaled);
+        speedNew[scaled] = calculateSendSpeed(scaled, Math.abs(delta[scaled] / delta[unscaled]));
+        speedNew[unscaled] = calculateSendSpeed(unscaled, 1.0);
         return speedNew;
     }
 
@@ -166,9 +165,9 @@ public class SmoothDrive {
      * @return double - Will return the exact unscaled speed that the motors should
      *         be set to.
      */
-    private double calculateSendSpeed(int side) {
+    private double calculateSendSpeed(int side, double scalingFactor) {
         double acceleration = getAccel(speedTarget[side], speedCurrentTarget[side]);
-        double driveSpeed = speedCurrentTarget[side] + acceleration;
+        double driveSpeed = speedCurrentTarget[side] + acceleration * scalingFactor;
         // If the speed to be set has just crossed the set speed in the correct
         // direction
         // then set the speed to the setpoint.
