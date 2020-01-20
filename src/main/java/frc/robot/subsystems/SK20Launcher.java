@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANEncoder;
+// import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
@@ -13,9 +13,9 @@ import frc.robot.Ports;
 
 public class SK20Launcher extends SubsystemBase
 {
-    CANSparkMax launcherMotor = new CANSparkMax(Ports.ballLauncherMotor, MotorType.kBrushless);
-    CANPIDController PIDControl = launcherMotor.getPIDController();
-    CANEncoder launcherMotorEncoder = new CANEncoder(launcherMotor);
+    private CANSparkMax launcherMotor = new CANSparkMax(Ports.ballLauncherMotor, MotorType.kBrushless);
+    private CANPIDController PIDControl = launcherMotor.getPIDController();
+    // private CANEncoder launcherMotorEncoder = new CANEncoder(launcherMotor);
 
     public SK20Launcher()
     {

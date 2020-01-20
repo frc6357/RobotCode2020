@@ -1,8 +1,14 @@
 package frc.robot.subsystems;
 
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
-// import frc.robot.subsystems.base.BaseRoller;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import frc.robot.Ports;
+import frc.robot.TuningParams;
+import frc.robot.subsystems.base.BaseRoller;
+import frc.robot.utils.ScaledEncoder;
 
 // TODO: Need to write this class.
 /**
@@ -10,15 +16,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class SK20Intake extends SubsystemBase
 {
-    // private BaseRoller IntakeRoller;
-    // private DoubleSolenoid intakeMover;
+    private BaseRoller intakeRoller;
+    private DoubleSolenoid intakeMover;
+    private WPI_VictorSPX intakeRollerMotor;
+    private ScaledEncoder intakeRollerEncoder;
 
     /**
      * Sets up the intake control such that it takes the values that are declared for it in Ports and assigns them to a BaseRoller and a double solenoid.
      */
     public SK20Intake ()
     {
+        intakeRollerMotor = new WPI_VictorSPX(Ports.intakeMotor);
+        intakeRoller = new BaseRoller(intakeRollerMotor, TuningParams.INTAKE_MAX_SPEED);
+        intakeRollerEncoder = new ScaledEncoder(Ports.intakeSpeedCheckA, Ports.intakeSpeedCheckB, TuningParams.INTAKE_ENCODER_PULSES, TuningParams.INTAKE_WHEEL_DIAMETER);
 
+        intakeMover = new DoubleSolenoid(Ports.intakeMoverExtend, Ports.intakeMoverRetract);
     }
 
     /**
@@ -26,7 +38,7 @@ public class SK20Intake extends SubsystemBase
      */
     public void extendIntake()
     {
-
+        intakeMover.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
@@ -34,15 +46,15 @@ public class SK20Intake extends SubsystemBase
      */
     public void retractIntake()
     {
-
-    }
+        intakeMover.set(DoubleSolenoid.Value.kReverse);
+    }   
 
     /**
      * When activate intake is called the motor on the intake turns on up to the set speed until it is deactivated
      */
     public void activateIntakeRoller()
     {
-
+        intakeRoller.setForwards();
     }
 
     /**
@@ -50,7 +62,7 @@ public class SK20Intake extends SubsystemBase
      */
     public void deactivateIntakeRoller()
     {
-        
+        intakeRoller.setStop();
     }
 
     /**
@@ -69,8 +81,7 @@ public class SK20Intake extends SubsystemBase
      */
     public double getIntakeRollerSpeed()
     {
-
-        return 1.0;
+        return intakeRollerEncoder.getRaw();
     }
 
     /**

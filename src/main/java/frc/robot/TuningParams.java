@@ -9,7 +9,6 @@ public final class TuningParams {
     public static final double DECEL_MAX_TOWARDS_FORWARD  = 0.075;
     public static final double DECEL_MAX_TOWARDS_BACKWARD = -0.075;
 
-
     public static final Color RGB_CYAN   = new Color(0.1799, 0.4451, 0.3799);
     public static final Color RGB_GREEN  = new Color(0.2199, 0.5200, 0.2300);
     public static final Color RGB_RED    = new Color(0.4199, 0.3899, 0.1699);
@@ -22,5 +21,12 @@ public final class TuningParams {
     public static final int P_VALUE                     = 1;
     public static final int I_VALUE                     = 1;
     public static final int D_VALUE                     = 1;
+
+    //////////////////////////////
+    // Intake Params
+    //////////////////////////////
+    public static final double INTAKE_MAX_SPEED         = 0.5;
+    public static final int INTAKE_ENCODER_PULSES       = 2048;
+    public static final double INTAKE_WHEEL_DIAMETER    = 2.0; // 2.0 Inches
 
 }

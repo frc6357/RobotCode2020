@@ -4,7 +4,7 @@ package frc.robot.subsystems.base;
  * This class is used to create a BaseLimitSensor object and controll the
  * state to always be the boolean that is passed in.
  */
-public class DummyLimitSensor extends BaseLimitSensor
+public class DummyLimitSensor extends LimitSensor
 {
 
     private final boolean constState;
@@ -18,6 +18,7 @@ public class DummyLimitSensor extends BaseLimitSensor
      */
     public DummyLimitSensor(boolean constState)
     {
+        super (30, false);
         this.constState = constState;
     }
 
@@ -27,7 +28,7 @@ public class DummyLimitSensor extends BaseLimitSensor
      *      - Returns the state set in the constructor
      */
     @Override
-    public boolean getIsTriggered()
+    public boolean get()
     {
         return constState;
     }

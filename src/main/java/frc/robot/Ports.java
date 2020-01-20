@@ -41,8 +41,9 @@ public class Ports
     public static final int intakeMoverRetract  = 1;    // PCM 1, Output 1
 
     public static final int intakeOpenCheck     = 2;    // DIO 2
-    public static final int intakeSpeedCheck    = 3;    // DIO 3
-    public static final int intakeBallCheck     = 4;    // DIO 4
+    public static final int intakeSpeedCheckA   = 3;    // DIO 3
+    public static final int intakeSpeedCheckB   = 4;    // DIO 4
+    public static final int intakeBallCheck     = 5;    // DIO 5
 
     ///////////////////////////////
     // Ball Handling Addresses
@@ -52,15 +53,15 @@ public class Ports
     public static final int ballGateOpen        = 2;    // PCM 1, Output 2
     public static final int ballGateDown        = 3;    // PCM 1, Output 3
 
-    public static final int ballSensor1         = 5;    // DIO 5
-    public static final int ballSensor2         = 6;    // DIO 6
-    public static final int ballSensor3         = 7;    // DIO 7
-    public static final int ballSensor4         = 8;    // DIO 8
-    public static final int ballSensor5         = 9;    // DIO 9
+    public static final int ballSensor1         = 6;    // DIO 6
+    public static final int ballSensor2         = 7;    // DIO 7
+    public static final int ballSensor3         = 8;    // DIO 8
+    public static final int ballSensor4         = 9;    // DIO 9
+    public static final int ballSensor5         = 10;   // DIO 10
 
-    public static final int gateStateOpen       = 10;   // DIO 10
+    public static final int gateStateOpen       = 11;   // DIO 11
 
-    public static final int beltSpeedStatus     = 11;   // DIO 11
+    public static final int beltSpeedStatus     = 12;   // DIO 12
 
     ///////////////////////////////
     // Ball Launcher Addresses

@@ -1,18 +1,10 @@
 package frc.robot.subsystems.base;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-
 /**
  * Base class for any proximity sensor
  */
-public class BaseProximitySensor extends BaseLimitSensor
+public class BaseProximitySensor extends LimitSensor
 {
-    // DIO
-    private final DigitalInput input;
-
-    // Polarity of triggered state
-    private final boolean triggeredState;
-
     /**
      * Constructor
      *
@@ -22,9 +14,7 @@ public class BaseProximitySensor extends BaseLimitSensor
      */
     public BaseProximitySensor(int port)
     {
-        input = new DigitalInput(port);
-
-        triggeredState = true;
+        super(port, false);
     }
 
     /**
@@ -40,17 +30,15 @@ public class BaseProximitySensor extends BaseLimitSensor
      */
     public BaseProximitySensor(int port, boolean triggeredState)
     {
-        input = new DigitalInput(port);
-
-        this.triggeredState = triggeredState;
+        super(port, triggeredState);
     }
 
     /**
      * Gets if sensor is triggered
      */
     @Override
-    public boolean getIsTriggered()
+    public boolean get()
     {
-        return input.get() ^ !triggeredState;
+        return super.get();
     }
 }
