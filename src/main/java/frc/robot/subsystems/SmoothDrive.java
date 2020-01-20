@@ -31,28 +31,6 @@ public class SmoothDrive {
     }
 
     /**
-     * This method is used to send a double to the speed controller on the left side
-     * of the robot.
-     *
-     * @param speed Speed is the double number between 1 and -1, usually from the
-     *              joystick axis.
-     */
-    public void setLeftSpeed(double speed) {
-        speedTarget[LEFT] = speed;
-    }
-
-    /**
-     * This method is used to send a double to the speed controller on the right
-     * side of the robot.
-     *
-     * @param speed Speed is the double number between 1 and -1, usually from the
-     *              joystick axis.
-     */
-    public void setRightSpeed(double speed) {
-        speedTarget[RIGHT] = speed;
-    }
-
-    /**
      * This method sets the target speeds we want to reach for each side of the
      * drivetrain.
      * 
@@ -61,10 +39,9 @@ public class SmoothDrive {
      * @param speedRight Speed target we want to reach on the right side of the
      *                   drivetrain
      */
-    /*
-     * public void setSpeeds(double speedLeft, double speedRight) {
-     * speedTarget[LEFT] = speedLeft; speedTarget[RIGHT] = speedRight; }
-     */
+    public void setSpeeds(double speedLeft, double speedRight) {
+        speedTarget[LEFT] = speedLeft;
+        speedTarget[RIGHT] = speedRight; }
 
     /**
      * This method is used to query the number of rotations the left encoder has

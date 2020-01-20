@@ -7,18 +7,11 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.SmoothDrive;
-import frc.robot.subsystems.base.SuperClasses.BaseDrive;
-import frc.robot.subsystems.base.SuperClasses.ShiftPolarity;
 import frc.robot.utils.FilteredJoystick;
-import frc.robot.utils.ScaledEncoder;
 import frc.robot.utils.filters.FilterDeadband;
 
 /**
@@ -55,19 +48,6 @@ public class Robot extends TimedRobot {
      * for any initialization code.
      */
     public Robot() {
-        WPI_VictorSPX frontLeft = new WPI_VictorSPX(Ports.frontLeftDrive);
-        WPI_VictorSPX backLeft = new WPI_VictorSPX(Ports.backLeftDrive);
-        WPI_VictorSPX frontRight = new WPI_VictorSPX(Ports.frontRightDrive);
-        WPI_VictorSPX backRight = new WPI_VictorSPX(Ports.backRightDrive);
-        SpeedControllerGroup motorGroupLeft = new SpeedControllerGroup(frontLeft, backLeft);
-        SpeedControllerGroup motorGroupRight = new SpeedControllerGroup(frontRight, backRight);
-        ScaledEncoder encoderLeft = null;
-        ScaledEncoder encoderRight = null;
-        Solenoid gearShiftSolenoid = null;
-        ShiftPolarity shiftPolarity = ShiftPolarity.PRESSURE_IS_LOW;
-        BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight, gearShiftSolenoid,
-                shiftPolarity);
-        smoothDrive = new SmoothDrive(drive);
         joystickDriver.setFilter(1, new FilterDeadband(0.06, -1.0));
         joystickDriver.setFilter(5, new FilterDeadband(0.06, -1.0));
     }
@@ -135,10 +115,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        double leftSpeed = joystickDriver.getFilteredAxis(Ports.OIDriverLeftDrive);
-        double rightSpeed = joystickDriver.getFilteredAxis(Ports.OIDriverRightDrive);
-        smoothDrive.setLeftSpeed(leftSpeed);
-        smoothDrive.setRightSpeed(rightSpeed);
+        double speedLeft = joystickDriver.getFilteredAxis(Ports.OIDriverLeftDrive);
+        double speedRight = joystickDriver.getFilteredAxis(Ports.OIDriverRightDrive);
+        smoothDrive.setSpeeds(speedLeft, speedRight);
         smoothDrive.SmoothDrivePeriodic();
     }
 
