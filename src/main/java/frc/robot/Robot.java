@@ -10,9 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.SmoothDrive;
-import frc.robot.utils.FilteredJoystick;
-import frc.robot.utils.filters.FilterDeadband;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,8 +22,7 @@ import frc.robot.utils.filters.FilterDeadband;
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
-    private final FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
-    private SmoothDrive smoothDrive;
+    
 
     // public Robot() {
     //     WPI_VictorSPX frontLeft = new WPI_VictorSPX(Ports.frontLeftDrive);
@@ -48,8 +45,12 @@ public class Robot extends TimedRobot {
      * for any initialization code.
      */
     public Robot() {
-        joystickDriver.setFilter(1, new FilterDeadband(0.06, -1.0));
-        joystickDriver.setFilter(5, new FilterDeadband(0.06, -1.0));
+        
+    }
+
+    @Override
+    public void robotInit() {
+      m_robotContainer = new RobotContainer();
     }
 
     /**
@@ -115,10 +116,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        double speedLeft = joystickDriver.getFilteredAxis(Ports.OIDriverLeftDrive);
-        double speedRight = joystickDriver.getFilteredAxis(Ports.OIDriverRightDrive);
-        smoothDrive.setSpeeds(speedLeft, speedRight);
-        smoothDrive.SmoothDrivePeriodic();
+        
+
     }
 
     @Override

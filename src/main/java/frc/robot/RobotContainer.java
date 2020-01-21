@@ -9,9 +9,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.SK20Drive;
+import frc.robot.utils.FilteredJoystick;
+import frc.robot.utils.filters.FilterDeadband;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -22,15 +25,21 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final SK20Drive m_driveSubsystem = new SK20Drive();
+
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
+  public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
+  
 
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    joystickDriver.setFilter(Ports.OIDriverLeftDrive, new FilterDeadband(0.06, -1.0));
+    joystickDriver.setFilter(Ports.OIDriverRightDrive, new FilterDeadband(0.06, -1.0));
+
     // Configure the button bindings
     configureButtonBindings();
   }

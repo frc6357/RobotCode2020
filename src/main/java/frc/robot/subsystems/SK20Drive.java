@@ -9,6 +9,7 @@ import frc.robot.Ports;
 import frc.robot.subsystems.base.SuperClasses.BaseDrive;
 import frc.robot.subsystems.base.SuperClasses.ShiftPolarity;
 import frc.robot.utils.ScaledEncoder;
+import frc.robot.commands.DefaultDriveCommand;
 
 public class SK20Drive extends SubsystemBase {
 
@@ -25,6 +26,7 @@ public class SK20Drive extends SubsystemBase {
     private final BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight,
             gearShiftSolenoid, shiftPolarity);
     private final SmoothDrive smoothDrive = new SmoothDrive(drive);
+    private final DefaultDriveCommand driveCommand;
 
     /**
      * This constructor of the SK20Drive sets up the BaseDrive object and passes it
@@ -44,6 +46,8 @@ public class SK20Drive extends SubsystemBase {
      *                          robot
      */
     public SK20Drive() {
+        driveCommand = new DefaultDriveCommand(this);
+        setDefaultCommand(driveCommand);
     }
 
     /**
@@ -62,5 +66,7 @@ public class SK20Drive extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
         // TODO: Set up this method!!
+        smoothDrive.SmoothDrivePeriodic();
     }
+    
 }
