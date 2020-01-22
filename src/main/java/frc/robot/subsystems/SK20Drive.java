@@ -31,19 +31,6 @@ public class SK20Drive extends SubsystemBase {
     /**
      * This constructor of the SK20Drive sets up the BaseDrive object and passes it
      * into the SmoothDrive object to set it up.
-     * 
-     * @param motorGroupLeft    A group containing all the motors on the left side
-     *                          of the drivetrain
-     * @param motorGroupRight   A group containing all the motors on the right side
-     *                          of the drivetrain
-     * @param encoderLeft       An encoder on the left side of the drivetrain on the
-     *                          robot
-     * @param encoderRight      An encoder on the right side of the drivetrain on
-     *                          the robot
-     * @param gearShiftSolenoid Contains the solenoid that allows for the gear
-     *                          shifts on the robot
-     * @param shiftPolarity     Tells us what the default gear setting is for the
-     *                          robot
      */
     public SK20Drive() {
         driveCommand = new DefaultDriveCommand(this);
