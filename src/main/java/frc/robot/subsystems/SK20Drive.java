@@ -59,6 +59,16 @@ public class SK20Drive extends SubsystemBase {
         
     };
 
+    //TEST FUNCTION
+    public void resetGyro() {
+        imu.reset();
+    }
+
+    //TEST FUNCTION
+    public double getAngle() {
+        return imu.getGyroAngleZ();
+    }
+
     // TODO: Create all the methods we need!!
 
     @Override
