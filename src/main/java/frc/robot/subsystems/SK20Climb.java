@@ -1,13 +1,30 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Ports;
+import frc.robot.TuningParams;
+import frc.robot.Constants.ClimbPolarity;
 
 /* 
 The SK20Climb class is a subsystem that interacts with the climbing mechanism in order to deploy the arm and winch the robot up
 */
 public class SK20Climb extends SubsystemBase {
 
+    private WPI_VictorSPX winchClimbLeft;
+    private WPI_VictorSPX winchClimbRight;
+    private SpeedControllerGroup winchMotorGroup;
+    private Solenoid armReleaseSolenoid = null;
+    private ClimbPolarity climbPolarity = ClimbPolarity.CLIMB_IS_OFF;
+
     public SK20Climb() {
+        armReleaseSolenoid = new Solenoid(Ports.armLockDown);
+        winchClimbLeft = new WPI_VictorSPX(Ports.winchClimbLeft);
+        winchClimbRight = new WPI_VictorSPX(Ports.winchClimbRight);
+        winchMotorGroup = new SpeedControllerGroup(winchClimbLeft, winchClimbRight);
 
     }
 
@@ -17,23 +34,14 @@ public class SK20Climb extends SubsystemBase {
      * which the entire climb mechanism will lock into position
      */
     public void deployArm() {
-
-    }
-
-    /*
-     * When raiseHook is called the pneumatic piston at the top of the robot will
-     * raise allowing the driver to get into position
-     */
-    public void raiseHook() {
-
-    }
-
-    /*
-     * When the lowerHook method is called the pneumatic piston at the top of the
-     * robot will lower, hooking the hook onto the rug
-     */
-    public void lowerHook() {
-
+        switch (climbPolarity) {
+        case CLIMB_IS_ON:
+            armReleaseSolenoid.set(true);
+            break;
+        case CLIMB_IS_OFF:
+            armReleaseSolenoid.set(false);
+            break;
+        }
     }
 
     /*
@@ -42,6 +50,7 @@ public class SK20Climb extends SubsystemBase {
      */
     public void startWinchRobot() {
 
+        winchMotorGroup.set(TuningParams.WINCH_MOTOR_SPEED);
     }
 
     /*
@@ -49,7 +58,8 @@ public class SK20Climb extends SubsystemBase {
      * stopped.
      */
     public void stopWinchRobot() {
-
+        winchMotorGroup.stopMotor();
+        //make sure there is the rachet
     }
 
 }
