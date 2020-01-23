@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -28,6 +29,10 @@ public class SK20Drive extends SubsystemBase {
     private final SmoothDrive smoothDrive = new SmoothDrive(drive);
     private final DefaultDriveCommand driveCommand;
 
+    private final ADIS16448_IMU imu = new ADIS16448_IMU();
+    private double angleTarget;
+    private double angleCurrent;
+
     /**
      * This constructor of the SK20Drive sets up the BaseDrive object and passes it
      * into the SmoothDrive object to set it up.
@@ -46,6 +51,13 @@ public class SK20Drive extends SubsystemBase {
     public void setSpeeds(double speedLeft, double speedRight) {
         smoothDrive.setSpeeds(speedLeft, speedRight);
     }
+
+    public void setTargetAngle(double degrees) {
+        angleTarget = degrees;
+        angleCurrent = imu.getGyroAngleZ();
+        double deltaAngle = angleTarget - angleCurrent;
+        
+    };
 
     // TODO: Create all the methods we need!!
 
