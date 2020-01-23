@@ -1,10 +1,16 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.I2C;
 // TODO: Uncomment these when used
-//import edu.wpi.first.wpilibj.Solenoid;
-//import frc.robot.subsystems.base.BaseRoller;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.Ports;
+import frc.robot.TuningParams;
+import frc.robot.subsystems.base.BaseRoller;
 import frc.robot.subsystems.base.ColorSensor2020;
+import frc.robot.utils.ScaledEncoder;
 import frc.robot.subsystems.base.Color2020;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -18,10 +24,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class SK20ColorWheel extends SubsystemBase
 {
     // TODO: Uncomment these once they are used
-    //private BaseRoller spinnerRoller;
-    //private Solenoid spinnerLifter;
+    private BaseRoller spinnerRoller;
+    private Solenoid spinnerLifter;
+    private WPI_VictorSPX spinnerRollerMotor;
     private int spinnerTransitionCount = 0;
     private ColorSensor2020 colorSensor;
+    private ScaledEncoder spinnerRollerEncoder;
+    private Color fieldSensor;
 
     /**
      * Creates the SK20ColorWheel object and all hardware resources it uses.
@@ -29,6 +38,9 @@ public class SK20ColorWheel extends SubsystemBase
     public SK20ColorWheel()
     {
         colorSensor = new ColorSensor2020(I2C.Port.kOnboard);
+        spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.INTAKE_MAX_SPEED);
+        spinnerLifter = new Solenoid(Ports.intakeMoverExtend, Ports.intakeMoverRetract);
+        spinnerRollerEncoder = new ScaledEncoder(Ports.intakeSpeedCheckA, Ports.intakeSpeedCheckB, TuningParams.INTAKE_ENCODER_PULSES, TuningParams.INTAKE_WHEEL_DIAMETER);
         // TODO: Write this
     }
 
@@ -38,6 +50,7 @@ public class SK20ColorWheel extends SubsystemBase
     public void extendLifter()
     {
         // TODO: Write this.
+        spinnerLifter.set(true);
     }
 
     /**
@@ -46,6 +59,7 @@ public class SK20ColorWheel extends SubsystemBase
     public void retractLifter()
     {
         // TODO: Write this.
+        spinnerLifter.set(false);
     }
 
     /**
@@ -55,6 +69,7 @@ public class SK20ColorWheel extends SubsystemBase
     public void activateSpinnerRoller()
     {
         // TODO: Write this.
+        spinnerRoller.setForwards();
     }
 
     /**
@@ -64,6 +79,7 @@ public class SK20ColorWheel extends SubsystemBase
     public void deactivateSpinnerRoller()
     {
         // TODO: Write this.
+        spinnerRoller.setStop();
     }
 
     /**
@@ -73,7 +89,7 @@ public class SK20ColorWheel extends SubsystemBase
     public boolean getIsLifterExtended()
     {
         // TODO: Write this.
-        return true;
+        return spinnerLifter.get();
     }
 
     /**
@@ -83,7 +99,7 @@ public class SK20ColorWheel extends SubsystemBase
     public double getSpinnerRollerSpeed()
     {
         // TODO: Write this.
-        return 1.0;
+        return spinnerRollerEncoder.getRaw();
     }
 
     /**
