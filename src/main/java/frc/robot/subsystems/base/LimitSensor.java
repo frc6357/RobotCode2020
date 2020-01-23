@@ -8,8 +8,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
  */
 public class LimitSensor extends DigitalInput
 {
-    // TODO: Document this class
     boolean inverted;
+    /**
+     * This creates a limit sensor that is based off of DigitalInput and sets the channel that requires, and then checks if the sensor needs to be inverted.
+     * @param channel - The DIO channel that the Limit Sensor is using
+     * @param inverted - If the limit sensor is returning false when the value should be true, set inverted to be true
+     */
     public LimitSensor(int channel, boolean inverted)
     {
         super(channel);
@@ -17,10 +21,13 @@ public class LimitSensor extends DigitalInput
     }
 
     @Override
+    /**
+     * This retuns the value of the limit sensor taking into count the inverted boolean
+     * @return The value of the limit sensor 
+     */
     public boolean get() 
     {
-        boolean returnVal = get();
-        returnVal = inverted ? !returnVal: returnVal;
-        return returnVal;
+        boolean returnVal = super.get();
+        return inverted ? !returnVal: returnVal;
     }
 }

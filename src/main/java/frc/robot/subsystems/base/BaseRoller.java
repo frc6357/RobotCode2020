@@ -125,16 +125,18 @@ public class BaseRoller
     /**
      * Function for test use only. This sets the motor to run at the commanded speed,
      * regardless of the speed set during initialization.
+     * @param speed The speed to set the roller at
      */
     public void testSetSpeed(double speed)
     {
-        motorController.set(speed);
         currentSpeed = speed;
+        motorController.set(speed);
         directionReader = (speed > 0.0) ? Direction.FORWARD : ((speed == 0.0) ? Direction.STOPPED : Direction.BACKWARD);
     }
 
     /**
      * Retrieve the current speed of the roller.
+     * @return The current speed that the encoder reads
      */
     public double testGetSpeed()
     {
