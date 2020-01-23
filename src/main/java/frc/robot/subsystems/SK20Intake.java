@@ -9,8 +9,8 @@ import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.BaseRoller;
 import frc.robot.utils.ScaledEncoder;
+import frc.robot.subsystems.base.LimitSensor;
 
-// TODO: Need to write this class.
 /**
  * The SK20Intake class is the subsystem that interacts with the intake to both set its speed and deploy or retract it and get its status.
  */
@@ -20,6 +20,7 @@ public class SK20Intake extends SubsystemBase
     private DoubleSolenoid intakeMover;
     private WPI_VictorSPX intakeRollerMotor;
     private ScaledEncoder intakeRollerEncoder;
+    private LimitSensor intakeBallDetector;
 
     /**
      * Sets up the intake control such that it takes the values that are declared for it in Ports and assigns them to a BaseRoller and a double solenoid.
@@ -29,6 +30,7 @@ public class SK20Intake extends SubsystemBase
         intakeRollerMotor = new WPI_VictorSPX(Ports.intakeMotor);
         intakeRoller = new BaseRoller(intakeRollerMotor, TuningParams.INTAKE_MAX_SPEED);
         intakeRollerEncoder = new ScaledEncoder(Ports.intakeSpeedCheckA, Ports.intakeSpeedCheckB, TuningParams.INTAKE_ENCODER_PULSES, TuningParams.INTAKE_WHEEL_DIAMETER);
+        intakeBallDetector = new LimitSensor(Ports.intakeBallCheck, TuningParams.INTAKE_BALL_CHECK_INVERT);
 
         intakeMover = new DoubleSolenoid(Ports.intakeMoverExtend, Ports.intakeMoverRetract);
     }
@@ -52,7 +54,7 @@ public class SK20Intake extends SubsystemBase
     /**
      * When activate intake is called the motor on the intake turns on up to the set speed until it is deactivated
      */
-    public void activateIntakeRoller()
+    public void startIntakeRoller()
     {
         intakeRoller.setForwards();
     }
@@ -60,19 +62,18 @@ public class SK20Intake extends SubsystemBase
     /**
      * When deactivate intake is called on the motor the intake is turned completely off
      */
-    public void deactivateIntakeRoller()
+    public void stopIntakeRoller()
     {
         intakeRoller.setStop();
     }
 
     /**
      * Checks whether the intake is open or closed using the limit switch that's installed
-     * @return The intake position. True for out, false for closed.
+     * @return The intake position. kForward for out, kReverse for in
      */
-    public boolean getIsIntakeOut()
+    public DoubleSolenoid.Value getIntakePosition()
     {
-
-        return true;
+        return intakeMover.get();
     }
 
     /**
@@ -81,7 +82,7 @@ public class SK20Intake extends SubsystemBase
      */
     public double getIntakeRollerSpeed()
     {
-        return intakeRollerEncoder.getRaw();
+        return intakeRollerEncoder.getRate();
     }
 
     /**
@@ -90,7 +91,6 @@ public class SK20Intake extends SubsystemBase
      */
     public boolean isBallInIntake()
     {
-
-        return true;
+        return intakeBallDetector.get();
     }
 }

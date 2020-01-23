@@ -2,35 +2,54 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import frc.robot.Ports;
+import frc.robot.TuningParams;
+import frc.robot.subsystems.base.BaseRoller;
+import frc.robot.subsystems.base.LimitSensor;
+
 /**
  * Sets the methods that are used to hold and control the balls inside of the robot.
  */
 public class SK20BallHandling extends SubsystemBase
 {
+    private CANSparkMax beltMotor;
+    private CANEncoder beltEncoder;
+    private BaseRoller ballBelt;
 
-    // private BaseRoller ballBelt;
+    private LimitSensor[] ballSensors = {new LimitSensor(Ports.ballSensor1, TuningParams.BALL_SENSOR_1_INVERT), 
+                                            new LimitSensor(Ports.ballSensor2, TuningParams.BALL_SENSOR_2_INVERT),
+                                            new LimitSensor(Ports.ballSensor3, TuningParams.BALL_SENSOR_3_INVERT), 
+                                            new LimitSensor(Ports.ballSensor4, TuningParams.BALL_SENSOR_4_INVERT),
+                                            new LimitSensor(Ports.ballSensor5, TuningParams.BALL_SENSOR_5_INVERT)};
+
     /**
      * Activates the roller that is used for the main ballBelt
      */
     public SK20BallHandling()
     {
-
+        beltMotor = new CANSparkMax(Ports.ballHandlingBelt, MotorType.kBrushless);
+        beltEncoder = new CANEncoder(beltMotor);
+        ballBelt = new BaseRoller(beltMotor, TuningParams.BALL_HANDLING_MAX_SPEED);
     }
 
     /**
      * When activated the rollers are set to run at whatever speed that they're set to run at
      */
-    public void activateRollers()
+    public void startRoller()
     {
-
+        ballBelt.setForwards();
     }
 
     /**
      * When activated the rollers are set to run at 0 speed
      */
-    public void shutoffRollers()
+    public void stopRoller()
     {
-
+        ballBelt.setStop();
     }
 
     /**
@@ -39,8 +58,7 @@ public class SK20BallHandling extends SubsystemBase
      */
     public double getRollerSpeed()
     {
-
-        return 1.0;
+        return beltEncoder.getVelocity();
     }
 
     /**
@@ -50,8 +68,14 @@ public class SK20BallHandling extends SubsystemBase
      */
     public int getBallCount()
     {
+        int count = 0;
 
-        return 1;
+        for(int cnt = 0; cnt < ballSensors.length; cnt++)
+        {
+            count += ballSensors[cnt].get() ? 1: 0;
+        }
+
+        return count;
     }
 
     /**
@@ -60,7 +84,21 @@ public class SK20BallHandling extends SubsystemBase
      */
     public boolean isFull()
     {
-        
-        return true;
+        int count = 0;
+
+        for(int cnt = 0; cnt < ballSensors.length; cnt++)
+        {
+            count += ballSensors[cnt].get() ? 1: 0;
+        }
+        // TODO: This also needs to check the intake ball sensor, but the intake class has not been implemented into robot.
+
+        if (count >= 5)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -17,16 +17,27 @@ public final class TuningParams {
     //////////////////////////////
     // Launcher Params
     //////////////////////////////
-    public static final int MAX_RPM                     = 5700;
-    public static final int P_VALUE                     = 1;
-    public static final int I_VALUE                     = 1;
-    public static final int D_VALUE                     = 1;
+    public static final int MAX_RPM                         = 5700;
+    public static final int P_VALUE                         = 1;
+    public static final int I_VALUE                         = 1;
+    public static final int D_VALUE                         = 1;
 
     //////////////////////////////
     // Intake Params
     //////////////////////////////
-    public static final double INTAKE_MAX_SPEED         = 0.5;
-    public static final int INTAKE_ENCODER_PULSES       = 2048;
-    public static final double INTAKE_WHEEL_DIAMETER    = 2.0; // 2.0 Inches
+    public static final double INTAKE_MAX_SPEED             = 0.5;
+    public static final int INTAKE_ENCODER_PULSES           = 2048;
+    public static final double INTAKE_WHEEL_DIAMETER        = 2.0; // 2.0 Inches
+    public static final boolean INTAKE_BALL_CHECK_INVERT    = false;
+
+    //////////////////////////////
+    // Ball Handling Params
+    //////////////////////////////
+    public static final double BALL_HANDLING_MAX_SPEED      = 0.75;
+    public static final boolean BALL_SENSOR_1_INVERT        = false;
+    public static final boolean BALL_SENSOR_2_INVERT        = false;
+    public static final boolean BALL_SENSOR_3_INVERT        = false;
+    public static final boolean BALL_SENSOR_4_INVERT        = false;
+    public static final boolean BALL_SENSOR_5_INVERT        = false;
 
 }
