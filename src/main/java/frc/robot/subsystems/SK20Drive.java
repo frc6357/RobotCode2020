@@ -51,20 +51,24 @@ public class SK20Drive extends SubsystemBase {
     public void setSpeeds(double speedLeft, double speedRight) {
         smoothDrive.setSpeeds(speedLeft, speedRight);
     }
-
+    
+    /*
     public void setTargetAngle(double degrees) {
         angleTarget = degrees;
         angleCurrent = imu.getGyroAngleZ();
         double deltaAngle = angleTarget - angleCurrent;
         
     };
+    */
 
     //TEST FUNCTION
+    //TODO: This is a test. Remove in production
     public void resetGyro() {
         imu.reset();
     }
 
     //TEST FUNCTION
+    //TODO: This is a test. Remove in production
     public double getAngle() {
         return imu.getGyroAngleZ();
     }
