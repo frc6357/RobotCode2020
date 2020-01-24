@@ -10,11 +10,16 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
+import frc.robot.TuningParams;
+import frc.robot.subsystems.base.BaseRoller;
 
 public class SK20Launcher extends SubsystemBase
 {
     private CANSparkMax launcherMotor = new CANSparkMax(Ports.ballLauncherMotor, MotorType.kBrushless);
     private CANPIDController PIDControl = launcherMotor.getPIDController();
+
+    private CANSparkMax transferMotor = new CANSparkMax(Ports.ballLoaderMotor, MotorType.kBrushless);
+    private BaseRoller transferRoller = new BaseRoller(transferMotor, TuningParams.LOADER_MAX_SPEED);
     // private CANEncoder launcherMotorEncoder = new CANEncoder(launcherMotor);
 
     public SK20Launcher()
@@ -27,7 +32,7 @@ public class SK20Launcher extends SubsystemBase
      */
     public void activateTransfer()
     {
-
+        transferRoller.setForwards();
     }
 
     /**
