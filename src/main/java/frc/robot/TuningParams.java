@@ -20,6 +20,8 @@ public final class TuningParams
     public static final Color RGB_RED                       = new Color(0.4199, 0.3899, 0.1699);
     public static final Color RGB_YELLOW                    = new Color(0.3100, 0.5300, 0.1499);
 
+    public static final int COLOR_WHEEL_PROXIMITY_THRESHOLD = 30;
+
     //////////////////////////////
     // Launcher Params
     //////////////////////////////

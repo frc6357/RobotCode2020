@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
+import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.subsystems.base.SuperClasses.BaseDrive;
 import frc.robot.subsystems.base.SuperClasses.ShiftPolarity;
 import frc.robot.utils.ScaledEncoder;
-import frc.robot.commands.DefaultDriveCommand;
 
 public class SK20Drive extends SubsystemBase {
 
