@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SK20Climb;
 
@@ -16,6 +17,8 @@ public class ClimbReleaseCommand extends CommandBase
 {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final SK20Climb m_subsystem;
+  private double time;
+  private String debugger;
 
   /**
    * ClimbReleaseCommand tells that arm is released by pneumatic piston or not.
@@ -23,6 +26,7 @@ public class ClimbReleaseCommand extends CommandBase
   public ClimbReleaseCommand(SK20Climb subsystem) 
   {
     m_subsystem = subsystem;
+    time = DriverStation.getInstance().getMatchTime();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -32,7 +36,23 @@ public class ClimbReleaseCommand extends CommandBase
   @Override
   public void execute() 
   {
-    m_subsystem.deployArm();
+    debugger = DriverStation.getInstance().getGameSpecificMessage();
+    
+    if(time <= 30 || debugger == "D")
+    {
+      m_subsystem.deployArm();
+    }
+    else if(time > 30)
+    {
+      //For Testing Reasons
+      System.out.println("Time is not for climb");
+    }
+    else
+    {
+      //For Testing Reasons
+      System.out.println("Time is not known");
+    }
+    
 
   }
 

@@ -6,8 +6,9 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot.commands;
 
-import frc.robot.subsystems.SK20Climb;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.SK20Climb;
 /**
  * An example command that uses an example subsystem.
  */
@@ -16,6 +17,8 @@ public class WinchRobotCommand extends CommandBase
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final SK20Climb m_subsystem;
   private boolean startWinch; //tells whether or not winch is turned on or not
+  private double time;
+  private String debugger;
 
   /**
    * WinchRobot command tells whether or not to winch or stop winching the robot.
@@ -26,6 +29,7 @@ public class WinchRobotCommand extends CommandBase
   {
     m_subsystem = subsystem;
     startWinch = startMotor;
+    time = DriverStation.getInstance().getMatchTime();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -34,18 +38,33 @@ public class WinchRobotCommand extends CommandBase
   @Override
   public void execute() 
   {
-    //when true start winch
-    if(startWinch)
+    debugger = DriverStation.getInstance().getGameSpecificMessage();
+    
+    if(time <= 30 || debugger == "D")
     {
-      m_subsystem.startWinchRobot();
+      //when true start winch
+      if(startWinch)
+      {
+        m_subsystem.startWinchRobot();
+      }
+      //when false stop winch
+      else 
+      {
+        m_subsystem.stopWinchRobot();
+      }
     }
-    //when false stop winch
-    else 
+    else if(time > 30)
     {
-      m_subsystem.stopWinchRobot();
+      //For Testing reasons
+      System.out.println("Time is not for climb");
+    }
+    else
+    {
+      //For Testing reasons
+      System.out.println("Time is not known");
     }
   }
-  
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() 
