@@ -1,14 +1,11 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.*;
 
 import edu.wpi.first.wpilibj.I2C;
-// TODO: Uncomment these when used
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.BaseRoller;
@@ -32,7 +29,7 @@ public class SK20ColorWheel extends SubsystemBase {
     private int spinnerTransitionCount = 0;
     private ColorSensor2020 colorSensor;
     private CANEncoder spinnerRollerEncoder;
-    private Color fieldSensor;
+    private static Color2020[] fieldColors = {Color2020.RED, Color2020.GREEN, Color2020.CYAN, Color2020.YELLOW};
 
     /**
      * Creates the SK20ColorWheel object and all hardware resources it uses.
@@ -43,14 +40,13 @@ public class SK20ColorWheel extends SubsystemBase {
         spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.INTAKE_MAX_SPEED);
         spinnerLifter = new Solenoid(Ports.intakeMoverExtend, Ports.intakeMoverRetract);
         spinnerRollerEncoder = new CANEncoder(spinnerRollerMotor);
-        // TODO: Write this
+        // TODO: Finish writing this
     }
 
     /**
      * This function energizes the solenoid to lift the color wheel mechanism.
      */
     public void extendLifter() {
-        // TODO: Write this.
         spinnerLifter.set(true);
     }
 
@@ -58,7 +54,6 @@ public class SK20ColorWheel extends SubsystemBase {
      * This function de-energies the solenoid to retract the color wheel mechanism.
      */
     public void retractLifter() {
-        // TODO: Write this.
         spinnerLifter.set(false);
     }
 
@@ -67,7 +62,6 @@ public class SK20ColorWheel extends SubsystemBase {
      * control panel, spins the colored disk. This method is intended for test use.
      */
     public void activateSpinnerRoller() {
-        // TODO: Write this.
         spinnerRoller.setForwards();
     }
 
@@ -76,7 +70,6 @@ public class SK20ColorWheel extends SubsystemBase {
      * control panel, spins the colored disk. This method is intended for test use.
      */
     public void deactivateSpinnerRoller() {
-        // TODO: Write this.
         spinnerRoller.setStop();
     }
 
@@ -86,7 +79,6 @@ public class SK20ColorWheel extends SubsystemBase {
      * @return True for extended, false for retracted.
      */
     public boolean getIsLifterExtended() {
-        // TODO: Write this.
         return spinnerLifter.get();
     }
 
@@ -96,7 +88,6 @@ public class SK20ColorWheel extends SubsystemBase {
      * @return The speed of the spinner.
      */
     public double getSpinnerRollerSpeed() {
-        // TODO: Write this.
         return spinnerRollerEncoder.getVelocity();
     }
 
@@ -142,7 +133,6 @@ public class SK20ColorWheel extends SubsystemBase {
      * @return The game color closest to the color currently being detected.
      */
     public Color2020 getDetectedColor() {
-        // TODO: Write this
         return colorSensor.getGameColor();
     }
 
@@ -157,8 +147,12 @@ public class SK20ColorWheel extends SubsystemBase {
      */
     public Color2020 getFieldDetectedColor() {
         // TODO: Write this. Read the color from the sensor and, knowing the sequence of
-        // colors on the wheel, determine which color must be under the field sensor and
-        // return that value.
+        // colors on the wheel (stored in the fieldColors member), determine which color
+        // must be under the field sensor and return that value. You know that the field
+        // sensor is 90 degrees ahead of our detector's position so that will be 2 entries
+        // ahead in the fieldColors array. Hint: Figure out which entry in the array 
+        // matches the current detected color then advance two positions in the array to
+        // find the color under the field sensor. The modulus operator (%) may be helpful.
         return Color2020.UNKNOWN;
     }
 
@@ -168,11 +162,10 @@ public class SK20ColorWheel extends SubsystemBase {
      * to be under the control panel when the proximity sensor detects any object
      * within its working range above it.
      * 
-     * @return True if the proximity sensor detects and object above it, false
+     * @return True if the proximity sensor detects an object above it, false
      *         otherwise.
      */
     public boolean isUnderControlPanel() {
-        // TODO: Write this.
         if (colorSensor.getProximity() < TuningParams.COLOR_WHEEL_PROXIMITY_THRESHOLD) {
             return false;
         } else {
