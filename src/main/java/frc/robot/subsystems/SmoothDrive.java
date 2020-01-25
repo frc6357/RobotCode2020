@@ -41,54 +41,8 @@ public class SmoothDrive {
      */
     public void setSpeeds(double speedLeft, double speedRight) {
         speedTarget[LEFT] = speedLeft;
-        speedTarget[RIGHT] = speedRight; }
-
-    /**
-     * This method is used to query the number of rotations the left encoder has
-     * recorded since the last time it was reset.
-     *
-     * @return Returns the number of full rotations the left encoder has recorded.
-     */
-    // TODO: Need to set up the methods to do this in BaseDrive
-    /*
-     * public double getLeftEncoderRotations() { return
-     * Drive.getLeftEncoderRotations(); }
-     */
-
-    /**
-     * This method is used to query the number of rotations the right encoder has
-     * recorded since the last time it was reset.
-     *
-     * @return Returns the number of full rotations the right encoder has recorded.
-     */
-    // TODO: Need to set up the methods to do this in BaseDrive
-    /*
-     * public double getRightEncoderRotations() { return
-     * Drive.getRightEncoderRotations(); }
-     */
-
-    /**
-     * This method is used to query the distance the left encoder has recorded since
-     * the last time it was reset.
-     *
-     * @return Returns the number of inches the left encoder has measured.
-     */
-    // TODO: Need to set up the methods to do this in BaseDrive
-    /*
-     * public double getLeftEncoderDistance() { return
-     * Drive.getLeftEncoderDistance(); }
-     */
-
-    /**
-     * This method is used to query the distance the right encoder has recorded
-     * since the last time it was reset.
-     *
-     * @return Returns the number of inches the right encoder has measured.
-     */
-    // TODO: Need to set up the methods to do this in BaseDrive
-    /*
-     * public double getRightEncoderDistance() { return getRightEncoderDistance(); }
-     */
+        speedTarget[RIGHT] = speedRight;
+    }
 
     /**
      * This method must be called from the relevant top level "periodic" call.

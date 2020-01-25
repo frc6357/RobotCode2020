@@ -77,6 +77,46 @@ public class BaseDrive {
     }
 
     /**
+     * This method is used to query the number of rotations the left encoder has
+     * recorded since the last time it was reset.
+     *
+     * @return Returns the number of full rotations the left encoder has recorded.
+     */
+    public double getLeftEncoderRotations() {
+        return encoderLeft.getRotations();
+    }
+
+    /**
+     * This method is used to query the number of rotations the right encoder has
+     * recorded since the last time it was reset.
+     *
+     * @return Returns the number of full rotations the right encoder has recorded.
+     */
+    public double getRightEncoderRotations() {
+        return encoderRight.getRotations();
+    }
+
+    /**
+     * This method is used to query the distance the left encoder has recorded since
+     * the last time it was reset.
+     *
+     * @return Returns the number of inches the left encoder has measured.
+     */
+    public double getLeftEncoderDistance() {
+        return encoderLeft.getDistance();
+    }
+
+    /**
+     * This method is used to query the distance the right encoder has recorded
+     * since the last time it was reset.
+     *
+     * @return Returns the number of inches the right encoder has measured.
+     */
+    public double getRightEncoderDistance() {
+        return encoderRight.getDistance();
+    }
+
+    /**
      * Sets the speed for the left side of the drivetrain
      * 
      * @param newGear The speed that the motor controller is going to be set to, 1

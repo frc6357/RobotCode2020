@@ -16,7 +16,6 @@ import frc.robot.RobotContainer;
  * An example command that uses an example subsystem.
  */
 public class DefaultDriveCommand extends CommandBase {
-  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final SK20Drive m_subsystem;
 
   /**

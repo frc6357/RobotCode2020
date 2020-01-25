@@ -19,19 +19,24 @@ public class SK20Drive extends SubsystemBase {
     private final WPI_VictorSPX backLeft = new WPI_VictorSPX(Ports.backLeftDrive);
     private final WPI_VictorSPX frontRight = new WPI_VictorSPX(Ports.frontRightDrive);
     private final WPI_VictorSPX backRight = new WPI_VictorSPX(Ports.backRightDrive);
+
     private final SpeedControllerGroup motorGroupLeft = new SpeedControllerGroup(frontLeft, backLeft);
     private final SpeedControllerGroup motorGroupRight = new SpeedControllerGroup(frontRight, backRight);
-    private final ScaledEncoder encoderLeft = null;
-    private final ScaledEncoder encoderRight = null;
+
+    private final ScaledEncoder encoderLeft = new ScaledEncoder(Ports.leftEncoderA, Ports.leftEncoderB,
+            TuningParams.ENCODER_LEFT_REVERSED, TuningParams.ENCODER_PULSES, TuningParams.WHEEL_DIAMETER);
+    private final ScaledEncoder encoderRight = new ScaledEncoder(Ports.rightEncoderA, Ports.rightEncoderB,
+            TuningParams.ENCODER_RIGHT_REVERSED, TuningParams.ENCODER_PULSES, TuningParams.WHEEL_DIAMETER);
+
     private final Solenoid gearShiftSolenoid = null;
     private final ShiftPolarity shiftPolarity = ShiftPolarity.PRESSURE_IS_LOW;
+
     private final BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight,
             gearShiftSolenoid, shiftPolarity);
     private final SmoothDrive smoothDrive = new SmoothDrive(drive);
     private final DefaultDriveCommand driveCommand;
 
     private final ADIS16448_IMU imu = new ADIS16448_IMU();
-    private double angleTarget = 0.0;
 
     /**
      * This constructor of the SK20Drive sets up the BaseDrive object and passes it
@@ -52,9 +57,25 @@ public class SK20Drive extends SubsystemBase {
         smoothDrive.setSpeeds(speedLeft, speedRight);
     }
 
-    public void turnRelative(double degrees) {
-        angleTarget = degrees + getAngle();
-    };
+    /**
+     * This method is used to query the distance the left encoder has recorded since
+     * the last time it was reset.
+     *
+     * @return Returns the number of inches the left encoder has measured.
+     */
+    public double getLeftEncoderDistance() {
+        return drive.getLeftEncoderDistance();
+    }
+
+    /**
+     * This method is used to query the distance the right encoder has recorded since
+     * the last time it was reset.
+     *
+     * @return Returns the number of inches the right encoder has measured.
+     */
+    public double getRightEncoderDistance() {
+        return drive.getRightEncoderDistance();
+    }
 
     /**
      * Resets the gyro value
@@ -73,20 +94,9 @@ public class SK20Drive extends SubsystemBase {
         return imu.getGyroAngleZ();
     }
 
-    // TODO: Create all the methods we need!!
-
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        // TODO: Set up this method!!
-
-        //THIS LOGIC NEEDS HELP!!!
-        if (angleTarget < getAngle()) {
-            setSpeeds(-TuningParams.CONTROLLED_TURN_SPEED, TuningParams.CONTROLLED_TURN_SPEED);
-        }
-        else if (angleTarget > getAngle()) {
-            setSpeeds(TuningParams.CONTROLLED_TURN_SPEED, -TuningParams.CONTROLLED_TURN_SPEED);
-        }
         smoothDrive.SmoothDrivePeriodic();
     }
 

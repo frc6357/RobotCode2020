@@ -12,7 +12,17 @@ public final class TuningParams
     public static final double DECEL_MAX_TOWARDS_FORWARD    = 0.075;
     public static final double DECEL_MAX_TOWARDS_BACKWARD   = -0.075;
 
-    public static final double CONTROLLED_TURN_SPEED = 0.5;
+    public static final double CONTROLLED_TURN_SPEED        = 0.5;
+    public static final double ANGLE_TURN_TOLERANCE         = 1;
+
+    public static final boolean ENCODER_LEFT_REVERSED       = false;
+    public static final boolean ENCODER_RIGHT_REVERSED      = true;
+    public static final int ENCODER_PULSES                  = 0;
+    public static final double WHEEL_DIAMETER               = 0;    //In Centimeters
+
+    public static final double AUTONOMOUS_DRIVE_SPEED          = 0.5;
+    public static final double STRAIGHT_DRIVE_OFFSET_TOLERANCE = 1.0; //In Centimeters
+    public static final double OFFSET_SPEED_INCREMENT          = 0.01;
 
     //////////////////////////////
     // Color Wheel Params

@@ -29,8 +29,11 @@ public class Ports
     public static final int backLeftDrive       = 12;   // CAN ID 12
     public static final int backRightDrive      = 13;   // CAN ID 13
 
-    public static final int leftEncoder         = 0;    // DIO 0
-    public static final int rightEncoder        = 1;    // DIO 1
+    public static final int leftEncoderA        = 0;    // DIO
+    public static final int leftEncoderB        = 1;    // DIO
+    public static final int rightEncoderA       = 2;    // DIO
+    public static final int rightEncoderB       = 3;    // DIO
+
 
     //////////////////////////////
     // Intake Addresses
@@ -40,10 +43,10 @@ public class Ports
     public static final int intakeMoverExtend   = 0;    // PCM 1, Output 0
     public static final int intakeMoverRetract  = 1;    // PCM 1, Output 1
 
-    public static final int intakeOpenCheck     = 2;    // DIO 2
-    public static final int intakeSpeedCheckA   = 3;    // DIO 3
-    public static final int intakeSpeedCheckB   = 4;    // DIO 4
-    public static final int intakeBallCheck     = 5;    // DIO 5
+    public static final int intakeOpenCheck     = 4;    // DIO
+    public static final int intakeSpeedCheckA   = 5;    // DIO
+    public static final int intakeSpeedCheckB   = 6;    // DIO
+    public static final int intakeBallCheck     = 7;    // DIO
 
     ///////////////////////////////
     // Ball Handling Addresses
@@ -53,13 +56,13 @@ public class Ports
     public static final int ballGateOpen        = 2;    // PCM 1, Output 2
     public static final int ballGateDown        = 3;    // PCM 1, Output 3
 
-    public static final int ballSensor1         = 6;    // DIO 6
-    public static final int ballSensor2         = 7;    // DIO 7
-    public static final int ballSensor3         = 8;    // DIO 8
-    public static final int ballSensor4         = 9;    // DIO 9
-    public static final int ballSensor5         = 10;   // DIO 10
+    public static final int ballSensor1         = 8;    // DIO
+    public static final int ballSensor2         = 9;    // DIO
+    public static final int ballSensor3         = 10;   // DIO
+    public static final int ballSensor4         = 11;   // DIO
+    public static final int ballSensor5         = 12;   // DIO
 
-    public static final int gateStateOpen       = 11;   // DIO 11
+    public static final int gateStateOpen       = 13;   // DIO
 
     ///////////////////////////////
     // Ball Launcher Addresses
@@ -88,8 +91,8 @@ public class Ports
     ///////////////////////////////
     // Operator Interface
     ///////////////////////////////
-    public static final int OIDriverJoystick             = 0;
+    public static final int OIDriverJoystick    = 0;
 
-    public static final int OIDriverLeftDrive            = 1;    // Left Joystick Y
-    public static final int OIDriverRightDrive           = 5;    // Right Joystick Y
+    public static final int OIDriverLeftDrive   = 1;    // Left Joystick Y
+    public static final int OIDriverRightDrive  = 5;    // Right Joystick Y
 }
