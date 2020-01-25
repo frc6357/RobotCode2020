@@ -45,10 +45,10 @@ public class SK20ColorWheel extends SubsystemBase {
     public SK20ColorWheel() {
         colorSensor = new ColorSensor2020(I2C.Port.kOnboard);
         spinnerRollerMotor = new CANSparkMax(Ports.colorWheelSpinner, MotorType.kBrushless);
-        spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.INTAKE_MAX_SPEED);
-        spinnerLifter = new Solenoid(Ports.intakeMoverExtend, Ports.intakeMoverRetract);
+        spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.COLOR_WHEEL_SPEED);
+        spinnerLifter = new Solenoid(Ports.colorSpinnerExtend, Ports.colorSpinnerRetract);
         spinnerRollerEncoder = new CANEncoder(spinnerRollerMotor);
-        // TODO: Finish writing this
+        //TODO: Finish writing this
     }
 
     /**
@@ -113,7 +113,7 @@ public class SK20ColorWheel extends SubsystemBase {
      * method must be called to keep track of the distance the wheel has moved since
      * the count was last reset. Since several commands are likely to be needed,
      * this keeps the accumulated number of transitions (and, hence, the accumulated
-     * total rotation) in a single place that each commadn can access.
+     * total rotation) in a single place that each command can access.
      */
     public void incrementSpinnerTransitionCount() {
         spinnerTransitionCount++;

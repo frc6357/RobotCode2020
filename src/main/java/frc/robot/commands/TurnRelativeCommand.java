@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -22,6 +15,7 @@ public class TurnRelativeCommand extends CommandBase {
     private boolean isDone;
 
     /**
+     * Constructor that creates a new TurnRelativeCommand
      * 
      * @param subsystem The subsystem used by this command.
      * @param turnAngle The target angle we want to turn relative to the robot.
@@ -65,15 +59,12 @@ public class TurnRelativeCommand extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        isDone = true;
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if (isDone) {
-            return true;
-        } else {
-            return false;
-        }
+        return isDone;
     }
 }

@@ -13,7 +13,8 @@ public class Ports {
     //////////////////////////////
     // Robot Infrastructure
     //////////////////////////////
-    public static final int pcm1 = 1; // CAN ID 1
+    public static final int pcm1                = 1;    // CAN ID
+    public static final int pcm2                = 2;    // CAN ID
 
     //////////////////////////////
     // I2C device addresses
@@ -84,7 +85,8 @@ public class Ports {
     ///////////////////////////////
     public static final int colorWheelSpinner = 40; // CAN ID 40
 
-    public static final int colorSpinnerLifter = 7; // PCM 1, Output 7
+    public static final int colorSpinnerExtend  = 0;    // PCM 2, Output 0
+    public static final int colorSpinnerRetract = 1;    // PCM 2, Output 1
 
     ///////////////////////////////
     // Operator Interface
