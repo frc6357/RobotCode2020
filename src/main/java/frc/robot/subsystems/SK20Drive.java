@@ -7,7 +7,11 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
+<<<<<<< HEAD
 import frc.robot.commands.DefaultDriveCommand;
+=======
+import frc.robot.TuningParams;
+>>>>>>> Started creating SK20Drive Methods
 import frc.robot.subsystems.base.SuperClasses.BaseDrive;
 import frc.robot.subsystems.base.SuperClasses.ShiftPolarity;
 import frc.robot.utils.ScaledEncoder;
@@ -30,8 +34,7 @@ public class SK20Drive extends SubsystemBase {
     private final DefaultDriveCommand driveCommand;
 
     private final ADIS16448_IMU imu = new ADIS16448_IMU();
-    private double angleTarget;
-    private double angleCurrent;
+    private double angleTarget = 0.0;
 
     /**
      * This constructor of the SK20Drive sets up the BaseDrive object and passes it
@@ -51,24 +54,24 @@ public class SK20Drive extends SubsystemBase {
     public void setSpeeds(double speedLeft, double speedRight) {
         smoothDrive.setSpeeds(speedLeft, speedRight);
     }
-    
-    /*
-    public void setTargetAngle(double degrees) {
-        angleTarget = degrees;
-        angleCurrent = imu.getGyroAngleZ();
-        double deltaAngle = angleTarget - angleCurrent;
-        
-    };
-    */
 
-    //TEST FUNCTION
-    //TODO: This is a test. Remove in production
+    public void turnRelative(double degrees) {
+        angleTarget = degrees + getAngle();
+    };
+
+    /**
+     * Resets the gyro value
+     */
     public void resetGyro() {
         imu.reset();
     }
 
-    //TEST FUNCTION
-    //TODO: This is a test. Remove in production
+    /**
+     * Finds the angle of the robot(in the plane parallel to the field) relative to
+     * the last reset
+     * 
+     * @return double - The value the gyro says we are turned
+     */
     public double getAngle() {
         return imu.getGyroAngleZ();
     }
@@ -79,7 +82,15 @@ public class SK20Drive extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
         // TODO: Set up this method!!
+
+        //THIS LOGIC NEEDS HELP!!!
+        if (angleTarget < getAngle()) {
+            setSpeeds(-TuningParams.CONTROLLED_TURN_SPEED, TuningParams.CONTROLLED_TURN_SPEED);
+        }
+        else if (angleTarget > getAngle()) {
+            setSpeeds(TuningParams.CONTROLLED_TURN_SPEED, -TuningParams.CONTROLLED_TURN_SPEED);
+        }
         smoothDrive.SmoothDrivePeriodic();
     }
-    
+
 }

@@ -43,10 +43,6 @@ public class DefaultDriveCommand extends CommandBase {
     double speedLeft = RobotContainer.joystickDriver.getFilteredAxis(Ports.OIDriverLeftDrive);
     double speedRight = RobotContainer.joystickDriver.getFilteredAxis(Ports.OIDriverRightDrive);
     m_subsystem.setSpeeds(speedLeft, speedRight);
-
-    //TODO: This is a test. Remove in production
-    System.out.println(m_subsystem.getAngle());
-
   }
 
   // Called once the command ends or is interrupted.
