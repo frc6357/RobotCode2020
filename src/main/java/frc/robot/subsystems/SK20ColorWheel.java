@@ -21,6 +21,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * responsible for activating the spinner motor, detecting color sensor reading
  * changes, and updating the color transition counter stored here.
  */
+
+
+ // TODO: How do we detect which color we need to position the Control Panel sensor 
+ // over during the final control panel phase? Read the following:
+ //
+ // https://frc-docs.readthedocs.io/en/latest/docs/software/wpilib-overview/2020-Game-Data.html
+ //
+ 
 public class SK20ColorWheel extends SubsystemBase {
     // TODO: Uncomment these once they are used
     private BaseRoller spinnerRoller;
