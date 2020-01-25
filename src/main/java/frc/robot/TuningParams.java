@@ -12,6 +12,8 @@ public final class TuningParams
     public static final double DECEL_MAX_TOWARDS_FORWARD    = 0.075;
     public static final double DECEL_MAX_TOWARDS_BACKWARD   = -0.075;
 
+    public static final double CONTROLLED_TURN_SPEED = 0.5;
+
     //////////////////////////////
     // Color Wheel Params
     //////////////////////////////
@@ -20,16 +22,7 @@ public final class TuningParams
     public static final Color RGB_RED                       = new Color(0.4199, 0.3899, 0.1699);
     public static final Color RGB_YELLOW                    = new Color(0.3100, 0.5300, 0.1499);
 
-<<<<<<< HEAD
     public static final int COLOR_WHEEL_PROXIMITY_THRESHOLD = 30;
-=======
-    public static final double CONTROLLED_TURN_SPEED = 0.5;
-
-    public static final Color RGB_CYAN   = new Color(0.1799, 0.4451, 0.3799);
-    public static final Color RGB_GREEN  = new Color(0.2199, 0.5200, 0.2300);
-    public static final Color RGB_RED    = new Color(0.4199, 0.3899, 0.1699);
-    public static final Color RGB_YELLOW = new Color(0.3100, 0.5300, 0.1499);
->>>>>>> Started creating SK20Drive Methods
 
     //////////////////////////////
     // Launcher Params
