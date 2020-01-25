@@ -61,8 +61,11 @@ public final class TuningParams
     public static final boolean BALL_SENSOR_4_INVERT        = false;
     public static final boolean BALL_SENSOR_5_INVERT        = false;
 
-    //////////////////////////////
-    // Climb Params
-    //////////////////////////////
+
+    ///////////////////////////////
+    //Climb Params
+    ///////////////////////////////
     public static final double WINCH_MOTOR_SPEED            = 0.5;
+    public static final boolean DEPLOY_CLIMB_ARM            = true; //assumes that the solenoid needs to be energized be extended
+
 }

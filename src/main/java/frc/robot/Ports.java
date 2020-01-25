@@ -93,6 +93,15 @@ public class Ports
     ///////////////////////////////
     public static final int OIDriverJoystick    = 0;
 
-    public static final int OIDriverLeftDrive   = 1;    // Left Joystick Y
-    public static final int OIDriverRightDrive  = 5;    // Right Joystick Y
+    public static final int OIDriverLeftDrive            = 1;    // Left Joystick Y
+    public static final int OIDriverRightDrive           = 5;    // Right Joystick Y
+
+    
+    public static final int OIOperatorJoystick           = 1;
+
+    public static final int OIOperatorDeployArm          = 4;   //Pneumatic for releasing the arm (Y)
+    public static final int OIOperatorStartWinchArm      = 5;   //Motor for Winching arm   (LeftBumper)
+    public static final int OIOperatorStopWinchArm       = 6;   //Stops motor for Winching arm  (RightBumper)
+   
+
 }
