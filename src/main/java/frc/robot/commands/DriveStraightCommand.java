@@ -31,6 +31,7 @@ public class DriveStraightCommand extends CommandBase {
     public void initialize() {
         initialLeftEncoderValue = m_subsystem.getLeftEncoderDistance();
         initialRightEncoderValue = m_subsystem.getRightEncoderDistance();
+        isDone = false;
     }
 
     // Called every time the scheduler runs while the command is scheduled.

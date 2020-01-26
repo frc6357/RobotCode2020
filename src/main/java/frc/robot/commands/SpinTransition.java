@@ -27,6 +27,7 @@ public class SpinTransition extends CommandBase {
     @Override
     public void initialize() {
         m_subsystem.resetSpinnerTransitionCount();
+        isDone = false;
     }
 
     // Called every time the scheduler runs while the command is scheduled.
