@@ -23,14 +23,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 
 
- // TODO: How do we detect which color we need to position the Control Panel sensor 
- // over during the final control panel phase? Read the following:
- //
- // https://frc-docs.readthedocs.io/en/latest/docs/software/wpilib-overview/2020-Game-Data.html
- //
  
 public class SK20ColorWheel extends SubsystemBase {
-    // TODO: Uncomment these once they are used
     private BaseRoller spinnerRoller;
     private Solenoid spinnerLifter;
     private CANSparkMax spinnerRollerMotor;
@@ -48,7 +42,6 @@ public class SK20ColorWheel extends SubsystemBase {
         spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.COLOR_WHEEL_SPEED);
         spinnerLifter = new Solenoid(Ports.colorSpinnerExtend, Ports.colorSpinnerRetract);
         spinnerRollerEncoder = new CANEncoder(spinnerRollerMotor);
-        //TODO: Finish writing this
     }
 
     /**
@@ -124,8 +117,6 @@ public class SK20ColorWheel extends SubsystemBase {
      * when the spinner roller is active and the color sensor detects a change in
      * the color above it.
      * 
-     * TODO: Commands for this subsystem must detect color transitions and update
-     * the transition counter.
      * 
      * @return The number of detected color transitions since the last call to
      *         resetSpinnerTransitionCount().
@@ -141,7 +132,11 @@ public class SK20ColorWheel extends SubsystemBase {
      * @return The game color closest to the color currently being detected.
      */
     public Color2020 getDetectedColor() {
-        return colorSensor.getGameColor();
+        if(colorSensor.getProximity() >= TuningParams.COLOR_WHEEL_PROXIMITY_THRESHOLD)
+        {
+            return colorSensor.getGameColor();
+        }
+        return Color2020.NONE;
     }
 
     /**
@@ -153,15 +148,32 @@ public class SK20ColorWheel extends SubsystemBase {
      * @return The game color we expect the field is currently detecting or UNKNOWN
      *         if the robot is not currently reading a color.
      */
-    public Color2020 getFieldDetectedColor() {
-        // TODO: Write this. Read the color from the sensor and, knowing the sequence of
-        // colors on the wheel (stored in the fieldColors member), determine which color
-        // must be under the field sensor and return that value. You know that the field
-        // sensor is 90 degrees ahead of our detector's position so that will be 2 entries
-        // ahead in the fieldColors array. Hint: Figure out which entry in the array 
-        // matches the current detected color then advance two positions in the array to
-        // find the color under the field sensor. The modulus operator (%) may be helpful.
+    public Color2020 getFieldDetectedColor() { 
+        /**
+         * @return the color the the fieldsensor is detecting and if the detected color is NONE which
+         *      is determined by getDetectedColor() it will return just NONE. And if finally the code
+         *      never matches any of these conditions if will just return UNKNOWN
+         */
+        int counter = 0;
+        Color2020 col = getDetectedColor();
+        if(col == Color2020.NONE)
+        {
+            return col;
+        }
+        else
+        {
+            for(int i = 0; i< fieldColors.length; i++)
+            {
+                if(col == fieldColors[i])
+                {
+                    return fieldColors[(i + 2) % 4];
+                }
+            }
+
+        }
+        
         return Color2020.UNKNOWN;
+        
     }
 
     /**
