@@ -5,7 +5,7 @@ import frc.robot.TuningParams;
 import frc.robot.subsystems.SK20Drive;
 
 /**
- * An example command that uses an example subsystem.
+ * A commmand that turns the robot in place for n degrees.
  */
 public class TurnRelativeCommand extends CommandBase {
     private final SK20Drive m_subsystem;
@@ -15,9 +15,10 @@ public class TurnRelativeCommand extends CommandBase {
     private boolean isDone;
 
     /**
-     * Constructor that creates a new TurnRelativeCommand
+     * Constructor that creates a new TurnRelativeCommand, sets up the member
+     * subsystem, and creates a variable to store the targeted turn angle.
      * 
-     * @param subsystem The subsystem used by this command.
+     * @param subsystem The subsystem used by this command to turn the robot.
      * @param turnAngle The target angle we want to turn relative to the robot.
      */
     public TurnRelativeCommand(SK20Drive subsystem, double turnAngle) {
@@ -59,7 +60,11 @@ public class TurnRelativeCommand extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        isDone = true;
+        // If we were interrupted, for safety, stop both motors.
+        if (interrupted) {
+            m_subsystem.setSpeeds(0.0, 0.0);
+            isDone = true;
+        }
     }
 
     // Returns true when the command should end.

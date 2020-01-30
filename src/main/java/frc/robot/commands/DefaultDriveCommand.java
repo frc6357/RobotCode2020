@@ -6,15 +6,17 @@ import frc.robot.subsystems.SK20Drive;
 import frc.robot.RobotContainer;
 
 /**
- * An example command that uses an example subsystem.
+ * A default drive command that takes in the filtered joysticks such that the
+ * robot drives in teloperated mode.
  */
 public class DefaultDriveCommand extends CommandBase {
     private final SK20Drive m_subsystem;
 
     /**
-     * Creates a new ExampleCommand.
+     * Creates a new DefaultDriveCommand that sets up the member subsystem.
      *
-     * @param subsystem The subsystem used by this command.
+     * @param subsystem The subsystem used by the command to set drivetrain motor
+     *                  speeds.
      */
     public DefaultDriveCommand(SK20Drive subsystem) {
         m_subsystem = subsystem;
@@ -29,6 +31,10 @@ public class DefaultDriveCommand extends CommandBase {
 
     }
 
+    /**
+     * This method, which is usually run every 20ms, takes in the filtered joystick
+     * values and sets the speeds that the drivetrain motors need to achieve.
+     */
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {

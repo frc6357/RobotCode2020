@@ -5,7 +5,7 @@ import frc.robot.TuningParams;
 import frc.robot.subsystems.SK20Drive;
 
 /**
- * An example command that uses an example subsystem.
+ * A command that drives the robot n distance forward.
  */
 public class DriveStraightCommand extends CommandBase {
     private final SK20Drive m_subsystem;
@@ -15,9 +15,11 @@ public class DriveStraightCommand extends CommandBase {
     private boolean isDone = false;
 
     /**
-     * Constructor that creates a new DriveStraightCommand
+     * Constructor that creates a new DriveStraightCommand, sets up the member
+     * subsystem, and sets the desired target distance we are trying to reach.
      *
-     * @param subsystem The subsystem used by this command.
+     * @param subsystem The subsystem used by the command to set drivetrain motor
+     *                  speeds.
      */
     public DriveStraightCommand(SK20Drive subsystem, double distanceTarget) {
         m_subsystem = subsystem;
@@ -34,6 +36,13 @@ public class DriveStraightCommand extends CommandBase {
         isDone = false;
     }
 
+    /**
+     * This method sets the target speeds that the motors need to achieve to drive
+     * straight usually every 20ms. This method also looks with the encoders to make
+     * sure that the robot isn't 'drifting' into a certain direction. If the robot
+     * happens to be drifting into a certain direction however, the code will
+     * correct the speeeds such that the robot doesn't drift as much if at all.
+     */
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
@@ -66,8 +75,7 @@ public class DriveStraightCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         // If we were interrupted, for safety, stop both motors.
-        if (interrupted)
-        {
+        if (interrupted) {
             m_subsystem.setSpeeds(0.0, 0.0);
             isDone = true;
         }

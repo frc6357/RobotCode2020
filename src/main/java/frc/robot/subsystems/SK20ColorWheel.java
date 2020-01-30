@@ -20,9 +20,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * responsible for activating the spinner motor, detecting color sensor reading
  * changes, and updating the color transition counter stored here.
  */
-
-
- 
 public class SK20ColorWheel extends SubsystemBase {
     private BaseRoller spinnerRoller;
     private Solenoid spinnerLifter;
@@ -30,7 +27,7 @@ public class SK20ColorWheel extends SubsystemBase {
     private int spinnerTransitionCount = 0;
     private ColorSensor2020 colorSensor;
     private CANEncoder spinnerRollerEncoder;
-    private static Color2020[] fieldColors = {Color2020.RED, Color2020.GREEN, Color2020.CYAN, Color2020.YELLOW};
+    private static Color2020[] fieldColors = { Color2020.RED, Color2020.GREEN, Color2020.CYAN, Color2020.YELLOW };
 
     /**
      * Creates the SK20ColorWheel object and all hardware resources it uses.
@@ -115,7 +112,6 @@ public class SK20ColorWheel extends SubsystemBase {
      * Returns the color transition counter. The transition count is incremented
      * when the spinner roller is active and the color sensor detects a change in
      * the color above it.
-     * 
      * 
      * @return The number of detected color transitions since the last call to
      *         resetSpinnerTransitionCount().
