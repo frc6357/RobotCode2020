@@ -18,6 +18,7 @@ import frc.robot.commands.WinchRobotCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SK20Climb;
 import frc.robot.subsystems.SK20Drive;
+import frc.robot.subsystems.SK20Intake;
 import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.filters.FilterDeadband;
 
@@ -32,8 +33,9 @@ public class RobotContainer
 {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final SK20Drive m_driveSubsystem = new SK20Drive();
-  private final SK20Climb m_climbSubsystem = new SK20Climb();
+  public static final SK20Drive m_driveSubsystem = new SK20Drive();
+  public static final SK20Climb m_climbSubsystem = new SK20Climb();
+  public static final SK20Intake m_intakeSubsystem = new SK20Intake();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
