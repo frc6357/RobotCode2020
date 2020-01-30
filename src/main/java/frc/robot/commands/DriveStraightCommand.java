@@ -48,15 +48,15 @@ public class DriveStraightCommand extends CommandBase {
         } else {
             double increment = absDelta * TuningParams.OFFSET_SPEED_INCREMENT;
             if (deltaLeftEncoderDistance > deltaRightEncoderDistance) {
-                m_subsystem.setSpeeds(TuningParams.CONTROLLED_TURN_SPEED,
-                        TuningParams.CONTROLLED_TURN_SPEED + increment);
+                m_subsystem.setSpeeds(TuningParams.AUTONOMOUS_DRIVE_SPEED,
+                        TuningParams.AUTONOMOUS_DRIVE_SPEED + increment);
             } else {
-                m_subsystem.setSpeeds(TuningParams.CONTROLLED_TURN_SPEED + increment,
-                        TuningParams.CONTROLLED_TURN_SPEED);
+                m_subsystem.setSpeeds(TuningParams.AUTONOMOUS_DRIVE_SPEED + increment,
+                        TuningParams.AUTONOMOUS_DRIVE_SPEED);
             }
         }
         if (deltaLeftEncoderDistance >= distanceTarget || deltaLeftEncoderDistance >= distanceTarget) {
-            m_subsystem.setSpeeds(0, 0);
+            m_subsystem.setSpeeds(0.0, 0.0);
             isDone = true;
         }
 
@@ -65,7 +65,12 @@ public class DriveStraightCommand extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        isDone = true;
+        // If we were interrupted, for safety, stop both motors.
+        if (interrupted)
+        {
+            m_subsystem.setSpeeds(0.0, 0.0);
+            isDone = true;
+        }
     }
 
     // Returns true when the command should end.
