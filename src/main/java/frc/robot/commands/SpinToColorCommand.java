@@ -1,8 +1,9 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.base.Color2020;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * A command that turns the control panel to the desired color for the field.
@@ -22,8 +23,9 @@ public class SpinToColorCommand extends CommandBase {
     public SpinToColorCommand(SK20ColorWheel subsystem, Color2020 targetColor) {
         m_subsystem = subsystem;
         this.targetColor = targetColor;
+
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+        addRequirements(RobotContainer.m_colorWheelSubsystem);
     }
 
     // Called when the command is initially scheduled.

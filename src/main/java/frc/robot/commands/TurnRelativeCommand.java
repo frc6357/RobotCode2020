@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.SK20Drive;
 
@@ -24,8 +25,9 @@ public class TurnRelativeCommand extends CommandBase {
     public TurnRelativeCommand(SK20Drive subsystem, double turnAngle) {
         m_subsystem = subsystem;
         m_turnAngle = turnAngle;
+
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+        addRequirements(RobotContainer.m_driveSubsystem);
     }
 
     // Called when the command is initially scheduled.

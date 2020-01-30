@@ -127,8 +127,7 @@ public class SK20ColorWheel extends SubsystemBase {
      * @return The game color closest to the color currently being detected.
      */
     public Color2020 getDetectedColor() {
-        if(colorSensor.getProximity() >= TuningParams.COLOR_WHEEL_PROXIMITY_THRESHOLD)
-        {
+        if (colorSensor.getProximity() >= TuningParams.COLOR_WHEEL_PROXIMITY_THRESHOLD) {
             return colorSensor.getGameColor();
         }
         return Color2020.NONE;
@@ -143,31 +142,27 @@ public class SK20ColorWheel extends SubsystemBase {
      * @return The game color we expect the field is currently detecting or UNKNOWN
      *         if the robot is not currently reading a color.
      */
-    public Color2020 getFieldDetectedColor() { 
+    public Color2020 getFieldDetectedColor() {
         /**
-         * @return the color the the fieldsensor is detecting and if the detected color is NONE which
-         *      is determined by getDetectedColor() it will return just NONE. And if finally the code
-         *      never matches any of these conditions if will just return UNKNOWN
+         * @return the color the the fieldsensor is detecting and if the detected color
+         *         is NONE which is determined by getDetectedColor() it will return just
+         *         NONE. And if finally the code never matches any of these conditions
+         *         if will just return UNKNOWN
          */
         Color2020 col = getDetectedColor();
-        if(col == Color2020.NONE)
-        {
+        if (col == Color2020.NONE) {
             return col;
-        }
-        else
-        {
-            for(int i = 0; i< fieldColors.length; i++)
-            {
-                if(col == fieldColors[i])
-                {
+        } else {
+            for (int i = 0; i < fieldColors.length; i++) {
+                if (col == fieldColors[i]) {
                     return fieldColors[(i + 2) % 4];
                 }
             }
 
         }
-        
+
         return Color2020.UNKNOWN;
-        
+
     }
 
     /**

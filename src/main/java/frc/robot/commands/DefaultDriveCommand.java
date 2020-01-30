@@ -22,7 +22,7 @@ public class DefaultDriveCommand extends CommandBase {
         m_subsystem = subsystem;
 
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+        addRequirements(RobotContainer.m_driveSubsystem);
     }
 
     // Called when the command is initially scheduled.

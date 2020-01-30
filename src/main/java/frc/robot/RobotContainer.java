@@ -17,6 +17,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.WinchRobotCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SK20Climb;
+import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.SK20Drive;
 import frc.robot.subsystems.SK20Intake;
 import frc.robot.utils.FilteredJoystick;
@@ -36,6 +37,7 @@ public class RobotContainer
   public static final SK20Drive m_driveSubsystem = new SK20Drive();
   public static final SK20Climb m_climbSubsystem = new SK20Climb();
   public static final SK20Intake m_intakeSubsystem = new SK20Intake();
+  public static final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
