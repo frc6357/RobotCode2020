@@ -10,7 +10,6 @@ import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.BaseRoller;
 import frc.robot.subsystems.base.ColorSensor2020;
-import frc.robot.utils.ScaledEncoder;
 import frc.robot.subsystems.base.Color2020;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -154,7 +153,6 @@ public class SK20ColorWheel extends SubsystemBase {
          *      is determined by getDetectedColor() it will return just NONE. And if finally the code
          *      never matches any of these conditions if will just return UNKNOWN
          */
-        int counter = 0;
         Color2020 col = getDetectedColor();
         if(col == Color2020.NONE)
         {
