@@ -117,10 +117,9 @@ public class BaseDrive {
     }
 
     /**
-     * Sets the speed for the left side of the drivetrain
+     * Sets the gear for both sides of the drivetrain.
      * 
-     * @param newGear The speed that the motor controller is going to be set to, 1
-     *                for full forwards and -1 for full back
+     * @param newGear The gear value that we want the robot to achieve.
      */
     public void setGear(Gear newGear) {
         switch (shiftPolarity) {

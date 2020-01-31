@@ -10,6 +10,7 @@ import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.subsystems.base.SuperClasses.BaseDrive;
+import frc.robot.subsystems.base.SuperClasses.Gear;
 import frc.robot.subsystems.base.SuperClasses.ShiftPolarity;
 import frc.robot.utils.ScaledEncoder;
 
@@ -58,6 +59,24 @@ public class SK20Drive extends SubsystemBase {
     }
 
     /**
+     * This method is used to set the gear on the drivetrain.
+     * 
+     * @param gearTarget The target gear we want to reach.
+     */
+    public void setGear(Gear gearTarget) {
+        drive.setGear(gearTarget);
+    }
+
+    /**
+     * This method is used to find which gear the robot is currently on.
+     * 
+     * @return Gear - The gear we are on (HIGH or LOW).
+     */
+    public Gear getGear() {
+        return drive.getGear();
+    }
+
+    /**
      * This method is used to query the distance the left encoder has recorded since
      * the last time it was reset.
      *
@@ -68,8 +87,8 @@ public class SK20Drive extends SubsystemBase {
     }
 
     /**
-     * This method is used to query the distance the right encoder has recorded since
-     * the last time it was reset.
+     * This method is used to query the distance the right encoder has recorded
+     * since the last time it was reset.
      *
      * @return Returns the number of inches the right encoder has measured.
      */
