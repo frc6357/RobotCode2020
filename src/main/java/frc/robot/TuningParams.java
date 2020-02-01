@@ -18,7 +18,7 @@ public final class TuningParams
     public static final boolean ENCODER_LEFT_REVERSED          = false;
     public static final boolean ENCODER_RIGHT_REVERSED         = true;
     public static final int ENCODER_PULSES                     = 0;
-    public static final double WHEEL_DIAMETER                  = 0;    //In Centimeters
+    public static final double WHEEL_DIAMETER                  = 8;    //In Inches
 
     public static final double AUTONOMOUS_DRIVE_SPEED          = 0.5;
     public static final double STRAIGHT_DRIVE_OFFSET_TOLERANCE = 1.0; //In Centimeters
@@ -65,9 +65,22 @@ public final class TuningParams
 
 
     ///////////////////////////////
-    //Climb Params
+    // Climb Params
     ///////////////////////////////
     public static final double WINCH_MOTOR_SPEED            = 0.5;
     public static final boolean DEPLOY_CLIMB_ARM            = true; //assumes that the solenoid needs to be energized be extended
+
+    ///////////////////////////////
+    // Test Params
+    ///////////////////////////////
+    public static final double TEST_DRIVE_STRAIGHT_1        = 12;    //Amount of inches
+    public static final double TEST_DRIVE_STRAIGHT_2        = 24;    //Amount of inches
+    public static final double TEST_DRIVE_STRAIGHT_3        = 60;    //Amount of inches
+
+    public static final double TEST_TURN_1                  = 10;    //Amount of degrees
+    public static final double TEST_TURN_2                  = 30;    //Amount of degrees
+    public static final double TEST_TURN_3                  = 50;    //Amount of degrees
+    public static final double TEST_TURN_4                  = 90;    //Amount of degrees
+    public static final double TEST_TURN_5                  = 180;    //Amount of degrees
 
 }

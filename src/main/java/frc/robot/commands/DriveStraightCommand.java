@@ -18,8 +18,9 @@ public class DriveStraightCommand extends CommandBase {
      * Constructor that creates a new DriveStraightCommand, sets up the member
      * subsystem, and sets the desired target distance we are trying to reach.
      *
-     * @param subsystem The subsystem used by the command to set drivetrain motor
-     *                  speeds.
+     * @param subsystem      The subsystem used by the command to set drivetrain
+     *                       motor speeds.
+     * @param distanceTarget The amount of inches we want to the robot to move.
      */
     public DriveStraightCommand(SK20Drive subsystem, double distanceTarget) {
         m_subsystem = subsystem;
