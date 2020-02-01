@@ -56,7 +56,7 @@ public class SK20ColorWheel extends SubsystemBase {
 
     /**
      * Turns on the motor which rotates the spinner which, when in contact with the
-     * control panel, spins the colored disk. This method is intended for test use.
+     * control panel, spins the colored disk.
      */
     public void activateSpinnerRoller() {
         spinnerRoller.setForwards();
@@ -64,7 +64,7 @@ public class SK20ColorWheel extends SubsystemBase {
 
     /**
      * Turns off the motor which rotates the spinner which, when in contact with the
-     * control panel, spins the colored disk. This method is intended for test use.
+     * control panel, spins the colored disk.
      */
     public void deactivateSpinnerRoller() {
         spinnerRoller.setStop();
