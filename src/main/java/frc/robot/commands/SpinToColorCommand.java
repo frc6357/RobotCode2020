@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.base.Color2020;
 
@@ -25,7 +24,7 @@ public class SpinToColorCommand extends CommandBase {
         this.targetColor = targetColor;
 
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(RobotContainer.m_colorWheelSubsystem);
+        addRequirements(m_subsystem);
     }
 
     // Called when the command is initially scheduled.

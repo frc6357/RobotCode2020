@@ -34,10 +34,11 @@ public class RobotContainer
 {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  public static final SK20Drive m_driveSubsystem = new SK20Drive();
-  public static final SK20Climb m_climbSubsystem = new SK20Climb();
-  public static final SK20Intake m_intakeSubsystem = new SK20Intake();
-  public static final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
+
+  private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
+  private final SK20Drive m_driveSubsystem = new SK20Drive();
+  private final SK20Climb m_climbSubsystem = new SK20Climb();
+  private final SK20Intake m_intakeSubsystem = new SK20Intake();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
