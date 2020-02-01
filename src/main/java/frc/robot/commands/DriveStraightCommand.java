@@ -43,7 +43,7 @@ public class DriveStraightCommand extends CommandBase {
      * straight usually every 20ms. This method also looks with the encoders to make
      * sure that the robot isn't 'drifting' into a certain direction. If the robot
      * happens to be drifting into a certain direction however, the code will
-     * correct the speeeds such that the robot doesn't drift as much if at all.
+     * correct the speeds such that the robot doesn't drift as much if at all.
      */
     // Called every time the scheduler runs while the command is scheduled.
     @Override
@@ -53,17 +53,16 @@ public class DriveStraightCommand extends CommandBase {
         double deltaLeftEncoderDistance = leftEncoderDistance - initialLeftEncoderValue;
         double deltaRightEncoderDistance = rightEncoderDistance - initialRightEncoderValue;
         double absDelta = Math.abs(deltaLeftEncoderDistance - deltaRightEncoderDistance);
+        double driveSpeed = TuningParams.AUTONOMOUS_DRIVE_SPEED * Math.signum(distanceTarget);
 
         if (absDelta <= TuningParams.STRAIGHT_DRIVE_OFFSET_TOLERANCE) {
-            m_subsystem.setSpeeds(TuningParams.AUTONOMOUS_DRIVE_SPEED, TuningParams.AUTONOMOUS_DRIVE_SPEED);
+            m_subsystem.setSpeeds(driveSpeed, driveSpeed);
         } else {
-            double increment = absDelta * TuningParams.OFFSET_SPEED_INCREMENT;
+            double increment = (absDelta * TuningParams.OFFSET_SPEED_INCREMENT) * Math.signum(distanceTarget);
             if (deltaLeftEncoderDistance > deltaRightEncoderDistance) {
-                m_subsystem.setSpeeds(TuningParams.AUTONOMOUS_DRIVE_SPEED,
-                        TuningParams.AUTONOMOUS_DRIVE_SPEED + increment);
+                m_subsystem.setSpeeds(driveSpeed, driveSpeed + increment);
             } else {
-                m_subsystem.setSpeeds(TuningParams.AUTONOMOUS_DRIVE_SPEED + increment,
-                        TuningParams.AUTONOMOUS_DRIVE_SPEED);
+                m_subsystem.setSpeeds(driveSpeed + increment, driveSpeed);
             }
         }
         if (deltaLeftEncoderDistance >= distanceTarget || deltaLeftEncoderDistance >= distanceTarget) {
