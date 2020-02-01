@@ -22,7 +22,7 @@ public class ClimbReleaseCommand extends CommandBase {
         addRequirements(subsystem);
     }
 
-    // TODO: Don't allow outside of endgame
+    
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {

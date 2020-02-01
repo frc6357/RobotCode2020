@@ -10,7 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.ExampleCommand;
@@ -32,6 +34,9 @@ import frc.robot.utils.filters.FilterDeadband;
  */
 public class RobotContainer 
 {
+  
+    private enum testModeChoice{DRIVE, LAUNCHER, CLIMB, INTAKE, COLOR_WHEEL, OTHER};
+    SendableChooser<testModeChoice> testModeSelector = new SendableChooser<testModeChoice>();
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -57,10 +62,17 @@ public class RobotContainer
 
   public RobotContainer() 
   {
+    
     joystickDriver.setFilter(Ports.OIDriverLeftDrive, new FilterDeadband(0.06, -1.0));
     joystickDriver.setFilter(Ports.OIDriverRightDrive, new FilterDeadband(0.06, -1.0));
     // Configure the button bindings
     configureButtonBindings();
+    testModeSelector.setDefaultOption("OTHER", testModeChoice.OTHER);
+    testModeSelector.addOption("DRIVE", testModeChoice.DRIVE);
+    testModeSelector.addOption("COLOR_WHEEL", testModeChoice.COLOR_WHEEL);
+    testModeSelector.addOption("CLIMB",testModeChoice.CLIMB);
+    testModeSelector.addOption("INTAKE", testModeChoice.INTAKE);
+    testModeSelector.addOption("LAUNCHER", testModeChoice.LAUNCHER);
   }
 
   /**
@@ -71,13 +83,38 @@ public class RobotContainer
    */
   private void configureButtonBindings()
   {
-    // TODO: Implentation has no interlock (MUST FIX !!!!!!!!!!!!!)
-    // TODO: use class DriverStation to know the Game time
+    
     // Sets robot button for the climb command
     operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem));
     startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
     stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
 
+  }
+
+  public void testSelector(){
+    switch (testModeSelector.getSelected()){
+      case OTHER:
+      //add later:
+      //CommandScheduler.getInstance().schedule(Command);
+        System.out.println("Doing OTHER");
+      break;
+      case DRIVE:
+        System.out.println("Doing Driver");
+        
+      break;
+      case LAUNCHER:
+        System.out.println("Doing LAUNCHER");
+      break;
+      case INTAKE:
+        System.out.println("Doing INTAKE");
+      break;
+      case CLIMB:
+        System.out.println("Doing CLIMB");
+      break;
+      case COLOR_WHEEL:
+        System.out.println("Doing COLOR_WHEEL");
+      break;
+    }
   }
 
   /**

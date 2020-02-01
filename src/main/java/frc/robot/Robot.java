@@ -8,8 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 
 
 /**
@@ -20,8 +22,15 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
+    private enum testModeChoice{DRIVE, LAUNCHER, CLIMB, INTAKE, COLOR_WHEEL, OTHER};
+    //private enum driveTestModeChoice{TestStraightCommandGroup, TestStraightInterruptCommandGroup, TestTurnCommandGroup, TestTurnInterruptCommandGroup}
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
+    
+    
+    SendableChooser<testModeChoice> testModeSelector = new SendableChooser<testModeChoice>();
+    //SendableChooser<driveTestModeChoice> driveTestModeSelector = new SendableChooser<driveTestModeChoice>();
+    
     
 
     // public Robot() {
@@ -45,12 +54,23 @@ public class Robot extends TimedRobot {
      * for any initialization code.
      */
     public Robot() {
-        
+      
+      //m_driveStraightCommand = command;
+      
+
+
+      //Drive
+      // driveTestModeSelector.addOption("TestStraightCommandGroup", driveTestModeChoice.TestStraightCommandGroup);
+      // driveTestModeSelector.addOption("TestStraightInterruptCommandGroup", driveTestModeChoice.TestStraightInterruptCommandGroup);
+      // driveTestModeSelector.addOption("TestTurnCommandGroup", driveTestModeChoice.TestTurnCommandGroup);
+      // driveTestModeSelector.addOption("TestTurnInterruptCommandGroup", driveTestModeChoice.TestTurnInterruptCommandGroup);
+
     }
 
     @Override
     public void robotInit() {
       m_robotContainer = new RobotContainer();
+      
     }
 
     /**
@@ -91,6 +111,28 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
           m_autonomousCommand.schedule();
         }
+        
+        
+        m_robotContainer.testSelector();
+
+        
+
+        // switch(){
+        //   case driveTestModeChoice.TestStraightCommandGroup:
+            
+        //   break;
+        //   case driveTestModeChoice.TestStraightInterruptCommandGroup:
+
+        //   break;
+        //   case driveTestModeChoice.TestTurnCommandGroup:
+
+        //   break;
+        //   case driveTestModeChoice.TestTurnInterruptCommandGroup:
+            
+        //   break;
+        // }
+        
+        
     }
 
     /**
