@@ -85,8 +85,8 @@ public class Ports {
     ///////////////////////////////
     public static final int colorWheelSpinner = 40; // CAN ID 40
 
-    public static final int colorSpinnerExtend  = 0;    // PCM 2, Output 0
-    public static final int colorSpinnerRetract = 1;    // PCM 2, Output 1
+    public static final int colorSpinnerExtend  = 7;    // PCM 2, Output 0
+    public static final int colorSpinnerRetract = 8;    // PCM 2, Output 1
 
     ///////////////////////////////
     // Operator Interface

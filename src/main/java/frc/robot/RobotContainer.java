@@ -12,14 +12,15 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ClimbReleaseCommand;
+// import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.WinchRobotCommand;
+// import frc.robot.commands.WinchRobotCommand;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.SK20Climb;
-import frc.robot.subsystems.SK20ColorWheel;
+// import frc.robot.subsystems.SK20BallHandling;
+// import frc.robot.subsystems.SK20Climb;
+// import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.SK20Drive;
-import frc.robot.subsystems.SK20Intake;
+// import frc.robot.subsystems.SK20Intake;
 import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.filters.FilterDeadband;
 
@@ -35,10 +36,11 @@ public class RobotContainer
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
+  // private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
   private final SK20Drive m_driveSubsystem = new SK20Drive();
-  private final SK20Climb m_climbSubsystem = new SK20Climb();
-  private final SK20Intake m_intakeSubsystem = new SK20Intake();
+  // private final SK20Climb m_climbSubsystem = new SK20Climb();
+  // private final SK20Intake m_intakeSubsystem = new SK20Intake();
+  // public final SK20BallHandling m_handlingSubsystem = new SK20BallHandling();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
@@ -74,9 +76,9 @@ public class RobotContainer
     // TODO: Implentation has no interlock (MUST FIX !!!!!!!!!!!!!)
     // TODO: use class DriverStation to know the Game time
     // Sets robot button for the climb command
-    operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem));
-    startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
-    stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
+    // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem));
+    // startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
+    // stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
 
   }
 

@@ -1,10 +1,12 @@
 package frc.robot.subsystems;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
@@ -16,10 +18,10 @@ import frc.robot.utils.ScaledEncoder;
 
 public class SK20Drive extends SubsystemBase {
 
-    private final WPI_VictorSPX frontLeft = new WPI_VictorSPX(Ports.frontLeftDrive);
-    private final WPI_VictorSPX backLeft = new WPI_VictorSPX(Ports.backLeftDrive);
-    private final WPI_VictorSPX frontRight = new WPI_VictorSPX(Ports.frontRightDrive);
-    private final WPI_VictorSPX backRight = new WPI_VictorSPX(Ports.backRightDrive);
+    private final WPI_TalonSRX frontLeft = new WPI_TalonSRX(Ports.frontLeftDrive);
+    private final WPI_TalonSRX backLeft = new WPI_TalonSRX(Ports.backLeftDrive);
+    private final WPI_TalonSRX frontRight = new WPI_TalonSRX(Ports.frontRightDrive);
+    private final WPI_TalonSRX backRight = new WPI_TalonSRX(Ports.backRightDrive);
 
     private final SpeedControllerGroup motorGroupLeft = new SpeedControllerGroup(frontLeft, backLeft);
     private final SpeedControllerGroup motorGroupRight = new SpeedControllerGroup(frontRight, backRight);
@@ -46,6 +48,8 @@ public class SK20Drive extends SubsystemBase {
     public SK20Drive() {
         driveCommand = new DefaultDriveCommand(this);
         setDefaultCommand(driveCommand);
+        SmartDashboard.putNumber("left Encoder", encoderLeft.getRotations());
+        SmartDashboard.putNumber("right Encoder", encoderRight.getRotations());
     }
 
     /**
