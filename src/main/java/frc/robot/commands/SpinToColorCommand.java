@@ -41,7 +41,6 @@ public class SpinToColorCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        // TODO: Review SpinnerRoller activation and deactivation commands with Rushil
         if (m_subsystem.getFieldDetectedColor() != targetColor) {
             m_subsystem.activateSpinnerRoller();
         } else {

@@ -56,6 +56,10 @@ public class RobotContainer
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
+
+   //color wheel buttons
+   public static JoystickButton startSpinner = new JoystickButton(JoystickOperator, Ports.colorWheelSpinner);
+
   public RobotContainer() 
   {
     
