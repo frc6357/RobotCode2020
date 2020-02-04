@@ -17,7 +17,7 @@ public final class TuningParams
 
     public static final boolean ENCODER_LEFT_REVERSED          = false;
     public static final boolean ENCODER_RIGHT_REVERSED         = true;
-    public static final int ENCODER_PULSES                     = 0;
+    public static final int ENCODER_PULSES                     = 2048;
     public static final double WHEEL_DIAMETER                  = 8;    //In Inches
 
     public static final double AUTONOMOUS_DRIVE_SPEED          = 0.5;
