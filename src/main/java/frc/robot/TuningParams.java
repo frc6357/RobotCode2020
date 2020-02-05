@@ -24,6 +24,10 @@ public final class TuningParams
     public static final double STRAIGHT_DRIVE_OFFSET_TOLERANCE = 1.0; //In Centimeters
     public static final double OFFSET_SPEED_INCREMENT          = 0.01;
 
+    //TODO: Remove these values later. This is for testing purposes only.
+    public static final int TEST_DRIVE_DISTANCE_CHANGE_AMOUNT         = 12;    //In Inches
+    public static final int TEST_DRIVE_ANGLE_CHANGE_AMOUNT            = 15;    //In Degrees
+
     //////////////////////////////
     // Color Wheel Params
     //////////////////////////////

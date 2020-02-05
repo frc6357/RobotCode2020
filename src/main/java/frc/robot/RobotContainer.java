@@ -34,74 +34,82 @@ import frc.robot.utils.filters.FilterDeadband;
  * scheduler calls). Instead, the structure of the robot (including subsystems,
  * commands, and button mappings) should be declared here.
  */
-public class RobotContainer 
+public class RobotContainer
 {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+    // The robot's subsystems and commands are defined here...
+    private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  // private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
-  private final SK20Drive m_driveSubsystem = new SK20Drive();
-  // private final SK20Climb m_climbSubsystem = new SK20Climb();
-  // private final SK20Intake m_intakeSubsystem = new SK20Intake();
-  // public final SK20BallHandling m_handlingSubsystem = new SK20BallHandling();
+    // private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
+    private final SK20Drive m_driveSubsystem = new SK20Drive();
+    // private final SK20Climb m_climbSubsystem = new SK20Climb();
+    // private final SK20Intake m_intakeSubsystem = new SK20Intake();
+    // public final SK20BallHandling m_handlingSubsystem = new SK20BallHandling();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
+    private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+    public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
 
-  //TODO: Remove these operator buttons. These are only for test use.
-  public static JoystickButton driveInterrupt = new JoystickButton(joystickDriver, Ports.OIDriverDummyDriveCommand);
-  public static JoystickButton driveInterruptTestCommand = new JoystickButton(joystickDriver, Ports.OIDriverDriveCommand);
-  public static POVButton incrementDriveDistance = new POVButton(joystickDriver, Ports.OIDriverIncrementDriveDistance);
-  public static POVButton decrementDriveDistance = new POVButton(joystickDriver, Ports.OIDriverDecrementDriveDistance);
-  public static POVButton incrementTurnAngle = new POVButton(joystickDriver, Ports.OIDriverIncrementTurnAngle);
-  public static POVButton decrementTurnAngle = new POVButton(joystickDriver, Ports.OIDriverDecrementTurnAngle);
+    // TODO: Remove these operator buttons. These are only for test use.
+    public static JoystickButton driveInterrupt = new JoystickButton(joystickDriver, Ports.OIDriverDummyDriveCommand);
+    public static JoystickButton driveInterruptTestCommand = new JoystickButton(joystickDriver, Ports.OIDriverDriveCommand);
+    public static POVButton incrementDriveDistance = new POVButton(joystickDriver, Ports.OIDriverIncrementDriveDistance);
+    public static POVButton decrementDriveDistance = new POVButton(joystickDriver, Ports.OIDriverDecrementDriveDistance);
+    public static POVButton incrementTurnAngle = new POVButton(joystickDriver, Ports.OIDriverIncrementTurnAngle);
+    public static POVButton decrementTurnAngle = new POVButton(joystickDriver, Ports.OIDriverDecrementTurnAngle);
+    
+    // TODO: Remove these variables. It is only used for testing.
+    public static int targetStraightDistance = 0;
+    public static int targetAngleTurn = 0;
+    
+    // Climb Buttons
+    public static Joystick joystickOperator = new Joystick(Ports.OIOperatorJoystick);
+    public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator, Ports.OIOperatorDeployArm);
+    public static JoystickButton startWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorStartWinchArm);
+    public static JoystickButton stopWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorStopWinchArm);
 
-  //Climb Buttons
-  public static Joystick joystickOperator = new Joystick(Ports.OIOperatorJoystick);
-  public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator, Ports.OIOperatorDeployArm);
-  public static JoystickButton startWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorStartWinchArm);
-  public static JoystickButton stopWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorStopWinchArm);
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
+    /**
+     * The container for the robot. Contains subsystems, OI devices, and commands.
+     */
 
-   //color wheel buttons
-   public static JoystickButton startSpinner = new JoystickButton(joystickOperator, Ports.colorWheelSpinner);
+    // color wheel buttons
+    public static JoystickButton startSpinner = new JoystickButton(joystickOperator, Ports.colorWheelSpinner);
 
-  public RobotContainer() 
-  {
-    joystickDriver.setFilter(Ports.OIDriverLeftDrive, new FilterDeadband(0.06, -1.0));
-    joystickDriver.setFilter(Ports.OIDriverRightDrive, new FilterDeadband(0.06, -1.0));
-    // Configure the button bindings
-    configureButtonBindings();
-  }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
-   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings()
-  {
-    // TODO: Implentation has no interlock (MUST FIX !!!!!!!!!!!!!)
-    // TODO: use class DriverStation to know the Game time
-    // Sets robot button for the climb command
-    // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem));
-    // startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
-    // stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
-    driveInterrupt.whenPressed(new TestDummyDriveCommand(m_driveSubsystem));
-    driveInterruptTestCommand.whenPressed(new DriveStraightCommand(m_driveSubsystem, 500));
-  }
+    public RobotContainer()
+    {
+        joystickDriver.setFilter(Ports.OIDriverLeftDrive, new FilterDeadband(0.06, -1.0));
+        joystickDriver.setFilter(Ports.OIDriverRightDrive, new FilterDeadband(0.06, -1.0));
+        // Configure the button bindings
+        configureButtonBindings();
+    }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() 
-  {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }
+    /**
+     * Use this method to define your button->command mappings. Buttons can be
+     * created by instantiating a {@link GenericHID} or one of its subclasses
+     * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
+     * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+     */
+    private void configureButtonBindings()
+    {
+        // TODO: Implentation has no interlock (MUST FIX !!!!!!!!!!!!!)
+        // TODO: use class DriverStation to know the Game time
+        // Sets robot button for the climb command
+        // operatorClimbArmDeploy.whenPressed(new
+        // ClimbReleaseCommand(m_climbSubsystem));
+        // startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
+        // stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
+        driveInterrupt.whenPressed(new TestDummyDriveCommand(m_driveSubsystem));
+        driveInterruptTestCommand.whenPressed(new DriveStraightCommand(m_driveSubsystem, targetStraightDistance));
+
+    }
+
+    /**
+     * Use this to pass the autonomous command to the main {@link Robot} class.
+     *
+     * @return the command to run in autonomous
+     */
+    public Command getAutonomousCommand()
+    {
+        // An ExampleCommand will run in autonomous
+        return m_autoCommand;
+    }
 }
