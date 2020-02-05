@@ -8,9 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,22 +22,24 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
-    
 
     // public Robot() {
-    //     WPI_VictorSPX frontLeft = new WPI_VictorSPX(Ports.frontLeftDrive);
-    //     WPI_VictorSPX backLeft = new WPI_VictorSPX(Ports.backLeftDrive);
-    //     WPI_VictorSPX frontRight = new WPI_VictorSPX(Ports.frontRightDrive);
-    //     WPI_VictorSPX backRight = new WPI_VictorSPX(Ports.backRightDrive);
-    //     SpeedControllerGroup motorGroupLeft = new SpeedControllerGroup(frontLeft, backLeft);
-    //     SpeedControllerGroup motorGroupRight = new SpeedControllerGroup(frontRight, backRight);
-    //     ScaledEncoder encoderLeft = null;
-    //     ScaledEncoder encoderRight = null;
-    //     Solenoid gearShiftSolenoid = null;
-    //     ShiftPolarity shiftPolarity = ShiftPolarity.PRESSURE_IS_LOW;
-    //     BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight, gearShiftSolenoid,
-    //             shiftPolarity);
-    //     smoothDrive = new SmoothDrive(drive);
+    // WPI_VictorSPX frontLeft = new WPI_VictorSPX(Ports.frontLeftDrive);
+    // WPI_VictorSPX backLeft = new WPI_VictorSPX(Ports.backLeftDrive);
+    // WPI_VictorSPX frontRight = new WPI_VictorSPX(Ports.frontRightDrive);
+    // WPI_VictorSPX backRight = new WPI_VictorSPX(Ports.backRightDrive);
+    // SpeedControllerGroup motorGroupLeft = new SpeedControllerGroup(frontLeft,
+    // backLeft);
+    // SpeedControllerGroup motorGroupRight = new SpeedControllerGroup(frontRight,
+    // backRight);
+    // ScaledEncoder encoderLeft = null;
+    // ScaledEncoder encoderRight = null;
+    // Solenoid gearShiftSolenoid = null;
+    // ShiftPolarity shiftPolarity = ShiftPolarity.PRESSURE_IS_LOW;
+    // BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft,
+    // encoderRight, gearShiftSolenoid,
+    // shiftPolarity);
+    // smoothDrive = new SmoothDrive(drive);
     // }
 
     /**
@@ -45,12 +47,12 @@ public class Robot extends TimedRobot {
      * for any initialization code.
      */
     public Robot() {
-        
+
     }
 
     @Override
     public void robotInit() {
-      m_robotContainer = new RobotContainer();
+        m_robotContainer = new RobotContainer();
     }
 
     /**
@@ -64,11 +66,16 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
-        // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-        // commands, running already-scheduled commands, removing finished or interrupted commands,
-        // and running subsystem periodic() methods.  This must be called from the robot's periodic
+        // Runs the Scheduler. This is responsible for polling buttons, adding
+        // newly-scheduled
+        // commands, running already-scheduled commands, removing finished or
+        // interrupted commands,
+        // and running subsystem periodic() methods. This must be called from the
+        // robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+        SmartDashboard.putNumber("Drive Straight Distance: ", (double)RobotContainer.targetStraightDistance);
+        SmartDashboard.putNumber("Drive Turn Angle: ", (double)RobotContainer.targetAngleTurn);
     }
 
     /**
@@ -90,7 +97,7 @@ public class Robot extends TimedRobot {
 
         // schedule the autonomous command (example)
         if (m_autonomousCommand != null) {
-          m_autonomousCommand.schedule();
+            m_autonomousCommand.schedule();
         }
     }
 
@@ -103,14 +110,14 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-      // This makes sure that the autonomous stops running when
-      // teleop starts running. If you want the autonomous to
-      // continue until interrupted by another command, remove
-      // this line or comment it out.
-      // m_robotContainer.m_handlingSubsystem.startRoller();
-      if (m_autonomousCommand != null) {
-        m_autonomousCommand.cancel();
-      }
+        // This makes sure that the autonomous stops running when
+        // teleop starts running. If you want the autonomous to
+        // continue until interrupted by another command, remove
+        // this line or comment it out.
+        // m_robotContainer.m_handlingSubsystem.startRoller();
+        if (m_autonomousCommand != null) {
+            m_autonomousCommand.cancel();
+        }
     }
 
     /**
@@ -118,15 +125,24 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        
+        if (RobotContainer.incrementDriveDistance.get()) {
+            RobotContainer.targetStraightDistance += TuningParams.TEST_DRIVE_DISTANCE_CHANGE_AMOUNT;
+        } else if (RobotContainer.decrementDriveDistance.get()) {
+            RobotContainer.targetStraightDistance -= TuningParams.TEST_DRIVE_DISTANCE_CHANGE_AMOUNT;
+        }
+        if (RobotContainer.incrementTurnAngle.get()) {
+            RobotContainer.targetAngleTurn += TuningParams.TEST_DRIVE_ANGLE_CHANGE_AMOUNT;
+        } else if (RobotContainer.decrementTurnAngle.get()) {
+            RobotContainer.targetAngleTurn -= TuningParams.TEST_DRIVE_ANGLE_CHANGE_AMOUNT;
+        }
 
     }
 
     @Override
-  public void testInit() {
-    // Cancels all running commands at the start of test mode.
-    CommandScheduler.getInstance().cancelAll();
-  }
+    public void testInit() {
+        // Cancels all running commands at the start of test mode.
+        CommandScheduler.getInstance().cancelAll();
+    }
 
     /**
      * This function is called periodically during test mode.

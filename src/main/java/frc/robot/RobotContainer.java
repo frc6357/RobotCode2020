@@ -12,10 +12,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DriveStraightCommand;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.DriveStraightCommand;
 // import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.TurnRelativeCommand;
 // import frc.robot.commands.WinchRobotCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 // import frc.robot.subsystems.SK20BallHandling;
@@ -34,8 +35,7 @@ import frc.robot.utils.filters.FilterDeadband;
  * scheduler calls). Instead, the structure of the robot (including subsystems,
  * commands, and button mappings) should be declared here.
  */
-public class RobotContainer
-{
+public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -50,19 +50,23 @@ public class RobotContainer
 
     // TODO: Remove these operator buttons. These are only for test use.
     public static JoystickButton driveInterrupt = new JoystickButton(joystickDriver, Ports.OIDriverDummyDriveCommand);
-    public static JoystickButton driveInterruptTestCommand = new JoystickButton(joystickDriver, Ports.OIDriverDriveCommand);
-    public static POVButton incrementDriveDistance = new POVButton(joystickDriver, Ports.OIDriverIncrementDriveDistance);
-    public static POVButton decrementDriveDistance = new POVButton(joystickDriver, Ports.OIDriverDecrementDriveDistance);
+    public static JoystickButton driveStraightCommand = new JoystickButton(joystickDriver, Ports.OIDriverDriveCommand);
+    public static JoystickButton turnAngleCommand = new JoystickButton(joystickDriver, Ports.OIDriverTurnCommand);
+    public static POVButton incrementDriveDistance = new POVButton(joystickDriver,
+            Ports.OIDriverIncrementDriveDistance);
+    public static POVButton decrementDriveDistance = new POVButton(joystickDriver,
+            Ports.OIDriverDecrementDriveDistance);
     public static POVButton incrementTurnAngle = new POVButton(joystickDriver, Ports.OIDriverIncrementTurnAngle);
     public static POVButton decrementTurnAngle = new POVButton(joystickDriver, Ports.OIDriverDecrementTurnAngle);
-    
+
     // TODO: Remove these variables. It is only used for testing.
     public static int targetStraightDistance = 0;
     public static int targetAngleTurn = 0;
-    
+
     // Climb Buttons
     public static Joystick joystickOperator = new Joystick(Ports.OIOperatorJoystick);
-    public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator, Ports.OIOperatorDeployArm);
+    public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator,
+            Ports.OIOperatorDeployArm);
     public static JoystickButton startWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorStartWinchArm);
     public static JoystickButton stopWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorStopWinchArm);
 
@@ -73,9 +77,7 @@ public class RobotContainer
     // color wheel buttons
     public static JoystickButton startSpinner = new JoystickButton(joystickOperator, Ports.colorWheelSpinner);
 
-
-    public RobotContainer()
-    {
+    public RobotContainer() {
         joystickDriver.setFilter(Ports.OIDriverLeftDrive, new FilterDeadband(0.06, -1.0));
         joystickDriver.setFilter(Ports.OIDriverRightDrive, new FilterDeadband(0.06, -1.0));
         // Configure the button bindings
@@ -97,8 +99,11 @@ public class RobotContainer
         // ClimbReleaseCommand(m_climbSubsystem));
         // startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
         // stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
+
+        //TODO: Remove these late. This is only for test use.
         driveInterrupt.whenPressed(new TestDummyDriveCommand(m_driveSubsystem));
-        driveInterruptTestCommand.whenPressed(new DriveStraightCommand(m_driveSubsystem, targetStraightDistance));
+        driveStraightCommand.whenPressed(new DriveStraightCommand(m_driveSubsystem, targetStraightDistance));
+        turnAngleCommand.whenPressed(new TurnRelativeCommand(m_driveSubsystem, targetAngleTurn));
 
     }
 
@@ -107,8 +112,7 @@ public class RobotContainer
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand()
-    {
+    public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
         return m_autoCommand;
     }

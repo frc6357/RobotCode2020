@@ -102,7 +102,8 @@ public class Ports {
     public static final int OIDriverIncrementTurnAngle = 90;
     public static final int OIDriverDecrementTurnAngle = 270;
     public static final int OIDriverDummyDriveCommand = 3;    //Dummy command that interupts the drive commands. (X)
-    public static final int OIDriverDriveCommand = 4;   //This is the original command to test the drive command interrupts (Y)
+    public static final int OIDriverDriveCommand = 4;   //This is the drive straight command(Y)
+    public static final int OIDriverTurnCommand = -1;    //This is the turn command.
 
     public static final int OIOperatorJoystick = 1;
 
