@@ -4,31 +4,28 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.base.Color2020;
 
-
 /**
  * A command that is used to spin the control panel the desired amount of
  * transitions (color slices)
  */
 public class SpinTransition extends CommandBase {
     private final SK20ColorWheel m_subsystem;
-    private final int transitionTarget;
+    private final int transitionCount;
     private boolean isDone = false;
-    private Color2020 colorCurrent;
+    private Color2020 colorPrevious;
 
-    // creates a new instance of the object. You need to update this to explain
-    // what the command does and what the two parameters to the constructor are.
 
     /**
-     * Creates a new SK20ColorWheel and takes in the subsystem and the amount of
+     * Creates a new instance of the SpinTransition and takes in the subsystem and the amount of
      * color transitions we want the control panel to achieve.
      * 
      * @param subsystem        The subsystem we plan on using to control the color
      *                         wheel parts.
-     * @param transitionTarget The amount of colors we want the wheel to rotate.
+     * @param transitionCount The amount of colors we want the wheel to rotate.
      */
-    public SpinTransition(SK20ColorWheel subsystem, int transitionTarget) {
+    public SpinTransition(SK20ColorWheel subsystem, int transitionCount) {
         m_subsystem = subsystem;
-        this.transitionTarget = transitionTarget;
+        this.transitionCount = transitionCount;
 
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(m_subsystem);
@@ -38,16 +35,10 @@ public class SpinTransition extends CommandBase {
     @Override
     public void initialize() {
         m_subsystem.resetSpinnerTransitionCount();
-        colorCurrent = m_subsystem.getDetectedColor();
+        colorPrevious = m_subsystem.getDetectedColor();
         isDone = false;
     }
 
-    // Once you can detect
-    // transitions, do you want to stop immediately after the last transition or
-    // try to move the wheel such that the sensor is right in the middle of the
-    // color quadrant (thus making it more likely that the field sensor is not
-    // positioned right over a transition and reading an unstable or incorrect
-    // color).
 
     /**
      * This method spins the control panel until the desired amount of transitions
@@ -57,16 +48,15 @@ public class SpinTransition extends CommandBase {
     @Override
     public void execute() {
         Color2020 detectedColor = m_subsystem.getDetectedColor();
-        if (m_subsystem.getSpinnerTransitionCount() < transitionTarget) {
-            m_subsystem.activateSpinnerRoller();
-        } else {
-            m_subsystem.deactivateSpinnerRoller();
-            isDone = true;
-        }
-        if (colorCurrent != detectedColor) {
+        if (colorPrevious != detectedColor) {
             m_subsystem.incrementSpinnerTransitionCount();
-            colorCurrent = detectedColor;
+            colorPrevious = detectedColor;
         }
+
+        if (m_subsystem.getSpinnerTransitionCount() > transitionCount) {
+            m_subsystem.deactivateSpinnerRoller();
+        }
+        
 
     }
 

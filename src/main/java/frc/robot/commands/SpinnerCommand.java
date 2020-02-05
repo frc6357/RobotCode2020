@@ -1,26 +1,28 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.SK20ColorWheel;
 
 /**
- * A SpinnerCommand that uses SK20ColorWheel subsystem
+ * A command that does three different parts. The first part extends the mechanism(assuming that the
+ * driver is already at the position to spin the color panel). The second part is where the color sensor
+ * monitors it's postion using isUnderControlPanel, this second part keeps running until the color sensor
+ * detects if it is under the control panel. The third and final part is where it starts the motor to spin
+ * the color panel.
  */
 public class SpinnerCommand extends CommandBase {
   private final SK20ColorWheel m_subsystem;
-  private final boolean startSpinner;
   private boolean isFinished = false;
 
   /**
-   * Creates a new SipnnerCommand.
+   * Creates a new SpinnerCommand instance that sets up the member subsystem
+   * and sets startSpinner if the instance wants to start the motor.
    *
-   * @param SK20ColorWheel The subsystem used by this command.
-   * @param startMotor
+   * @param SK20ColorWheel The subsystem used by this command to see if the mechanism is extended.
+   * @param startMotor     Checks to see if the instance wants to start the motor.
    */
-  public SpinnerCommand(SK20ColorWheel subsystem, Boolean startMotor) {
+  public SpinnerCommand(SK20ColorWheel subsystem) {
     m_subsystem = subsystem;
-    startSpinner =  startMotor;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -28,23 +30,29 @@ public class SpinnerCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-      m_subsystem.activateSpinnerRoller();
+      m_subsystem.extendLifter();
       isFinished = false;
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+  /**
+   * This method checks to see if the mechanism is extended and if the instance wants to start the spinner.
+   * This works every 20ms, when both of these conditions are true then the SK20ColorWheel instance starts the
+   * motor. If any one of these parameters are false then it turns off the motor. And finally if somehow the 
+   * conditions meet none of these requirements, then it returns an error.
+   */
   @Override
   public void execute() {
-      if(m_subsystem.getIsLifterExtended() == true && startSpinner == true){
-          m_subsystem.activateSpinnerRoller();
+        if(m_subsystem.isUnderControlPanel() == true){
+            m_subsystem.activateSpinnerRoller();
       }
 
-      else if(m_subsystem.getIsLifterExtended() == false || startSpinner == false){
-          m_subsystem.deactivateSpinnerRoller();
+        else if(m_subsystem.isUnderControlPanel() == false){
+            System.out.println("Keep moving closer");
       }
 
-      else{
-          System.out.println("ERROR");
+
+        else{
+            System.out.println("ERROR");
       }
 
       isFinished = true;
@@ -53,6 +61,7 @@ public class SpinnerCommand extends CommandBase {
   }
 
   // Called once the command ends or is interrupted.
+  // For safety if something were to happen then we should just deactivate the motor.
   @Override
   public void end(boolean interrupted) {
       m_subsystem.deactivateSpinnerRoller();
