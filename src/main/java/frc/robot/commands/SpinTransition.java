@@ -53,8 +53,10 @@ public class SpinTransition extends CommandBase {
             colorPrevious = detectedColor;
         }
 
-        if (m_subsystem.getSpinnerTransitionCount() > transitionCount) {
+        if (m_subsystem.getSpinnerTransitionCount() >= transitionCount) {
             m_subsystem.deactivateSpinnerRoller();
+            m_subsystem.resetSpinnerTransitionCount();
+            isDone = true;
         }
         
 
