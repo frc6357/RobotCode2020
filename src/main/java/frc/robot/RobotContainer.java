@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DriveStraightCommand;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 // import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.ExampleCommand;
 // import frc.robot.commands.WinchRobotCommand;
@@ -20,6 +22,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 // import frc.robot.subsystems.SK20Climb;
 // import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.SK20Drive;
+import frc.robot.test.TestDummyDriveCommand;
 // import frc.robot.subsystems.SK20Intake;
 import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.filters.FilterDeadband;
@@ -45,17 +48,25 @@ public class RobotContainer
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
 
+  //TODO: Remove these operator buttons. These are only for test use.
+  public static JoystickButton driveInterrupt = new JoystickButton(joystickDriver, Ports.OIDriverDummyDriveCommand);
+  public static JoystickButton driveInterruptTestCommand = new JoystickButton(joystickDriver, Ports.OIDriverDriveCommand);
+  public static POVButton incrementDriveDistance = new POVButton(joystickDriver, Ports.OIDriverIncrementDriveDistance);
+  public static POVButton decrementDriveDistance = new POVButton(joystickDriver, Ports.OIDriverDecrementDriveDistance);
+  public static POVButton incrementTurnAngle = new POVButton(joystickDriver, Ports.OIDriverIncrementTurnAngle);
+  public static POVButton decrementTurnAngle = new POVButton(joystickDriver, Ports.OIDriverDecrementTurnAngle);
+
   //Climb Buttons
-  public static Joystick JoystickOperator = new Joystick(Ports.OIOperatorJoystick);
-  public static JoystickButton operatorClimbArmDeploy = new JoystickButton(JoystickOperator, Ports.OIOperatorDeployArm);
-  public static JoystickButton startWinchRobot = new JoystickButton(JoystickOperator, Ports.OIOperatorStartWinchArm);
-  public static JoystickButton stopWinchRobot = new JoystickButton(JoystickOperator, Ports.OIOperatorStopWinchArm);
+  public static Joystick joystickOperator = new Joystick(Ports.OIOperatorJoystick);
+  public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator, Ports.OIOperatorDeployArm);
+  public static JoystickButton startWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorStartWinchArm);
+  public static JoystickButton stopWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorStopWinchArm);
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
 
    //color wheel buttons
-   public static JoystickButton startSpinner = new JoystickButton(JoystickOperator, Ports.colorWheelSpinner);
+   public static JoystickButton startSpinner = new JoystickButton(joystickOperator, Ports.colorWheelSpinner);
 
   public RobotContainer() 
   {
@@ -79,7 +90,8 @@ public class RobotContainer
     // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem));
     // startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
     // stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
-
+    driveInterrupt.whenPressed(new TestDummyDriveCommand(m_driveSubsystem));
+    driveInterruptTestCommand.whenPressed(new DriveStraightCommand(m_driveSubsystem, 500));
   }
 
   /**

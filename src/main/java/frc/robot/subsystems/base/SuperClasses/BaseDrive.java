@@ -15,6 +15,8 @@ public class BaseDrive {
     private final ScaledEncoder encoderLeft, encoderRight;
     private final Solenoid gearShiftSolenoid;
     private final ShiftPolarity shiftPolarity;
+    private double lastLeftSetSpeed = 0;
+    private double lastRightSetSpeed = 0;
 
     /**
      * Constructor of the BaseDrive and Sets up Differential Drive
@@ -55,7 +57,12 @@ public class BaseDrive {
      *                   -1 for full back
      */
     public void SetSpeed(double speedLeft, double speedRight) {
-        driveDiff.tankDrive(speedLeft, speedRight);
+        if ((speedLeft != lastLeftSetSpeed) || (speedRight != lastRightSetSpeed)) {
+            driveDiff.tankDrive(speedLeft, speedRight);
+            speedLeft = lastLeftSetSpeed;
+            speedRight = lastRightSetSpeed;
+        }
+        
     }
 
     /**

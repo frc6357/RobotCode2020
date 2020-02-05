@@ -96,6 +96,14 @@ public class Ports {
     public static final int OIDriverLeftDrive            = 1;    // Left Joystick Y
     public static final int OIDriverRightDrive           = 5;    // Right Joystick Y
 
+    //TODO: Remove these later. This button is only for test use.
+    public static final int OIDriverIncrementDriveDistance =  0;
+    public static final int OIDriverDecrementDriveDistance = 180;
+    public static final int OIDriverIncrementTurnAngle = 90;
+    public static final int OIDriverDecrementTurnAngle = 270;
+    public static final int OIDriverDummyDriveCommand = 3;    //Dummy command that interupts the drive commands. (X)
+    public static final int OIDriverDriveCommand = 4;   //This is the original command to test the drive command interrupts (Y)
+
     public static final int OIOperatorJoystick = 1;
 
     public static final int OIOperatorDeployArm = 4; // Pneumatic for releasing the arm (Y)
