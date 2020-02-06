@@ -45,12 +45,6 @@ public class SpinnerStartCommand extends CommandBase {
         if(m_subsystem.isUnderControlPanel() == true){
             m_subsystem.activateSpinnerRoller();
       }
-
-        else if(m_subsystem.isUnderControlPanel() == false){
-            System.out.println("Keep moving closer");
-      }
-
-
         else{
             System.out.println("ERROR");
       }

@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.WinchRobotCommand;
+import frc.robot.commands.SpinnerStartCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SK20Climb;
 import frc.robot.subsystems.SK20ColorWheel;
@@ -88,6 +89,7 @@ public class RobotContainer
     operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem));
     startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
     stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
+    startSpinner.whenPressed(new SpinnerStartCommand(m_colorWheelSubsystem));
 
   }
 
