@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.WinchRobotCommand;
-import frc.robot.commands.SpinnerStartCommand;
 import frc.robot.commands.StopColorWheelCommand;
+import frc.robot.commands.ThreeRotateCommandGroup;
+import frc.robot.commands.TurnToColorCommandGroup;
+import frc.robot.commands.WinchRobotCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SK20Climb;
 import frc.robot.subsystems.SK20ColorWheel;
@@ -91,6 +91,8 @@ public class RobotContainer
     startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
     stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
     stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
+    startThreeRotate.whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
+    startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
 
   }
 

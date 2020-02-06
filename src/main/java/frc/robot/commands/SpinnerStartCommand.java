@@ -35,23 +35,15 @@ public class SpinnerStartCommand extends CommandBase {
   }
 
   /**
-   * This method checks to see if the mechanism is extended and if the instance wants to start the spinner.
-   * This works every 20ms, when both of these conditions are true then the SK20ColorWheel instance starts the
-   * motor. If any one of these parameters are false then it turns off the motor. And finally if somehow the 
-   * conditions meet none of these requirements, then it returns an error.
+   * This command extends the lifter and keeps running until the color sensor is under the control
+   * panel is which case it will turn on the motor.
    */
   @Override
   public void execute() {
         if(m_subsystem.isUnderControlPanel() == true){
             m_subsystem.activateSpinnerRoller();
+            isFinished = true;
       }
-        else{
-            System.out.println("ERROR");
-      }
-
-      isFinished = true;
-
-
   }
 
   // Called once the command ends or is interrupted.

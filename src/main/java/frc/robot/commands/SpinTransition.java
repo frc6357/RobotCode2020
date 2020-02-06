@@ -47,6 +47,7 @@ public class SpinTransition extends CommandBase {
      */
     @Override
     public void execute() {
+        // TODO: Guard against UNKNOWN or NONE colors
         Color2020 detectedColor = m_subsystem.getDetectedColor();
         if (colorPrevious != detectedColor) {
             m_subsystem.incrementSpinnerTransitionCount();
@@ -55,7 +56,7 @@ public class SpinTransition extends CommandBase {
 
         if (m_subsystem.getSpinnerTransitionCount() >= transitionCount) {
             m_subsystem.deactivateSpinnerRoller();
-            m_subsystem.resetSpinnerTransitionCount();
+            m_subsystem.retractLifter();
             isDone = true;
         }
         

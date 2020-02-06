@@ -34,7 +34,9 @@ public final class TuningParams
 
     public static final int COLOR_WHEEL_PROXIMITY_THRESHOLD    = 30;
 
-    public static final double COLOR_WHEEL_SPEED               = 0.5;
+    public static final double COLOR_WHEEL_SPEED               = 0.5; 
+
+    public static final int COLOR_WHEEL_TRANSITIONS            = 26; // Slightly more than three revs
 
     //////////////////////////////
     // Launcher Params
