@@ -18,6 +18,7 @@ import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.WinchRobotCommand;
 import frc.robot.commands.SpinnerStartCommand;
+import frc.robot.commands.StopColorWheelCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SK20Climb;
 import frc.robot.subsystems.SK20ColorWheel;
@@ -49,17 +50,17 @@ public class RobotContainer
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
 
-  //Climb Buttons
+  // Climb Buttons
   public static Joystick JoystickOperator = new Joystick(Ports.OIOperatorJoystick);
   public static JoystickButton operatorClimbArmDeploy = new JoystickButton(JoystickOperator, Ports.OIOperatorDeployArm);
   public static JoystickButton startWinchRobot = new JoystickButton(JoystickOperator, Ports.OIOperatorStartWinchArm);
   public static JoystickButton stopWinchRobot = new JoystickButton(JoystickOperator, Ports.OIOperatorStopWinchArm);
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
 
-   //color wheel buttons
-   public static JoystickButton startSpinner = new JoystickButton(JoystickOperator, Ports.colorWheelSpinner);
+   // Color wheel buttons
+   public static JoystickButton startThreeRotate = new JoystickButton(JoystickOperator, Ports.OIOperatorStartThreeRotate);
+   public static JoystickButton startSetColor = new JoystickButton(JoystickOperator, Ports.OIOperatorStartSetColor);
+   public static JoystickButton stopColorWheel = new JoystickButton(JoystickOperator, Ports.OIOperatorStopColorWheel);
+   
 
   public RobotContainer() 
   {
@@ -89,7 +90,7 @@ public class RobotContainer
     operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem));
     startWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true));
     stopWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, false));
-    startSpinner.whenPressed(new SpinnerStartCommand(m_colorWheelSubsystem));
+    stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
 
   }
 
