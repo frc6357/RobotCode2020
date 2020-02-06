@@ -10,7 +10,7 @@ import frc.robot.subsystems.SK20ColorWheel;
  * detects if it is under the control panel. The third and final part is where it starts the motor to spin
  * the color panel.
  */
-public class SpinnerCommand extends CommandBase {
+public class SpinnerStartCommand extends CommandBase {
   private final SK20ColorWheel m_subsystem;
   private boolean isFinished = false;
 
@@ -21,7 +21,7 @@ public class SpinnerCommand extends CommandBase {
    * @param SK20ColorWheel The subsystem used by this command to see if the mechanism is extended.
    * @param startMotor     Checks to see if the instance wants to start the motor.
    */
-  public SpinnerCommand(SK20ColorWheel subsystem) {
+  public SpinnerStartCommand(SK20ColorWheel subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
