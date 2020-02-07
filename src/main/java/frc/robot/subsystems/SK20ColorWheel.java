@@ -6,6 +6,7 @@ import com.revrobotics.*;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.BaseRoller;
@@ -180,5 +181,23 @@ public class SK20ColorWheel extends SubsystemBase {
         } else {
             return true;
         }
+    }
+
+    /**
+     * It takes in a color and reports back to Smart Dashboard to see what color the sensor
+     * is detecting.
+     * @param color
+     */
+    public void reportColor(Color2020 color)
+    {
+        boolean red    = (color == Color2020.RED)    ? true : false;
+        boolean green  = (color == Color2020.GREEN)  ? true : false;
+        boolean cyan   = (color == Color2020.CYAN)   ? true : false;
+        boolean yellow = (color == Color2020.YELLOW) ? true : false;
+
+        SmartDashboard.putBoolean("isRed",    red);
+        SmartDashboard.putBoolean("isGreen",  green);
+        SmartDashboard.putBoolean("isCyan",   cyan);
+        SmartDashboard.putBoolean("isYellow", yellow);
     }
 }
