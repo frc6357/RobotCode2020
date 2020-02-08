@@ -17,7 +17,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbReleaseCommand;
+import frc.robot.commands.LaunchBallCommand;
 import frc.robot.commands.SetGear;
+import frc.robot.commands.SetLaunchAngleHighCommand;
 import frc.robot.commands.SetSlowmodeCommand;
 import frc.robot.commands.StopColorWheelCommand;
 import frc.robot.commands.ThreeRotateCommandGroup;
@@ -28,6 +30,7 @@ import frc.robot.subsystems.SK20Climb;
 import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.SK20Drive;
 import frc.robot.subsystems.SK20Intake;
+import frc.robot.subsystems.SK20Launcher;
 import frc.robot.subsystems.base.SuperClasses.Gear;
 import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.filters.FilterDeadband;
@@ -55,9 +58,10 @@ public class RobotContainer
     private final SK20Drive m_driveSubsystem = new SK20Drive();
     private final SK20Climb m_climbSubsystem = new SK20Climb();
     private final SK20Intake m_intakeSubsystem = new SK20Intake();
+    private final SK20Launcher m_launcherSubsystem = new SK20Launcher();
 
     public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
-    public static Joystick JoystickOperator = new Joystick(Ports.OIOperatorJoystick);
+    public static Joystick joystickOperator = new Joystick(Ports.OIOperatorJoystick);
 
     // Slowmode Buttons
     public static JoystickButton slowmodeLeft = new JoystickButton(joystickDriver, Ports.OIDriverSetSlowmodeLeft);
@@ -68,19 +72,24 @@ public class RobotContainer
     public static JoystickButton setHighGear = new JoystickButton(joystickDriver, Ports.OIDriverSetHighGear);
 
     // Intake control button
-    public static JoystickButton toggleIntake = new JoystickButton(JoystickOperator, Ports.OIOperatorToggleIntake);
+    public static JoystickButton toggleIntake = new JoystickButton(joystickOperator, Ports.OIOperatorToggleIntake);
+
+    // Launcher control buttons
+    public static JoystickButton launchBall = new JoystickButton(joystickOperator, Ports.OIOperatorShootBall);
+    public static JoystickButton setLowAngle = new JoystickButton(joystickOperator, Ports.OIOperatorSetLowAngle);
+    public static JoystickButton setHighAngle = new JoystickButton(joystickOperator, Ports.OIOperatorSetLowAngle);
     
     // Climb Buttons
-    public static JoystickButton operatorClimbArmDeploy = new JoystickButton(JoystickOperator,
+    public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator,
             Ports.OIOperatorDeployArm);
-    public static JoystickButton runWinchRobot = new JoystickButton(JoystickOperator, Ports.OIOperatorRunWinchArm);
-    public static JoystickButton armClimbSystem = new JoystickButton(JoystickOperator, Ports.OIOperatorArmClimb);
+    public static JoystickButton runWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorRunWinchArm);
+    public static JoystickButton armClimbSystem = new JoystickButton(joystickOperator, Ports.OIOperatorArmClimb);
 
     // Color wheel buttons
-    public static JoystickButton startThreeRotate = new JoystickButton(JoystickOperator,
+    public static JoystickButton startThreeRotate = new JoystickButton(joystickOperator,
             Ports.OIOperatorStartThreeRotate);
-    public static JoystickButton startSetColor = new JoystickButton(JoystickOperator, Ports.OIOperatorStartSetColor);
-    public static JoystickButton stopColorWheel = new JoystickButton(JoystickOperator, Ports.OIOperatorStopColorWheel);
+    public static JoystickButton startSetColor = new JoystickButton(joystickOperator, Ports.OIOperatorStartSetColor);
+    public static JoystickButton stopColorWheel = new JoystickButton(joystickOperator, Ports.OIOperatorStopColorWheel);
 
     public RobotContainer()
     {
@@ -126,6 +135,11 @@ public class RobotContainer
         operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
         runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
         runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
+
+        // Set the ball launcher buttons to do correct commands
+        setHighAngle.whenPressed(new SetLaunchAngleHighCommand(m_launcherSubsystem, true));
+        setLowAngle.whenPressed(new SetLaunchAngleHighCommand(m_launcherSubsystem, false));
+        launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
 
         // Sets robot buttons for the control panel command
         stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));

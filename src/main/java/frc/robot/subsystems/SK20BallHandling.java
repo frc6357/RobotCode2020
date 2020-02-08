@@ -1,24 +1,25 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
+import frc.robot.commands.DefaultBallHandlingCommand;
 import frc.robot.subsystems.base.BaseRoller;
 import frc.robot.subsystems.base.LimitSensor;
 
 /**
- * Sets the methods that are used to hold and control the balls inside of the robot.
+ * Sets the methods that are used to hold and control the balls inside of the
+ * robot.
  */
-public class SK20BallHandling extends SubsystemBase
-{
+public class SK20BallHandling extends SubsystemBase {
     private CANSparkMax beltMotor;
     private CANEncoder beltEncoder;
     private BaseRoller ballBelt;
+    private final DefaultBallHandlingCommand ballHandling;
 
     private LimitSensor[] ballSensors = {new LimitSensor(Ports.ballSensor1, TuningParams.BALL_SENSOR_1_INVERT), 
                                             new LimitSensor(Ports.ballSensor2, TuningParams.BALL_SENSOR_2_INVERT),
@@ -34,6 +35,8 @@ public class SK20BallHandling extends SubsystemBase
         beltMotor = new CANSparkMax(Ports.ballHandlingBelt, MotorType.kBrushless);
         beltEncoder = new CANEncoder(beltMotor);
         ballBelt = new BaseRoller(beltMotor, TuningParams.BALL_HANDLING_MAX_SPEED);
+        ballHandling = new DefaultBallHandlingCommand(this);
+        setDefaultCommand(ballHandling);
     }
 
     /**

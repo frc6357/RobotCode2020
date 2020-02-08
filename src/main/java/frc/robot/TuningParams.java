@@ -49,6 +49,7 @@ public final class TuningParams
     public static final int P_VALUE                            = 1;
     public static final int I_VALUE                            = 1;
     public static final int D_VALUE                            = 1;
+    public static final int RELEASE_MOTOR_RUNTIME              = 1000; // In Milliseconds
 
     //////////////////////////////
     // Intake Params
