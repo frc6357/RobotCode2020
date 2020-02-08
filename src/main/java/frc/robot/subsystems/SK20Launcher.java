@@ -35,7 +35,10 @@ public class SK20Launcher extends SubsystemBase
      */
     public SK20Launcher()
     {
-        
+        // Set the launcher motor into coast mode. If we don't do this and we stop the motor quickly,
+        // there's a very good chance we'll damage something since there's a large flywheel attached 
+        // to this subsystem!
+        launcherMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
     }
 
     /**
