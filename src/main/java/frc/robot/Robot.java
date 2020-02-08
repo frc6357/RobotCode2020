@@ -74,8 +74,8 @@ public class Robot extends TimedRobot {
         // robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
-        SmartDashboard.putNumber("Drive Straight Distance: ", (double)RobotContainer.targetStraightDistance);
-        SmartDashboard.putNumber("Drive Turn Angle: ", (double)RobotContainer.targetAngleTurn);
+        SmartDashboard.putNumber("Drive Straight Distance", RobotContainer.targetStraightDistance);
+        SmartDashboard.putNumber("Drive Turn Angle", RobotContainer.targetAngleTurn);
     }
 
     /**

@@ -17,15 +17,15 @@ public final class TuningParams
 
     public static final boolean ENCODER_LEFT_REVERSED          = false;
     public static final boolean ENCODER_RIGHT_REVERSED         = true;
-    public static final int ENCODER_PULSES                     = 2048;
-    public static final double WHEEL_DIAMETER                  = 8;    //In Inches
+    public static final int ENCODER_PULSES                     = 480;
+    public static final double WHEEL_DIAMETER                  = 18.375;    //7.5" In Centimeters
 
     public static final double AUTONOMOUS_DRIVE_SPEED          = 0.5;
     public static final double STRAIGHT_DRIVE_OFFSET_TOLERANCE = 1.0; //In Centimeters
     public static final double OFFSET_SPEED_INCREMENT          = 0.01;
 
     //TODO: Remove these values later. This is for testing purposes only.
-    public static final int TEST_DRIVE_DISTANCE_CHANGE_AMOUNT         = 12;    //In Inches
+    public static final int TEST_DRIVE_DISTANCE_CHANGE_AMOUNT         = 50;    //In Centimeters
     public static final int TEST_DRIVE_ANGLE_CHANGE_AMOUNT            = 15;    //In Degrees
 
     //////////////////////////////
@@ -77,9 +77,9 @@ public final class TuningParams
     ///////////////////////////////
     // Test Params
     ///////////////////////////////
-    public static final double TEST_DRIVE_STRAIGHT_1        = 12;    //Amount of inches
-    public static final double TEST_DRIVE_STRAIGHT_2        = 24;    //Amount of inches
-    public static final double TEST_DRIVE_STRAIGHT_3        = 60;    //Amount of inches
+    public static final double TEST_DRIVE_STRAIGHT_1        = 100;    //Amount in centimeters
+    public static final double TEST_DRIVE_STRAIGHT_2        = 200;    //Amount in centimeters
+    public static final double TEST_DRIVE_STRAIGHT_3        = 500;    //Amount in centimeters
 
     public static final double TEST_TURN_1                  = 10;    //Amount of degrees
     public static final double TEST_TURN_2                  = 30;    //Amount of degrees

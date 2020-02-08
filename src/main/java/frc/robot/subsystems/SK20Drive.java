@@ -84,7 +84,7 @@ public class SK20Drive extends SubsystemBase {
      * This method is used to query the distance the left encoder has recorded since
      * the last time it was reset.
      *
-     * @return Returns the number of inches the left encoder has measured.
+     * @return Returns the number of centimeters the left encoder has measured.
      */
     public double getLeftEncoderDistance() {
         return drive.getLeftEncoderDistance();
@@ -94,10 +94,50 @@ public class SK20Drive extends SubsystemBase {
      * This method is used to query the distance the right encoder has recorded
      * since the last time it was reset.
      *
-     * @return Returns the number of inches the right encoder has measured.
+     * @return Returns the number of centimeters the right encoder has measured.
      */
     public double getRightEncoderDistance() {
         return drive.getRightEncoderDistance();
+    }
+
+    /**
+     * This method is used to query the revolutions the left encoder has recorded
+     * since the last time it was reset.
+     * 
+     * @return Returns the amount of revolutions the left wheel has turned.
+     */
+    public double getLeftEncoderRevolutions() {
+        return drive.getLeftEncoderRotations();
+    }
+
+    /**
+     * This method is used to query the revolutions the right encoder has recorded
+     * since the last time it was reset.
+     * 
+     * @return Returns the amount of revolutions the right wheel has turned.
+     */
+    public double getRightEncoderRevolutions() {
+        return drive.getRightEncoderRotations();
+    }
+
+    /**
+     * This method is used to query the raw pulses the left encoder has recorded
+     * since the last time it was reset.
+     * 
+     * @return Returns the raw value that the left encoder has read.
+     */
+    public int getLeftEncoderRaw() {
+        return drive.getLeftEncoderRaw();
+    }
+
+    /**
+     * This method is used to query the raw pulses the right encoder has recorded
+     * since the last time it was reset.
+     * 
+     * @return Returns the raw value that the right encoder has read.
+     */
+    public int getRightEncoderRaw() {
+        return drive.getRightEncoderRaw();
     }
 
     /**
@@ -120,6 +160,12 @@ public class SK20Drive extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        SmartDashboard.putNumber("Left Wheel Revolution", getLeftEncoderRevolutions());
+        SmartDashboard.putNumber("Right Wheel Revolution", getRightEncoderRevolutions());
+        SmartDashboard.putNumber("Left Wheel Distance", getLeftEncoderDistance());
+        SmartDashboard.putNumber("Right Wheel Distance", getRightEncoderDistance());
+        SmartDashboard.putNumber("Left Wheel Raw", getLeftEncoderRaw());
+        SmartDashboard.putNumber("Right Wheel Raw", getRightEncoderRaw());
         smoothDrive.SmoothDrivePeriodic();
     }
 
