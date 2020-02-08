@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbReleaseCommand;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SetGear;
 import frc.robot.commands.SetSlowmodeCommand;
 import frc.robot.commands.StopColorWheelCommand;
@@ -25,7 +24,6 @@ import frc.robot.commands.ThreeRotateCommandGroup;
 import frc.robot.commands.ToggleIntakeCommand;
 import frc.robot.commands.TurnToColorCommandGroup;
 import frc.robot.commands.WinchRobotCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SK20Climb;
 import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.SK20Drive;
@@ -53,13 +51,10 @@ public class RobotContainer
     SendableChooser<testModeChoice> testModeSelector = new SendableChooser<testModeChoice>();
 
     // The robot's subsystems and commands are defined here...
-    private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
     private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
     private final SK20Drive m_driveSubsystem = new SK20Drive();
     private final SK20Climb m_climbSubsystem = new SK20Climb();
     private final SK20Intake m_intakeSubsystem = new SK20Intake();
-
-    private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
     public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
     public static Joystick JoystickOperator = new Joystick(Ports.OIOperatorJoystick);
@@ -140,9 +135,6 @@ public class RobotContainer
 
         // Sets the buttons to activate/deactivate intake
         toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));
-
-
-
     }
 
     public void testSelector()
@@ -180,8 +172,8 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
-        // An ExampleCommand will run in autonomous
-        return m_autoCommand;
+        // TODO: Get the selected autonomous command from the driver station chooser!
+        return (Command)null;
     }
 
     public boolean isClimbArmed() {

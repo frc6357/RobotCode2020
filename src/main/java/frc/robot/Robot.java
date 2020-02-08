@@ -111,11 +111,8 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
           m_autonomousCommand.schedule();
         }
-        
-        
-        m_robotContainer.testSelector();
 
-        
+        m_robotContainer.testSelector();
 
         // switch(){
         //   case driveTestModeChoice.TestStraightCommandGroup:
@@ -131,8 +128,6 @@ public class Robot extends TimedRobot {
             
         //   break;
         // }
-        
-        
     }
 
     /**
