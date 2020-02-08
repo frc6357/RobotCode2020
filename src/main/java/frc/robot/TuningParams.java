@@ -44,6 +44,7 @@ public final class TuningParams
     // Launcher Params
     //////////////////////////////
     public static final double LOADER_MAX_SPEED                = 0.75;
+    public static final double RELEASE_MOTOR_SPEED             = 0.75;
     public static final int MAX_RPM                            = 5700;
     public static final int P_VALUE                            = 1;
     public static final int I_VALUE                            = 1;

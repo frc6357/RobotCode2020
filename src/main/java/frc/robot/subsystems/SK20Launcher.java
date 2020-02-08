@@ -12,6 +12,8 @@ import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.BaseRoller;
 
+// TODO: I don't see anything here that relates to determining the number of balls
+//       currently stored in the mechanism. Is this an oversight?
 /**
  * This is the launcher subsystem that controls everything that has to do with the launcher including the transfer from the handling system to the launcher
  * as well the speed of the launcher and the position of the hood to change the set angle
@@ -23,6 +25,9 @@ public class SK20Launcher extends SubsystemBase
 
     private final CANSparkMax transferMotor = new CANSparkMax(Ports.ballLoaderMotor, MotorType.kBrushless);   
     private final BaseRoller transferRoller = new BaseRoller(transferMotor, TuningParams.LOADER_MAX_SPEED);
+
+    private final CANSparkMax releaseMotor = new CANSparkMax(Ports.ballReleaseMotor, MotorType.kBrushless);
+    private final BaseRoller releaseRoller = new BaseRoller(releaseMotor, TuningParams.RELEASE_MOTOR_SPEED);
 
     private final CANEncoder launcherMotorEncoder = new CANEncoder(launcherMotor);
     private final CANEncoder transferMotorEncoder = new CANEncoder(transferMotor);
@@ -101,8 +106,9 @@ public class SK20Launcher extends SubsystemBase
     /**
      * It sets the hood according to whatever position it is passed
      */
-    public void setHoodPosition(DoubleSolenoid.Value value)
+    public void setHoodPositionHigh(boolean high)
     {
+        DoubleSolenoid.Value value = high ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
         hoodMover.set(value);
     }
 
@@ -110,9 +116,11 @@ public class SK20Launcher extends SubsystemBase
      * Checks to see what position the hood is in
      * @return The value of the double solenoid
      */
-    public DoubleSolenoid.Value getHoodPosition()
+    public boolean isHoodPositionHigh()
     {
-        return hoodMover.get();
+        DoubleSolenoid.Value value = hoodMover.get();
+
+        return (value == DoubleSolenoid.Value.kForward) ? true : false;
     }
 
     /**
@@ -123,5 +131,23 @@ public class SK20Launcher extends SubsystemBase
     public void setLauncherSpeed(double speed)
     {
         launcherMotor.set(speed);
+    }
+
+    /**
+     * This starts the launcher's release roller motor. Turning it on causes the shooter to
+     * fire balls. It is likely that a command to shoot balls will turn his on for some period,
+     * possibly using one of the ball detectors to determine when to turn it back off again.
+     */
+    public void startLaunchReleaseMotor()
+    {
+        releaseRoller.setForwards();
+    }
+
+    /**
+     * This stops the launcher's release roller motor.
+     */
+    public void stopLaunchReleaseMotor()
+    {
+        releaseRoller.setStop();
     }
 }

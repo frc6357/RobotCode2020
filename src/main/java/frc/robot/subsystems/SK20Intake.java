@@ -19,6 +19,7 @@ public class SK20Intake extends SubsystemBase
 {
     private BaseRoller intakeRoller;
     private DoubleSolenoid intakeMover;
+    // TODO: Switch to CAN Spark Max and Neo integrated encoder.
     private WPI_VictorSPX intakeRollerMotor;
     private ScaledEncoder intakeRollerEncoder;
     private LimitSensor intakeBallDetector;
@@ -28,6 +29,7 @@ public class SK20Intake extends SubsystemBase
      */
     public SK20Intake ()
     {
+        // TODO: The final intake uses a Neo motor controller with integrated encoder. Update this.
         intakeRollerMotor = new WPI_VictorSPX(Ports.intakeMotor);
         intakeRoller = new BaseRoller(intakeRollerMotor, TuningParams.INTAKE_MAX_SPEED);
         intakeRollerEncoder = new ScaledEncoder(Ports.intakeSpeedCheckA, Ports.intakeSpeedCheckB, TuningParams.INTAKE_ENCODER_PULSES, TuningParams.INTAKE_WHEEL_DIAMETER);
