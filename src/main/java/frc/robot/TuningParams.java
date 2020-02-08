@@ -24,6 +24,8 @@ public final class TuningParams
     public static final double  STRAIGHT_DRIVE_OFFSET_TOLERANCE = 1.0;    //In Centimeters
     public static final double  OFFSET_SPEED_INCREMENT          = 0.01;
 
+    public static final double  SLOWMODE_MULTIPLIER             = 0.25;
+
     //////////////////////////////
     // Color Wheel Params
     //////////////////////////////
@@ -76,15 +78,13 @@ public final class TuningParams
     ///////////////////////////////
     // Test Params
     ///////////////////////////////
-    // TODO: This must be metric!
-    public static final double TEST_DRIVE_STRAIGHT_1        = 12;    //Amount of inches
-    public static final double TEST_DRIVE_STRAIGHT_2        = 24;    //Amount of inches
-    public static final double TEST_DRIVE_STRAIGHT_3        = 60;    //Amount of inches
-
-    public static final double TEST_TURN_1                  = 10;    //Amount of degrees
-    public static final double TEST_TURN_2                  = 30;    //Amount of degrees
-    public static final double TEST_TURN_3                  = 50;    //Amount of degrees
-    public static final double TEST_TURN_4                  = 90;    //Amount of degrees
-    public static final double TEST_TURN_5                  = 180;    //Amount of degrees
+    public static final double TEST_DRIVE_STRAIGHT_1        = 100;  //Amount in centimeters
+    public static final double TEST_DRIVE_STRAIGHT_2        = 200;  //Amount in centimeters
+    public static final double TEST_DRIVE_STRAIGHT_3        = 400;  //Amount in centimeters
+    public static final double TEST_TURN_1                  = 10;   //Amount of degrees
+    public static final double TEST_TURN_2                  = 30;   //Amount of degrees
+    public static final double TEST_TURN_3                  = 50;   //Amount of degrees
+    public static final double TEST_TURN_4                  = 90;   //Amount of degrees
+    public static final double TEST_TURN_5                  = 180;  //Amount of degrees
 
 }

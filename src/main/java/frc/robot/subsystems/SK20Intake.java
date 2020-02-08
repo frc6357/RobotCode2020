@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Ports;
@@ -71,9 +72,10 @@ public class SK20Intake extends SubsystemBase
      * Checks whether the intake is open or closed using the limit switch that's installed
      * @return The intake position. kForward for out, kReverse for in
      */
-    public DoubleSolenoid.Value getIntakePosition()
+    public boolean isIntakeExtended()
     {
-        return intakeMover.get();
+        DoubleSolenoid.Value currentState = intakeMover.get();
+        return (currentState == Value.kForward) ? true : false;
     }
 
     /**

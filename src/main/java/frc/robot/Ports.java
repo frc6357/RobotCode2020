@@ -101,14 +101,27 @@ public class Ports {
     public static final int OIDriverLeftDrive           = 1;    // Left Joystick Y
     public static final int OIDriverRightDrive          = 5;    // Right Joystick Y
 
-    public static final int OIOperatorJoystick          = 1;
+    public static final int OIDriverSetLowGear          = 1;    // Sets the low gear (A)
+    public static final int OIDriverSetHighGear         = 4;    // Sets the high gear (Y) 
 
-    public static final int OIOperatorDeployArm         = 4;    // Pneumatic for releasing the arm (Y)
-    public static final int OIOperatorStartWinchArm     = 5;    // Motor for Winching arm (LeftBumper)
-    public static final int OIOperatorStopWinchArm      = 6;    // Stops motor for Winching arm (RightBumper)
+    public static final int OIDriverSetSlowmodeLeft     = 5;    // Set slowmode (LeftBumper)
+    public static final int OIDriverSetSlowmodeRight    = 6;    // Set slowmode (RightBumper)
+
+
+
+    public static final int OIOperatorJoystick          = 1;
 
     public static final int OIOperatorStopColorWheel    = 1;    // Button A
     public static final int OIOperatorStartThreeRotate  = 9;    // Left Joystick press button
     public static final int OIOperatorStartSetColor     = 10;   // Right Joystick press button
 
+    public static final int OIOperatorShootBall         = 2;    // Button B
+    public static final int OIOperatorToggleIntake      = 3;    // Button X
+
+    public static final int OIOperatorSetHighAngle      = 0;    // POV 0
+    public static final int OIOperatorSetLowAngle       = 180;  // POV 180
+
+    public static final int OIOperatorArmClimb          = 4;    // Button Y
+    public static final int OIOperatorDeployArm         = 5;    // Pneumatic for releasing the arm (Left Bumper)
+    public static final int OIOperatorRunWinchArm       = 6;    // Motor for Winching arm while held (RightBumper)
 }
