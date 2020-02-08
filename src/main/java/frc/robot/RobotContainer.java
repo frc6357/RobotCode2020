@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -36,12 +38,13 @@ import frc.robot.utils.filters.FilterDeadband;
  */
 public class RobotContainer 
 {
+  public static UsbCamera camera;
+
+  private enum testModeChoice{DRIVE, LAUNCHER, CLIMB, INTAKE, COLOR_WHEEL, OTHER};
+  SendableChooser<testModeChoice> testModeSelector = new SendableChooser<testModeChoice>();
   
-    private enum testModeChoice{DRIVE, LAUNCHER, CLIMB, INTAKE, COLOR_WHEEL, OTHER};
-    SendableChooser<testModeChoice> testModeSelector = new SendableChooser<testModeChoice>();
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
   private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
   private final SK20Drive m_driveSubsystem = new SK20Drive();
   private final SK20Climb m_climbSubsystem = new SK20Climb();
@@ -75,6 +78,11 @@ public class RobotContainer
     testModeSelector.addOption("CLIMB",testModeChoice.CLIMB);
     testModeSelector.addOption("INTAKE", testModeChoice.INTAKE);
     testModeSelector.addOption("LAUNCHER", testModeChoice.LAUNCHER);
+
+    // Driver camera configuration.
+    camera = CameraServer.getInstance().startAutomaticCapture("Driver Front Camera", 0);
+    camera.setResolution(240, 240);
+    camera.setFPS(15);
   }
 
   /**
