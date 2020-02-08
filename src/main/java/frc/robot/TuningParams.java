@@ -7,22 +7,22 @@ public final class TuningParams
     //////////////////////////////
     // Drive Params
     //////////////////////////////
-    public static final double ACCEL_MAX_TOWARDS_FORWARD       = 0.075;
-    public static final double ACCEL_MAX_TOWARDS_BACKWARD      = -0.075;
-    public static final double DECEL_MAX_TOWARDS_FORWARD       = 0.075;
-    public static final double DECEL_MAX_TOWARDS_BACKWARD      = -0.075;
+    public static final double  ACCEL_MAX_TOWARDS_FORWARD       =  0.075;
+    public static final double  ACCEL_MAX_TOWARDS_BACKWARD      = -0.075;
+    public static final double  DECEL_MAX_TOWARDS_FORWARD       =  0.075;
+    public static final double  DECEL_MAX_TOWARDS_BACKWARD      = -0.075;
 
-    public static final double CONTROLLED_TURN_SPEED           = 0.5;
-    public static final double ANGLE_TURN_TOLERANCE            = 1;
+    public static final double  CONTROLLED_TURN_SPEED           = 0.5;
+    public static final double  ANGLE_TURN_TOLERANCE            = 1;
 
-    public static final boolean ENCODER_LEFT_REVERSED          = false;
-    public static final boolean ENCODER_RIGHT_REVERSED         = true;
-    public static final int ENCODER_PULSES                     = 2048;
-    public static final double WHEEL_DIAMETER                  = 8;    //In Inches
+    public static final boolean ENCODER_LEFT_REVERSED           = false;
+    public static final boolean ENCODER_RIGHT_REVERSED          = true;
+    public static final int     ENCODER_PULSES                  = 480;
+    public static final double  WHEEL_DIAMETER                  = 18.375; // 7.5" In Centimeters
 
-    public static final double AUTONOMOUS_DRIVE_SPEED          = 0.5;
-    public static final double STRAIGHT_DRIVE_OFFSET_TOLERANCE = 1.0; //In Centimeters
-    public static final double OFFSET_SPEED_INCREMENT          = 0.01;
+    public static final double  AUTONOMOUS_DRIVE_SPEED          = 0.5;
+    public static final double  STRAIGHT_DRIVE_OFFSET_TOLERANCE = 1.0;    //In Centimeters
+    public static final double  OFFSET_SPEED_INCREMENT          = 0.01;
 
     //////////////////////////////
     // Color Wheel Params
@@ -50,10 +50,11 @@ public final class TuningParams
     //////////////////////////////
     // Intake Params
     //////////////////////////////
-    public static final double INTAKE_MAX_SPEED             = 0.5;
-    public static final int INTAKE_ENCODER_PULSES           = 2048;
-    public static final double INTAKE_WHEEL_DIAMETER        = 2.0; // 2.0 Inches
-    public static final boolean INTAKE_BALL_CHECK_INVERT    = false;
+    public static final double INTAKE_MAX_SPEED                = 0.5;
+    public static final int INTAKE_ENCODER_PULSES              = 2048; // TODO: Check this.
+    // TODO: This must be metric!
+    public static final double INTAKE_WHEEL_DIAMETER           = 2.0; // 2.0 Inches
+    public static final boolean INTAKE_BALL_CHECK_INVERT       = false;
 
     //////////////////////////////
     // Ball Handling Params
@@ -75,6 +76,7 @@ public final class TuningParams
     ///////////////////////////////
     // Test Params
     ///////////////////////////////
+    // TODO: This must be metric!
     public static final double TEST_DRIVE_STRAIGHT_1        = 12;    //Amount of inches
     public static final double TEST_DRIVE_STRAIGHT_2        = 24;    //Amount of inches
     public static final double TEST_DRIVE_STRAIGHT_3        = 60;    //Amount of inches
