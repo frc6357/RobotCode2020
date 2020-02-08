@@ -1,15 +1,15 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.BaseRoller;
-import frc.robot.utils.ScaledEncoder;
 import frc.robot.subsystems.base.LimitSensor;
 
 /**
@@ -19,9 +19,8 @@ public class SK20Intake extends SubsystemBase
 {
     private BaseRoller intakeRoller;
     private DoubleSolenoid intakeMover;
-    // TODO: Switch to CAN Spark Max and Neo integrated encoder.
-    private WPI_VictorSPX intakeRollerMotor;
-    private ScaledEncoder intakeRollerEncoder;
+    private CANSparkMax intakeRollerMotor;
+    private CANEncoder intakeRollerEncoder;
     private LimitSensor intakeBallDetector;
 
     /**
@@ -29,10 +28,9 @@ public class SK20Intake extends SubsystemBase
      */
     public SK20Intake ()
     {
-        // TODO: The final intake uses a Neo motor controller with integrated encoder. Update this.
-        intakeRollerMotor = new WPI_VictorSPX(Ports.intakeMotor);
+        intakeRollerMotor = new CANSparkMax(Ports.intakeMotor, MotorType.kBrushless);
         intakeRoller = new BaseRoller(intakeRollerMotor, TuningParams.INTAKE_MAX_SPEED);
-        intakeRollerEncoder = new ScaledEncoder(Ports.intakeSpeedCheckA, Ports.intakeSpeedCheckB, TuningParams.INTAKE_ENCODER_PULSES, TuningParams.INTAKE_WHEEL_DIAMETER);
+        intakeRollerEncoder = new CANEncoder(intakeRollerMotor);
         intakeBallDetector = new LimitSensor(Ports.intakeBallCheck, TuningParams.INTAKE_BALL_CHECK_INVERT);
 
         intakeMover = new DoubleSolenoid(Ports.intakeMoverExtend, Ports.intakeMoverRetract);
@@ -86,7 +84,7 @@ public class SK20Intake extends SubsystemBase
      */
     public double getIntakeRollerSpeed()
     {
-        return intakeRollerEncoder.getRate();
+        return intakeRollerEncoder.getVelocity();
     }
 
     /**
