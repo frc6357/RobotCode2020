@@ -48,6 +48,11 @@ public class SpinTransition extends CommandBase {
     @Override
     public void execute() {
         // TODO: Guard against UNKNOWN or NONE colors
+
+        // TODO: We probably want to add some "debounce" here to guard against spurious readings
+        // if we read the color when a transition is right above the sensor. Only report a 
+        // transition after reading the same color twice on successive execute() calls, for example?
+        
         Color2020 detectedColor = m_subsystem.getDetectedColor();
         if (colorPrevious != detectedColor) {
             m_subsystem.incrementSpinnerTransitionCount();
