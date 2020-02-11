@@ -115,7 +115,6 @@ public class Ports {
     public static final int OIOperatorToggleIntake      = 3;    // Button X
 
     public static final int OIOperatorSetHighAngle      = 0;    // POV 0
-    public static final int OIOperatorSetLowAngle       = 180;  // POV 180
 
     public static final int OIOperatorArmClimb          = 4;    // Button Y
     public static final int OIOperatorDeployArm         = 5;    // Pneumatic for releasing the arm (Left Bumper)

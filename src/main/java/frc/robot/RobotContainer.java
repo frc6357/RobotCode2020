@@ -76,8 +76,7 @@ public class RobotContainer
 
     // Launcher control buttons
     public static JoystickButton launchBall = new JoystickButton(joystickOperator, Ports.OIOperatorShootBall);
-    public static JoystickButton setLowAngle = new JoystickButton(joystickOperator, Ports.OIOperatorSetLowAngle);
-    public static JoystickButton setHighAngle = new JoystickButton(joystickOperator, Ports.OIOperatorSetLowAngle);
+    public static JoystickButton setHighAngle = new JoystickButton(joystickOperator, Ports.OIOperatorSetHighAngle);
     
     // Climb Buttons
     public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator,
@@ -138,7 +137,7 @@ public class RobotContainer
 
         // Set the ball launcher buttons to do correct commands
         setHighAngle.whenPressed(new SetLaunchAngleHighCommand(m_launcherSubsystem, true));
-        setLowAngle.whenPressed(new SetLaunchAngleHighCommand(m_launcherSubsystem, false));
+        setHighAngle.whenReleased(new SetLaunchAngleHighCommand(m_launcherSubsystem, false));
         launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
 
         // Sets robot buttons for the control panel command
