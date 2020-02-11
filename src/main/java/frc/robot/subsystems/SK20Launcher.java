@@ -7,6 +7,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
@@ -15,7 +16,8 @@ import frc.robot.subsystems.base.BaseRoller;
 // TODO: I don't see anything here that relates to determining the number of balls
 //       currently stored in the mechanism. Is this an oversight?
 /**
- * This is the launcher subsystem that controls everything that has to do with the launcher including the transfer from the handling system to the launcher
+ * This is the launcher subsystem that controls everything that has to do with 
+ * the launcher including the transfer from the handling system to the launcher
  * as well the speed of the launcher and the position of the hood to change the set angle
  */
 public class SK20Launcher extends SubsystemBase
@@ -36,7 +38,7 @@ public class SK20Launcher extends SubsystemBase
 
     /**
      * This does nothing as everything is intialized inside of the class before the constructor is even called so that 
-     * we can guarantee 
+     * we can guarantee everything is set up the way that we need it to be set up at.
      */
     public SK20Launcher()
     {
@@ -44,6 +46,7 @@ public class SK20Launcher extends SubsystemBase
         // there's a very good chance we'll damage something since there's a large flywheel attached 
         // to this subsystem!
         launcherMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
+        setPIDValues();
     }
 
     /**
@@ -87,11 +90,11 @@ public class SK20Launcher extends SubsystemBase
      * @param iVal The integral value
      * @param dVal The derivative value
      */
-    public void setPIDValues(int pVal, int iVal, int dVal)
+    private void setPIDValues()
     {
-        PIDControl.setP(pVal);
-        PIDControl.setI(iVal);
-        PIDControl.setD(dVal);
+        PIDControl.setP(TuningParams.LAUNCHER_P_VALUE);
+        PIDControl.setI(TuningParams.LAUNCHER_I_VALUE);
+        PIDControl.setD(TuningParams.LAUNCHER_D_VALUE);
     }
 
     /**
@@ -106,10 +109,10 @@ public class SK20Launcher extends SubsystemBase
     /**
      * It sets the hood according to whatever position it is passed
      */
-    public void setHoodPositionHigh(boolean high)
+    public void setHoodUp(boolean value)
     {
-        DoubleSolenoid.Value value = high ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
-        hoodMover.set(value);
+        DoubleSolenoid.Value sendVal = value ? Value.kForward: Value.kReverse;
+        hoodMover.set(sendVal);
     }
 
     /**
@@ -149,5 +152,18 @@ public class SK20Launcher extends SubsystemBase
     public void stopLaunchReleaseMotor()
     {
         releaseRoller.setStop();
+    }
+
+    /**
+     * Don't quite know how this is going to work yet, it could just end up firing one ball,
+     * or it could end up firing many balls. This is not implemented yet because the complete
+     * action of the ball handling to launcher transfer mechanism is not known yet. However,
+     * this method will still operate in the same way.
+     * TODO: This method needs to actually be coded, watiting on final operation of mechanism to be able to know for sure.
+     * @param numBalls How many balls you want to launch at a time, the deafault is zero
+     */
+    public void fireBall(int numBalls)
+    {
+
     }
 }

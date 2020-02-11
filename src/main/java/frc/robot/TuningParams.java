@@ -46,10 +46,10 @@ public final class TuningParams
     public static final double LOADER_MAX_SPEED                = 0.75;
     public static final double RELEASE_MOTOR_SPEED             = 0.75;
     public static final int MAX_RPM                            = 5700;
-    public static final int P_VALUE                            = 1;
-    public static final int I_VALUE                            = 1;
-    public static final int D_VALUE                            = 1;
     public static final int RELEASE_MOTOR_RUNTIME              = 1000; // In Milliseconds
+    public static final int LAUNCHER_P_VALUE                   = 1;
+    public static final int LAUNCHER_I_VALUE                   = 1;
+    public static final int LAUNCHER_D_VALUE                   = 1;
 
     //////////////////////////////
     // Intake Params

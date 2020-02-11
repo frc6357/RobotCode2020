@@ -28,7 +28,7 @@ public class SetLaunchAngleHighCommand extends CommandBase {
     // Called when the command is initially scheduled and sets the hood angle
     @Override
     public void initialize() {
-        subsystem.setHoodPositionHigh(setHighAngle);
+        subsystem.setHoodUp(setHighAngle);
     }
 
     // Returns true when the command should end.
