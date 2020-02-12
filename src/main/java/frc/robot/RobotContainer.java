@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.LaunchBallCommand;
 import frc.robot.commands.SetGear;
-import frc.robot.commands.SetLaunchAngleHighCommand;
+import frc.robot.commands.SetAngleCommand;
 import frc.robot.commands.SetSlowmodeCommand;
 import frc.robot.commands.StopColorWheelCommand;
 import frc.robot.commands.ThreeRotateCommandGroup;
@@ -136,8 +136,9 @@ public class RobotContainer
         runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
 
         // Set the ball launcher buttons to do correct commands
-        setHighAngle.whenPressed(new SetLaunchAngleHighCommand(m_launcherSubsystem, true));
-        setHighAngle.whenReleased(new SetLaunchAngleHighCommand(m_launcherSubsystem, false));
+        setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true));
+        setHighAngle.whenReleased(new SetAngleCommand(m_launcherSubsystem, false));
+
         launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
 
         // Sets robot buttons for the control panel command

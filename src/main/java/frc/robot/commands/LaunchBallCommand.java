@@ -7,7 +7,8 @@ import frc.robot.subsystems.SK20Launcher;
 /**
  * A command that launches the ball
  */
-public class LaunchBallCommand extends CommandBase {
+public class LaunchBallCommand extends CommandBase 
+{
     private final SK20Launcher subsystem;
     private int runTimeCount;
     private boolean isDone = false;
@@ -15,7 +16,8 @@ public class LaunchBallCommand extends CommandBase {
     /**
      * The 
      */
-    public LaunchBallCommand(SK20Launcher subsystem) {
+    public LaunchBallCommand(SK20Launcher subsystem) 
+    {
         this.subsystem = subsystem;
         addRequirements(subsystem);
     }
@@ -23,7 +25,8 @@ public class LaunchBallCommand extends CommandBase {
     
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
+    public void initialize() 
+    {
         runTimeCount = 0;
         subsystem.startLaunchReleaseMotor();
         isDone = false;
@@ -31,8 +34,10 @@ public class LaunchBallCommand extends CommandBase {
 
     // Runs once every 20ms
     @Override
-    public void execute() {
-        if (runTimeCount >= TuningParams.RELEASE_MOTOR_RUNTIME) {
+    public void execute() 
+    {
+        if (runTimeCount >= TuningParams.RELEASE_MOTOR_RUNTIME) 
+        {
            subsystem.stopLaunchReleaseMotor();
            isDone = true;
         }
@@ -41,7 +46,8 @@ public class LaunchBallCommand extends CommandBase {
 
     // Returns true when the command should end.
     @Override
-    public boolean isFinished() {
+    public boolean isFinished() 
+    {
         return isDone;
     }
 }

@@ -38,7 +38,7 @@ public class SpinTransition extends CommandBase {
     @Override
     public void initialize() {
         m_subsystem.resetSpinnerTransitionCount();
-        colorPrevious = Color2020.UNKNOWN;
+        this.colorPrevious = Color2020.UNKNOWN;
         indexOfColorRay = 0;
         colorArrayIsFull = false;
         isDone = false;
