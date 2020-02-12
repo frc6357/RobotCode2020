@@ -17,6 +17,7 @@ public class SpinTransition extends CommandBase {
     private Color2020[] colorRay = new Color2020[TuningParams.COLOR_WHEEL_ARRAY_SIZE];
     private int indexOfColorRay = 0;
     private boolean colorArrayIsFull = false;
+    private boolean firstColorSet = false;
 
     /**
      * Creates a new instance of the SpinTransition and takes in the subsystem and
@@ -65,13 +66,20 @@ public class SpinTransition extends CommandBase {
 
         // This code is to run once the color array has been filled in at least once.
         if (colorArrayIsFull) {
-            
+
             // This part checks that all of values in the color array are the same to
             // unbounce the reading.
             for (int i = 1; i < TuningParams.COLOR_WHEEL_ARRAY_SIZE; i++) {
                 if (colorRay[i] != colorRay[0]) {
                     return;
                 }
+            }
+
+            // Checks to see if the original read color was set to make sure transitions are
+            // calculated correctly.
+            if (!firstColorSet) {
+                colorPrevious = colorRay[0];
+                firstColorSet = true;
             }
 
             // Checks to see if the wheel has actually changed and increments the transition
