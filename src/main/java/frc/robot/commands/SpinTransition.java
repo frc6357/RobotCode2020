@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.TuningParams;
 import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.base.Color2020;
 
@@ -13,14 +14,16 @@ public class SpinTransition extends CommandBase {
     private final int transitionCount;
     private boolean isDone = false;
     private Color2020 colorPrevious;
-
+    private Color2020[] colorRay = new Color2020[TuningParams.COLOR_WHEEL_ARRAY_SIZE];
+    private int indexOfColorRay = 0;
+    private boolean colorArrayIsFull = false;
 
     /**
-     * Creates a new instance of the SpinTransition and takes in the subsystem and the amount of
-     * color transitions we want the control panel to achieve.
+     * Creates a new instance of the SpinTransition and takes in the subsystem and
+     * the amount of color transitions we want the control panel to achieve.
      * 
-     * @param subsystem        The subsystem we plan on using to control the color
-     *                         wheel parts.
+     * @param subsystem       The subsystem we plan on using to control the color
+     *                        wheel parts.
      * @param transitionCount The amount of colors we want the wheel to rotate.
      */
     public SpinTransition(SK20ColorWheel subsystem, int transitionCount) {
@@ -35,10 +38,11 @@ public class SpinTransition extends CommandBase {
     @Override
     public void initialize() {
         m_subsystem.resetSpinnerTransitionCount();
-        colorPrevious = m_subsystem.getDetectedColor();
+        colorPrevious = Color2020.UNKNOWN;
+        indexOfColorRay = 0;
+        colorArrayIsFull = false;
         isDone = false;
     }
-
 
     /**
      * This method spins the control panel until the desired amount of transitions
@@ -49,14 +53,23 @@ public class SpinTransition extends CommandBase {
     public void execute() {
         // TODO: Guard against UNKNOWN or NONE colors
 
-        // TODO: We probably want to add some "debounce" here to guard against spurious readings
-        // if we read the color when a transition is right above the sensor. Only report a 
-        // transition after reading the same color twice on successive execute() calls, for example?
-        
-        Color2020 detectedColor = m_subsystem.getDetectedColor();
-        if (colorPrevious != detectedColor) {
-            m_subsystem.incrementSpinnerTransitionCount();
-            colorPrevious = detectedColor;
+        // TODO: We probably want to add some "debounce" here to guard against spurious
+        // readings if we read the color when a transition is right above the sensor.
+        // Only report a transition after reading the same color twice on successive
+        // execute() calls, for example?
+        colorRay[indexOfColorRay] = m_subsystem.getDetectedColor();
+        indexOfColorRay = (indexOfColorRay + 1) % TuningParams.COLOR_WHEEL_ARRAY_SIZE;
+        if(indexOfColorRay == 0)
+        {
+            colorArrayIsFull = true;
+        }
+        if (colorArrayIsFull) {
+            for (int i = 1; i < TuningParams.COLOR_WHEEL_ARRAY_SIZE; i++) {
+                if(colorRay[i] != colorRay[0]) {
+                    return;
+                }
+            }
+            // TODO: Start here
         }
 
         if (m_subsystem.getSpinnerTransitionCount() >= transitionCount) {
@@ -64,7 +77,6 @@ public class SpinTransition extends CommandBase {
             m_subsystem.retractLifter();
             isDone = true;
         }
-        
 
     }
 

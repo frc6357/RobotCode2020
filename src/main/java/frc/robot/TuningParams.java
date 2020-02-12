@@ -40,6 +40,8 @@ public final class TuningParams
 
     public static final int COLOR_WHEEL_TRANSITIONS            = 26; // Slightly more than three revs
 
+    public static final int COLOR_WHEEL_ARRAY_SIZE             = 3;
+
     //////////////////////////////
     // Launcher Params
     //////////////////////////////
