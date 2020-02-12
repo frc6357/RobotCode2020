@@ -47,31 +47,43 @@ public class SpinTransition extends CommandBase {
     /**
      * This method spins the control panel until the desired amount of transitions
      * to rotate is met. It also increments the amount of color transitions by
-     * looking if the color on the control panel has changed.
+     * looking if the color on the control panel has changed. It also 'debounces'
+     * the values to ensure our change in values are correct.
      */
     @Override
     public void execute() {
-        // TODO: Guard against UNKNOWN or NONE colors
-
-        // TODO: We probably want to add some "debounce" here to guard against spurious
-        // readings if we read the color when a transition is right above the sensor.
-        // Only report a transition after reading the same color twice on successive
-        // execute() calls, for example?
+        // Updates the color array.
         colorRay[indexOfColorRay] = m_subsystem.getDetectedColor();
+
+        // This line is used to make sure that the index values don't go out of bounds.
         indexOfColorRay = (indexOfColorRay + 1) % TuningParams.COLOR_WHEEL_ARRAY_SIZE;
-        if(indexOfColorRay == 0)
-        {
+
+        // This checks that the color array has been filled
+        if (indexOfColorRay == 0) {
             colorArrayIsFull = true;
         }
+
+        // This code is to run once the color array has been filled in at least once.
         if (colorArrayIsFull) {
+            
+            // This part checks that all of values in the color array are the same to
+            // unbounce the reading.
             for (int i = 1; i < TuningParams.COLOR_WHEEL_ARRAY_SIZE; i++) {
-                if(colorRay[i] != colorRay[0]) {
+                if (colorRay[i] != colorRay[0]) {
                     return;
                 }
             }
-            // TODO: Start here
+
+            // Checks to see if the wheel has actually changed and increments the transition
+            // amount if the value has actually changed.
+            if (colorRay[0] != colorPrevious) {
+                m_subsystem.incrementSpinnerTransitionCount();
+                colorPrevious = colorRay[0];
+            }
         }
 
+        // If we have reached the desired transition amount, we will deactivate
+        // everything and retract the mechanism.
         if (m_subsystem.getSpinnerTransitionCount() >= transitionCount) {
             m_subsystem.deactivateSpinnerRoller();
             m_subsystem.retractLifter();
