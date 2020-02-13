@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.LaunchBallCommand;
@@ -26,6 +27,8 @@ import frc.robot.commands.ThreeRotateCommandGroup;
 import frc.robot.commands.ToggleIntakeCommand;
 import frc.robot.commands.TurnToColorCommandGroup;
 import frc.robot.commands.WinchRobotCommand;
+import frc.robot.commands.DefaultBallHandlingCommand;
+import frc.robot.subsystems.SK20BallHandling;
 import frc.robot.subsystems.SK20Climb;
 import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.SK20Drive;
@@ -59,6 +62,7 @@ public class RobotContainer
     private final SK20Climb m_climbSubsystem = new SK20Climb();
     private final SK20Intake m_intakeSubsystem = new SK20Intake();
     private final SK20Launcher m_launcherSubsystem = new SK20Launcher();
+    private final SK20BallHandling m_ballHandlingSubsystem = new SK20BallHandling();
 
     public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
     public static Joystick joystickOperator = new Joystick(Ports.OIOperatorJoystick);
@@ -89,6 +93,8 @@ public class RobotContainer
             Ports.OIOperatorStartThreeRotate);
     public static JoystickButton startSetColor = new JoystickButton(joystickOperator, Ports.OIOperatorStartSetColor);
     public static JoystickButton stopColorWheel = new JoystickButton(joystickOperator, Ports.OIOperatorStopColorWheel);
+
+    public static Button runBallHandler = new Button();
 
     public RobotContainer()
     {
@@ -149,6 +155,9 @@ public class RobotContainer
 
         // Sets the buttons to activate/deactivate intake
         toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));
+
+        runBallHandler.whenPressed(new DefaultBallHandlingCommand(m_ballHandlingSubsystem));
+        runBallHandler.whenReleased(new DefaultBallHandlingCommand(m_ballHandlingSubsystem));
     }
 
     public void testSelector()

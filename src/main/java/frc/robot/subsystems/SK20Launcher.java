@@ -101,7 +101,7 @@ public class SK20Launcher extends SubsystemBase
      * Sets the setpoint of the PID controller
      * @param value The set double value
      */
-    public void setSetpoint(double value)
+    private void setSetpoint(double value)
     {
         PIDControl.setReference(value, ControlType.kVelocity);
     }
@@ -128,12 +128,11 @@ public class SK20Launcher extends SubsystemBase
 
     /**
      * This sets the speed of the motor using the PID control loop
-     * TODO: Check to see if this is actually setting the speed using the PID control loop rather than just setting the speed manually
      * @param speed The speed that we want the motor to be runinng at
      */
     public void setLauncherSpeed(double speed)
     {
-        launcherMotor.set(speed);
+        setSetpoint(speed);
     }
 
     /**

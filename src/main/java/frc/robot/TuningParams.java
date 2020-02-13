@@ -80,6 +80,11 @@ public final class TuningParams
     public static final boolean DEPLOY_CLIMB_ARM            = true; //assumes that the solenoid needs to be energized be extended
 
     ///////////////////////////////
+    // Auto Params
+    ///////////////////////////////
+    public static final double AUTO_STRAIGHTSTMOVE_DRIVE_DISTANCE = 3.0;
+
+    ///////////////////////////////
     // Test Params
     ///////////////////////////////
     public static final double TEST_DRIVE_STRAIGHT_1        = 100;  //Amount in centimeters
