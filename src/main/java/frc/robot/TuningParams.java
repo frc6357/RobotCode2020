@@ -87,6 +87,8 @@ public final class TuningParams
     // Auto Params
     ///////////////////////////////
     public static final double AUTO_STRAIGHTSTMOVE_DRIVE_DISTANCE = 3.0;
+    public static final double AUTO_OFFSETSTMOVE_DRIVE_DISTANCE = 3.0;
+    public static final double LAUNCHER_START_UP_TIME       = 2.0;
 
     ///////////////////////////////
     // Test Params
