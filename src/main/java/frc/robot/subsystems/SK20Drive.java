@@ -60,6 +60,14 @@ public class SK20Drive extends SubsystemBase {
         smoothDrive.setSpeeds(speedLeft * speedMultiplier, speedRight * speedMultiplier);
     }
 
+    /**
+     * This method sets the motors directly to 0 without any deceleration value.
+     */
+    public void emergencyStop() {
+        smoothDrive.setSpeeds(0, 0);
+        drive.SetSpeed(0, 0);
+    }
+
     public void setSlowmode(boolean enabled) {
         speedMultiplier = enabled ? TuningParams.SLOWMODE_MULTIPLIER : 1.0;
     }

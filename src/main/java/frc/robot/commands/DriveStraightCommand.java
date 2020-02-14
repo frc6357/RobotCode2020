@@ -55,17 +55,24 @@ public class DriveStraightCommand extends CommandBase {
         double absDelta = Math.abs(deltaLeftEncoderDistance - deltaRightEncoderDistance);
         double driveSpeed = TuningParams.AUTONOMOUS_DRIVE_SPEED * Math.signum(distanceTarget);
 
+        if (deltaLeftEncoderDistance >= (distanceTarget - TuningParams.AUTONOMOUS_SLOW_DISTANCE_AREA)
+                || deltaRightEncoderDistance >= (distanceTarget - TuningParams.AUTONOMOUS_SLOW_DISTANCE_AREA)) {
+            driveSpeed = TuningParams.AUTONOMOUS_LOW_SPEED_LEVEL * Math.signum(distanceTarget);
+        }
+
         if (absDelta <= TuningParams.STRAIGHT_DRIVE_OFFSET_TOLERANCE) {
             m_subsystem.setSpeeds(driveSpeed, driveSpeed);
+
         } else {
             double increment = (absDelta * TuningParams.OFFSET_SPEED_INCREMENT) * Math.signum(distanceTarget);
             if (deltaLeftEncoderDistance > deltaRightEncoderDistance) {
-                m_subsystem.setSpeeds(driveSpeed, driveSpeed + increment);
+                m_subsystem.setSpeeds(driveSpeed - increment, driveSpeed);
             } else {
-                m_subsystem.setSpeeds(driveSpeed + increment, driveSpeed);
+                m_subsystem.setSpeeds(driveSpeed, driveSpeed - increment);
             }
         }
-        if (deltaLeftEncoderDistance >= distanceTarget || deltaLeftEncoderDistance >= distanceTarget) {
+
+        if (deltaLeftEncoderDistance >= distanceTarget || deltaRightEncoderDistance >= distanceTarget) {
             m_subsystem.setSpeeds(0.0, 0.0);
             isDone = true;
         }

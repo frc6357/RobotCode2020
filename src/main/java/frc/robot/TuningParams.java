@@ -13,16 +13,20 @@ public final class TuningParams
     public static final double  DECEL_MAX_TOWARDS_BACKWARD      = -0.075;
 
     public static final double  CONTROLLED_TURN_SPEED           = 0.5;
+    public static final double  SLOW_CONTROLLED_TURN_SPEED      = 0.2;
     public static final double  ANGLE_TURN_TOLERANCE            = 1;
+    public static final double  AUTONOMOUS_SLOW_START_ANGLE     = 30;       // In Degrees
 
     public static final boolean ENCODER_LEFT_REVERSED           = false;
     public static final boolean ENCODER_RIGHT_REVERSED          = true;
     public static final int     ENCODER_PULSES                  = 480;
-    public static final double  WHEEL_DIAMETER                  = 18.375; // 7.5" In Centimeters
+    public static final double  WHEEL_DIAMETER                  = 18.375;   // 7.5" In Centimeters
 
-    public static final double  AUTONOMOUS_DRIVE_SPEED          = 0.5;
-    public static final double  STRAIGHT_DRIVE_OFFSET_TOLERANCE = 1.0;    //In Centimeters
+    public static final double  STRAIGHT_DRIVE_OFFSET_TOLERANCE = 1.0;      // In Centimeters
     public static final double  OFFSET_SPEED_INCREMENT          = 0.01;
+    public static final double  AUTONOMOUS_DRIVE_SPEED          = 0.5;
+    public static final double  AUTONOMOUS_LOW_SPEED_LEVEL      = 0.2;
+    public static final double  AUTONOMOUS_SLOW_DISTANCE_AREA   = 40;       // In Centimeters
 
     public static final double  SLOWMODE_MULTIPLIER             = 0.25;
 
