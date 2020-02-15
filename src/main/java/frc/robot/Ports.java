@@ -52,6 +52,7 @@ public class Ports
     // Ball Handling Addresses
     ///////////////////////////////
     public static final int ballHandlingBelt            = 21; // CAN ID 21
+    public static final int ballHandlingBelt2           = 22; // CAN ID 22
 
     public static final int ballSensor1                 = 8;  // DIO
     public static final int ballSensor2                 = 9;  // DIO
@@ -62,9 +63,9 @@ public class Ports
     ///////////////////////////////
     // Ball Launcher Addresses
     ///////////////////////////////
-    public static final int ballLauncherMotor           = 22; // CAN ID 22
-    public static final int ballLoaderMotor             = 23; // CAN ID 23
-    public static final int ballReleaseMotor            = 24; // CAN ID 24
+    public static final int ballLauncherMotor           = 23; // CAN ID 22
+    public static final int ballLoaderMotor             = 24; // CAN ID 23
+    public static final int ballReleaseMotor            = 25; // CAN ID 24
 
     public static final int launcherHoodExtend          = 4; // PCM 1, Output 4
     public static final int launcherHoodRetract         = 5; // PCM 1, Output 5
