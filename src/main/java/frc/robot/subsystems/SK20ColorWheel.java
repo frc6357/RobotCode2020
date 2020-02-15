@@ -167,23 +167,6 @@ public class SK20ColorWheel extends SubsystemBase {
     }
 
     /**
-     * Uses the proximity sensor on the mechanism to decide whether the sensor is
-     * below the color wheel on the control panel or not. The mechanism is assumed
-     * to be under the control panel when the proximity sensor detects any object
-     * within its working range above it.
-     * 
-     * @return True if the proximity sensor detects an object above it, false
-     *         otherwise.
-     */
-    public boolean isUnderControlPanel() {
-        if (colorSensor.getProximity() < TuningParams.COLOR_WHEEL_PROXIMITY_THRESHOLD) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
      * It takes in a color and reports back to Smart Dashboard to see what color the sensor
      * is detecting.
      * @param color

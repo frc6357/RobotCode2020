@@ -116,7 +116,6 @@ public class SpinToColorCommand extends CommandBase {
         // want the field to read.
         if (targetColor == currentFieldColor) {
             m_subsystem.deactivateSpinnerRoller();
-            m_subsystem.retractLifter();
             isDone = true;
         }
     }

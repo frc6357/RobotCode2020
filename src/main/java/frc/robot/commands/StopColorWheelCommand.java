@@ -25,7 +25,6 @@ public class StopColorWheelCommand extends CommandBase {
     @Override
     public void initialize() {
         m_subsystem.deactivateSpinnerRoller();
-        m_subsystem.retractLifter();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
