@@ -101,6 +101,7 @@ public class RobotContainer
             Ports.OIOperatorStartThreeRotate);
     public static JoystickButton startSetColor = new JoystickButton(joystickOperator, Ports.OIOperatorStartSetColor);
     public static JoystickButton stopColorWheel = new JoystickButton(joystickOperator, Ports.OIOperatorStopColorWheel);
+    public static JoystickButton manualColorWheelControl = new JoystickButton(joystickOperator, Ports.OIOperatorManualColorWheelControl);
 
     public static Button runBallHandler = new Button();
 
@@ -164,6 +165,7 @@ public class RobotContainer
         startThreeRotate
                 .whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
         startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
+        
 
         // Sets the buttons to activate/deactivate intake
         toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));

@@ -29,6 +29,7 @@ public class SK20ColorWheel extends SubsystemBase {
     private ColorSensor2020 colorSensor;
     private CANEncoder spinnerRollerEncoder;
     private static Color2020[] fieldColors = { Color2020.RED, Color2020.GREEN, Color2020.CYAN, Color2020.YELLOW };
+    private CANSparkMax wheelSpinnerManual;
 
     /**
      * Creates the SK20ColorWheel object and all hardware resources it uses.
@@ -39,6 +40,7 @@ public class SK20ColorWheel extends SubsystemBase {
         spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.COLOR_WHEEL_SPEED);
         spinnerLifter = new Solenoid(Ports.colorSpinnerExtend, Ports.colorSpinnerRetract);
         spinnerRollerEncoder = new CANEncoder(spinnerRollerMotor);
+        wheelSpinnerManual = new CANSparkMax(Ports.OIOperatorManualColorWheelControl,MotorType.kBrushless);
     }
 
     /**
@@ -62,6 +64,7 @@ public class SK20ColorWheel extends SubsystemBase {
     public void activateSpinnerRoller() {
         spinnerRoller.setForwards();
     }
+
 
     /**
      * Turns off the motor which rotates the spinner which, when in contact with the
@@ -182,5 +185,9 @@ public class SK20ColorWheel extends SubsystemBase {
         SmartDashboard.putBoolean("isGreen",  green);
         SmartDashboard.putBoolean("isCyan",   cyan);
         SmartDashboard.putBoolean("isYellow", yellow);
+    }
+
+    public void startManuallySpinColorWheel(){
+        wheelSpinnerManual.set(TuningParams.COLOR_WHEEL_SPEED);
     }
 }

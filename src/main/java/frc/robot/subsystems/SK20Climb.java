@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,17 +15,17 @@ The SK20Climb class is a subsystem that interacts with the climbing mechanism in
 public class SK20Climb extends SubsystemBase 
 {
     //instantiates climb mechanisms
-    private WPI_VictorSPX winchClimbLeft;
-    private WPI_VictorSPX winchClimbRight;
+    private CANSparkMax winchClimbLeft;
+    private CANSparkMax winchClimbRight;
     private SpeedControllerGroup winchMotorGroup;
     private Solenoid armReleaseSolenoid = null;
     
     //assigns values to instantiated objects
     public SK20Climb()
-    {
+    { 
         armReleaseSolenoid = new Solenoid(Ports.armLockDown);
-        winchClimbLeft = new WPI_VictorSPX(Ports.winchClimbLeft);
-        winchClimbRight = new WPI_VictorSPX(Ports.winchClimbRight);
+        winchClimbLeft = new CANSparkMax(Ports.winchClimbLeft, MotorType.kBrushless);
+        winchClimbRight = new CANSparkMax(Ports.winchClimbRight,MotorType.kBrushless );
         winchMotorGroup = new SpeedControllerGroup(winchClimbLeft, winchClimbRight);
     }
 
