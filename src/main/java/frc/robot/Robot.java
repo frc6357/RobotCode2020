@@ -127,7 +127,11 @@ public class Robot extends TimedRobot
         {
             m_autonomousCommand.schedule();
         }
+        
+        
         m_robotContainer.testSelector();
+
+        
 
         // switch(){
         // case driveTestModeChoice.TestStraightCommandGroup:
@@ -143,14 +147,16 @@ public class Robot extends TimedRobot
 
         // break;
         // }
+        
+        
     }
 
     /**
      * This function is called periodically during autonomous.
      */
     @Override
-    public void autonomousPeriodic() 
-    {
+    public void autonomousPeriodic() {
+      
     }
 
     @Override
