@@ -100,7 +100,7 @@ public class BaseDrive {
      * This method is used to query the distance the left encoder has recorded since
      * the last time it was reset.
      *
-     * @return Returns the number of inches the left encoder has measured.
+     * @return Returns the number of centimeters the left encoder has measured.
      */
     public double getLeftEncoderDistance() {
         return encoderLeft.getDistance();
@@ -110,7 +110,7 @@ public class BaseDrive {
      * This method is used to query the distance the right encoder has recorded
      * since the last time it was reset.
      *
-     * @return Returns the number of inches the right encoder has measured.
+     * @return Returns the number of centimeters the right encoder has measured.
      */
     public double getRightEncoderDistance() {
         return encoderRight.getDistance();

@@ -20,7 +20,7 @@ public class DriveStraightCommand extends CommandBase {
      *
      * @param subsystem      The subsystem used by the command to set drivetrain
      *                       motor speeds.
-     * @param distanceTarget The amount of inches we want to the robot to move.
+     * @param distanceTarget The amount of centimeters we want to the robot to move.
      */
     public DriveStraightCommand(SK20Drive subsystem, double distanceTarget) {
         m_subsystem = subsystem;
