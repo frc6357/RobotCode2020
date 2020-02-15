@@ -29,4 +29,9 @@ public class OffAngleShotToMoveAuto
         commandGroup.addCommands(new FireNumberBallsCommand(3, m_launcherSubsystem));
         commandGroup.addCommands(new DriveStraightCommand(m_driveSubsystem, TuningParams.AUTO_OFFSETSTMOVE_DRIVE_DISTANCE));
     }
+
+    public void schedule()
+    {
+        commandGroup.schedule();
+    }
 }

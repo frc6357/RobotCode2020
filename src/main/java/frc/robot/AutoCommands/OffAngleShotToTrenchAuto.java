@@ -39,4 +39,9 @@ public class OffAngleShotToTrenchAuto
         commandGroup.addCommands(new DriveStraightCommand(this.m_driveSubsystem, TuningParams.AUTO_TRENCH_DRIVE_DISTANCE));
         commandGroup.addCommands(new ToggleIntakeCommand(this.m_intakeSubsystem));
     }
+
+    public void schedule()
+    {
+        commandGroup.schedule();
+    }
 }
