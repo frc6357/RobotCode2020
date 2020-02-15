@@ -24,11 +24,11 @@ public class SK20BallHandling extends SubsystemBase {
     private BaseRoller ballBelt2;
     private final DefaultBallHandlingCommand ballHandling;
 
-    private LimitSensor[] ballSensors = {new LimitSensor(Ports.ballSensor1, TuningParams.BALL_SENSOR_1_INVERT), 
-                                            new LimitSensor(Ports.ballSensor2, TuningParams.BALL_SENSOR_2_INVERT),
-                                            new LimitSensor(Ports.ballSensor3, TuningParams.BALL_SENSOR_3_INVERT), 
-                                            new LimitSensor(Ports.ballSensor4, TuningParams.BALL_SENSOR_4_INVERT),
-                                            new LimitSensor(Ports.ballSensor5, TuningParams.BALL_SENSOR_5_INVERT)};
+    // private LimitSensor[] ballSensors = {new LimitSensor(Ports.ballSensor1, TuningParams.BALL_SENSOR_1_INVERT), 
+                                            // new LimitSensor(Ports.ballSensor2, TuningParams.BALL_SENSOR_2_INVERT),
+                                            // new LimitSensor(Ports.ballSensor3, TuningParams.BALL_SENSOR_3_INVERT), 
+                                            // new LimitSensor(Ports.ballSensor4, TuningParams.BALL_SENSOR_4_INVERT),
+                                            // new LimitSensor(Ports.ballSensor5, TuningParams.BALL_SENSOR_5_INVERT)};
 
     /**
      * Activates the roller that is used for the main ballBelt
@@ -81,10 +81,10 @@ public class SK20BallHandling extends SubsystemBase {
     {
         int count = 0;
 
-        for(int cnt = 0; cnt < ballSensors.length; cnt++)
-        {
-            count += ballSensors[cnt].get() ? 1: 0;
-        }
+        // for(int cnt = 0; cnt < ballSensors.length; cnt++)
+        // {
+            // count += ballSensors[cnt].get() ? 1: 0;
+        // }
 
         return count;
     }

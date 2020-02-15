@@ -17,27 +17,27 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.AutoCommands.OffAngleShotToMoveAuto;
-import frc.robot.AutoCommands.OffAngleShotToTrenchAuto;
-import frc.robot.AutoCommands.StraightShotToMoveAuto;
-import frc.robot.AutoCommands.StraightShotToTrenchAuto;
-import frc.robot.commands.ClimbReleaseCommand;
-import frc.robot.commands.LaunchBallCommand;
+// import frc.robot.AutoCommands.OffAngleShotToMoveAuto;
+// import frc.robot.AutoCommands.OffAngleShotToTrenchAuto;
+// import frc.robot.AutoCommands.StraightShotToMoveAuto;
+// import frc.robot.AutoCommands.StraightShotToTrenchAuto;
+// import frc.robot.commands.ClimbReleaseCommand;
+// import frc.robot.commands.LaunchBallCommand;
 import frc.robot.commands.SetGear;
-import frc.robot.commands.SetAngleCommand;
+// import frc.robot.commands.SetAngleCommand;
 import frc.robot.commands.SetSlowmodeCommand;
-import frc.robot.commands.StopColorWheelCommand;
-import frc.robot.commands.ThreeRotateCommandGroup;
-import frc.robot.commands.ToggleIntakeCommand;
-import frc.robot.commands.TurnToColorCommandGroup;
-import frc.robot.commands.WinchRobotCommand;
+// import frc.robot.commands.StopColorWheelCommand;
+// import frc.robot.commands.ThreeRotateCommandGroup;
+// import frc.robot.commands.ToggleIntakeCommand;
+// import frc.robot.commands.TurnToColorCommandGroup;
+// import frc.robot.commands.WinchRobotCommand;
 import frc.robot.commands.DefaultBallHandlingCommand;
 import frc.robot.subsystems.SK20BallHandling;
-import frc.robot.subsystems.SK20Climb;
-import frc.robot.subsystems.SK20ColorWheel;
+// import frc.robot.subsystems.SK20Climb;
+// import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.SK20Drive;
-import frc.robot.subsystems.SK20Intake;
-import frc.robot.subsystems.SK20Launcher;
+// import frc.robot.subsystems.SK20Intake;
+// import frc.robot.subsystems.SK20Launcher;
 import frc.robot.subsystems.base.SuperClasses.Gear;
 import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.filters.FilterDeadband;
@@ -65,11 +65,11 @@ public class RobotContainer
     SendableChooser<AutoCommands> autoCommandSelector = new SendableChooser<AutoCommands>();
 
     // The robot's subsystems and commands are defined here...
-    private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
+    // private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
     private final SK20Drive m_driveSubsystem = new SK20Drive();
-    private final SK20Climb m_climbSubsystem = new SK20Climb();
-    private final SK20Intake m_intakeSubsystem = new SK20Intake();
-    private final SK20Launcher m_launcherSubsystem = new SK20Launcher();
+    // private final SK20Climb m_climbSubsystem = new SK20Climb();
+    // private final SK20Intake m_intakeSubsystem = new SK20Intake();
+    // private final SK20Launcher m_launcherSubsystem = new SK20Launcher();
     private final SK20BallHandling m_ballHandlingSubsystem = new SK20BallHandling();
 
     public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
@@ -150,26 +150,26 @@ public class RobotContainer
         slowmodeRight.whenReleased(new SetSlowmodeCommand(m_driveSubsystem, false));
 
         // Sets robot buttons for the climb command
-        operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
-        runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
-        runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
+        // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
+        // runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
+        // runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
 
         // Set the ball launcher buttons to do correct commands
-        setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true));
-        setHighAngle.whenReleased(new SetAngleCommand(m_launcherSubsystem, false));
-        launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
+        // setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true));
+        // setHighAngle.whenReleased(new SetAngleCommand(m_launcherSubsystem, false));
+        // launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
 
         // Sets robot buttons for the control panel command
-        stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
-        startThreeRotate
-                .whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
-        startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
+        // stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
+        // startThreeRotate
+                // .whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
+        // startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
 
         // Sets the buttons to activate/deactivate intake
-        toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));
+        // toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));
 
-        runBallHandler.whenPressed(new DefaultBallHandlingCommand(m_ballHandlingSubsystem));
-        runBallHandler.whenReleased(new DefaultBallHandlingCommand(m_ballHandlingSubsystem));
+        // runBallHandler.whenPressed(new DefaultBallHandlingCommand(m_ballHandlingSubsystem));
+        // runBallHandler.whenReleased(new DefaultBallHandlingCommand(m_ballHandlingSubsystem));
     }
 
     public void testSelector() 
@@ -210,21 +210,21 @@ public class RobotContainer
         AutoCommands myAuto = autoCommandSelector.getSelected();
         switch (myAuto) {
             case OffAngleShot:
-                OffAngleShotToMoveAuto m_autoPath = new OffAngleShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
-                return m_autoPath.getCommandGroup();
+                // OffAngleShotToMoveAuto m_autoPath = new OffAngleShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
+                // return m_autoPath.getCommandGroup();
 
             case OffAngleRecollectShot:
-                OffAngleShotToTrenchAuto m_autoPath1 = new OffAngleShotToTrenchAuto(m_driveSubsystem, m_intakeSubsystem, m_launcherSubsystem);
-                return m_autoPath1.getCommandGroup();
+                // OffAngleShotToTrenchAuto m_autoPath1 = new OffAngleShotToTrenchAuto(m_driveSubsystem, m_intakeSubsystem, m_launcherSubsystem);
+                // return m_autoPath1.getCommandGroup();
 
             case StraightShot:
-                StraightShotToMoveAuto m_autoPath2 = new StraightShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
+                // StraightShotToMoveAuto m_autoPath2 = new StraightShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
 
-                return m_autoPath2.getCommandGroup();
+                // return m_autoPath2.getCommandGroup();
             case StraightRecollectShot:
-                StraightShotToTrenchAuto m_autoPath3 = new StraightShotToTrenchAuto(m_driveSubsystem, m_launcherSubsystem, m_intakeSubsystem);
+                // StraightShotToTrenchAuto m_autoPath3 = new StraightShotToTrenchAuto(m_driveSubsystem, m_launcherSubsystem, m_intakeSubsystem);
 
-                return m_autoPath3.getCommandGroup();
+                // return m_autoPath3.getCommandGroup();
             default:
                 return (Command) null;
         }
