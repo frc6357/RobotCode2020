@@ -8,10 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -19,9 +18,25 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends TimedRobot 
+{
+    private enum testModeChoice 
+    {
+        DRIVE, LAUNCHER, CLIMB, INTAKE, COLOR_WHEEL, OTHER
+    };
+
+    
+
+    // private enum driveTestModeChoice{TestStraightCommandGroup,
+    // TestStraightInterruptCommandGroup, TestTurnCommandGroup,
+    // TestTurnInterruptCommandGroup}
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
+
+    SendableChooser<testModeChoice> testModeSelector = new SendableChooser<testModeChoice>();
+    
+    // SendableChooser<driveTestModeChoice> driveTestModeSelector = new
+    // SendableChooser<driveTestModeChoice>();
 
     // public Robot() {
     // WPI_VictorSPX frontLeft = new WPI_VictorSPX(Ports.frontLeftDrive);
@@ -46,13 +61,30 @@ public class Robot extends TimedRobot {
      * This function is run when the robot is first started up and should be used
      * for any initialization code.
      */
-    public Robot() {
+    public Robot() 
+    {
+
+        // m_driveStraightCommand = command;
+
+        // Drive
+        // driveTestModeSelector.addOption("TestStraightCommandGroup",
+        // driveTestModeChoice.TestStraightCommandGroup);
+        // driveTestModeSelector.addOption("TestStraightInterruptCommandGroup",
+        // driveTestModeChoice.TestStraightInterruptCommandGroup);
+        // driveTestModeSelector.addOption("TestTurnCommandGroup",
+        // driveTestModeChoice.TestTurnCommandGroup);
+        // driveTestModeSelector.addOption("TestTurnInterruptCommandGroup",
+        // driveTestModeChoice.TestTurnInterruptCommandGroup);
+
+        
 
     }
 
     @Override
-    public void robotInit() {
+    public void robotInit() 
+    {
         m_robotContainer = new RobotContainer();
+
     }
 
     /**
@@ -65,7 +97,8 @@ public class Robot extends TimedRobot {
      * and SmartDashboard integrated updating.
      */
     @Override
-    public void robotPeriodic() {
+    public void robotPeriodic() 
+    {
         // Runs the Scheduler. This is responsible for polling buttons, adding
         // newly-scheduled
         // commands, running already-scheduled commands, removing finished or
@@ -74,8 +107,6 @@ public class Robot extends TimedRobot {
         // robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
-        SmartDashboard.putNumber("Drive Straight Distance", RobotContainer.targetStraightDistance);
-        SmartDashboard.putNumber("Drive Turn Angle", RobotContainer.targetAngleTurn);
     }
 
     /**
@@ -91,30 +122,58 @@ public class Robot extends TimedRobot {
      * make sure to add them to the chooser code above as well.
      */
     @Override
-    public void autonomousInit() {
+    public void autonomousInit() 
+    {
+        
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-        // m_robotContainer.m_handlingSubsystem.startRoller();
+
 
         // schedule the autonomous command (example)
-        if (m_autonomousCommand != null) {
+        if (m_autonomousCommand != null) 
+        {
             m_autonomousCommand.schedule();
         }
-    }
+        
+
+
+
+        
+
+        }
+
+        // switch(){
+        // case driveTestModeChoice.TestStraightCommandGroup:
+
+        // break;
+        // case driveTestModeChoice.TestStraightInterruptCommandGroup:
+
+        // break;
+        // case driveTestModeChoice.TestTurnCommandGroup:
+
+        // break;
+        // case driveTestModeChoice.TestTurnInterruptCommandGroup:
+
+        // break;
+        // }
+        
+        
+    
 
     /**
      * This function is called periodically during autonomous.
      */
     @Override
     public void autonomousPeriodic() {
+      
     }
 
     @Override
-    public void teleopInit() {
+    public void teleopInit() 
+    {
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        // m_robotContainer.m_handlingSubsystem.startRoller();
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
@@ -124,22 +183,14 @@ public class Robot extends TimedRobot {
      * This function is called periodically during operator control.
      */
     @Override
-    public void teleopPeriodic() {
-        if (RobotContainer.incrementDriveDistance.get()) {
-            RobotContainer.targetStraightDistance += TuningParams.TEST_DRIVE_DISTANCE_CHANGE_AMOUNT;
-        } else if (RobotContainer.decrementDriveDistance.get()) {
-            RobotContainer.targetStraightDistance -= TuningParams.TEST_DRIVE_DISTANCE_CHANGE_AMOUNT;
-        }
-        if (RobotContainer.incrementTurnAngle.get()) {
-            RobotContainer.targetAngleTurn += TuningParams.TEST_DRIVE_ANGLE_CHANGE_AMOUNT;
-        } else if (RobotContainer.decrementTurnAngle.get()) {
-            RobotContainer.targetAngleTurn -= TuningParams.TEST_DRIVE_ANGLE_CHANGE_AMOUNT;
-        }
+    public void teleopPeriodic() 
+    {
 
     }
 
     @Override
-    public void testInit() {
+    public void testInit() 
+    {
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
     }
@@ -148,6 +199,7 @@ public class Robot extends TimedRobot {
      * This function is called periodically during test mode.
      */
     @Override
-    public void testPeriodic() {
+    public void testPeriodic() 
+    {
     }
 }
