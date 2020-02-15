@@ -140,7 +140,6 @@ public class RobotContainer {
         // Set the ball launcher buttons to do correct commands
         setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true));
         setHighAngle.whenReleased(new SetAngleCommand(m_launcherSubsystem, false));
-
         launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
 
         // Sets robot buttons for the control panel command
