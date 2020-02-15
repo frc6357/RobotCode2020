@@ -1,24 +1,28 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
+import frc.robot.commands.DefaultBallHandlingCommand;
 import frc.robot.subsystems.base.BaseRoller;
 import frc.robot.subsystems.base.LimitSensor;
 
 /**
- * Sets the methods that are used to hold and control the balls inside of the robot.
+ * Sets the methods that are used to hold and control the balls inside of the
+ * robot.
  */
-public class SK20BallHandling extends SubsystemBase
-{
-    private CANSparkMax beltMotor;
-    private CANEncoder beltEncoder;
-    private BaseRoller ballBelt;
+public class SK20BallHandling extends SubsystemBase {
+    private CANSparkMax beltMotor1;
+    private CANSparkMax beltMotor2;
+    private CANEncoder beltEncoder1;
+    private BaseRoller ballBelt1;
+    private CANEncoder beltEncoder2;
+    private BaseRoller ballBelt2;
+    private final DefaultBallHandlingCommand ballHandling;
 
     private LimitSensor[] ballSensors = {new LimitSensor(Ports.ballSensor1, TuningParams.BALL_SENSOR_1_INVERT), 
                                             new LimitSensor(Ports.ballSensor2, TuningParams.BALL_SENSOR_2_INVERT),
@@ -31,9 +35,14 @@ public class SK20BallHandling extends SubsystemBase
      */
     public SK20BallHandling()
     {
-        beltMotor = new CANSparkMax(Ports.ballHandlingBelt, MotorType.kBrushless);
-        beltEncoder = new CANEncoder(beltMotor);
-        ballBelt = new BaseRoller(beltMotor, TuningParams.BALL_HANDLING_MAX_SPEED);
+        beltMotor1 = new CANSparkMax(Ports.ballHandlingBelt, MotorType.kBrushless);
+        beltMotor2 = new CANSparkMax(Ports.ballHandlingBelt2, MotorType.kBrushless);
+        beltEncoder1 = new CANEncoder(beltMotor1);
+        beltEncoder2 = new CANEncoder(beltMotor2);
+        ballBelt1 = new BaseRoller(beltMotor1, TuningParams.BALL_HANDLING_MAX_SPEED);
+        ballBelt2 = new BaseRoller(beltMotor2, TuningParams.BALL_HANDLING_MAX_SPEED);
+        ballHandling = new DefaultBallHandlingCommand(this);
+        setDefaultCommand(ballHandling);
     }
 
     /**
@@ -41,7 +50,8 @@ public class SK20BallHandling extends SubsystemBase
      */
     public void startRoller()
     {
-        ballBelt.setForwards();
+        ballBelt1.setForwards();
+        ballBelt2.setForwards();
     }
 
     /**
@@ -49,7 +59,8 @@ public class SK20BallHandling extends SubsystemBase
      */
     public void stopRoller()
     {
-        ballBelt.setStop();
+        ballBelt1.setStop();
+        ballBelt2.setStop();
     }
 
     /**
@@ -58,7 +69,7 @@ public class SK20BallHandling extends SubsystemBase
      */
     public double getRollerSpeed()
     {
-        return beltEncoder.getVelocity();
+        return beltEncoder1.getVelocity();
     }
 
     /**

@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.SK20Climb;
 
 /**
@@ -9,35 +9,25 @@ import frc.robot.subsystems.SK20Climb;
  */
 public class ClimbReleaseCommand extends CommandBase {
     private final SK20Climb m_subsystem;
-    private double time;
-    private String debugger;
+    private RobotContainer robotContainer;
 
     /**
      * ClimbReleaseCommand tells that arm is released by pneumatic piston or not.
      */
-    public ClimbReleaseCommand(SK20Climb subsystem) {
+    public ClimbReleaseCommand(SK20Climb subsystem, RobotContainer robotContainer) {
         m_subsystem = subsystem;
-        time = DriverStation.getInstance().getMatchTime();
+        this.robotContainer = robotContainer;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
 
-    // TODO: Don't allow outside of endgame
+    
     // Called every time the scheduler runs while the command is scheduled.
     @Override
-    public void execute() {
-        debugger = DriverStation.getInstance().getGameSpecificMessage();
-
-        if (time <= 30 || debugger == "D") {
+    public void initialize() {
+        if (robotContainer.isClimbArmed()) {
             m_subsystem.deployArm();
-        } else if (time > 30) {
-            // For Testing Reasons
-            System.out.println("Time is not for climb");
-        } else {
-            // For Testing Reasons
-            System.out.println("Time is not known");
         }
-
     }
 
     // Returns true when the command should end.

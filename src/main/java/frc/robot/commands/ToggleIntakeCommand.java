@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SK20Intake;
 
 /**
- * This command is set up that the intake class will have two commands, one for extend and one for retract. This set up 
+ * This command toggles the intake position to be extended or retracted.
  */
-public class ActivateIntakeCommand extends CommandBase 
+public class ToggleIntakeCommand extends CommandBase 
 {
     private SK20Intake subsystem;
-    public ActivateIntakeCommand(SK20Intake subsystem) 
+    public ToggleIntakeCommand(SK20Intake subsystem) 
     {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -28,8 +28,16 @@ public class ActivateIntakeCommand extends CommandBase
     @Override
     public void initialize() 
     {
-        subsystem.extendIntake();
-        subsystem.startIntakeRoller();
+        if(subsystem.isIntakeExtended())
+        {
+            subsystem.retractIntake();
+            subsystem.stopIntakeRoller();
+        }
+        else
+        {
+            subsystem.extendIntake();
+            subsystem.startIntakeRoller();
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run

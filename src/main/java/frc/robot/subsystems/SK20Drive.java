@@ -41,6 +41,8 @@ public class SK20Drive extends SubsystemBase {
 
     private final ADIS16448_IMU imu = new ADIS16448_IMU();
 
+    private double speedMultiplier = 1.0;
+
     /**
      * This constructor of the SK20Drive sets up the BaseDrive object and passes it
      * into the SmoothDrive object to set it up.
@@ -59,7 +61,19 @@ public class SK20Drive extends SubsystemBase {
      * @param speedRight The desired for the right side of drivetrain
      */
     public void setSpeeds(double speedLeft, double speedRight) {
-        smoothDrive.setSpeeds(speedLeft, speedRight);
+        smoothDrive.setSpeeds(speedLeft * speedMultiplier, speedRight * speedMultiplier);
+    }
+
+    /**
+     * This method sets the motors directly to 0 without any deceleration value.
+     */
+    public void emergencyStop() {
+        smoothDrive.setSpeeds(0, 0);
+        drive.SetSpeed(0, 0);
+    }
+
+    public void setSlowmode(boolean enabled) {
+        speedMultiplier = enabled ? TuningParams.SLOWMODE_MULTIPLIER : 1.0;
     }
 
     /**

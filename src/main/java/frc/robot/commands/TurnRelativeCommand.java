@@ -45,15 +45,21 @@ public class TurnRelativeCommand extends CommandBase {
     public void execute() {
         double currentAngle = m_subsystem.getAngle();
         deltaAngle = Math.abs(currentAngle - angleTarget);
+        double turnSpeed = TuningParams.CONTROLLED_TURN_SPEED;
 
         if (deltaAngle <= TuningParams.ANGLE_TURN_TOLERANCE) {
             m_subsystem.setSpeeds(0, 0);
             isDone = true;
         } else {
+            
+            if (deltaAngle <= TuningParams.AUTONOMOUS_SLOW_START_ANGLE) {
+                turnSpeed = TuningParams.SLOW_CONTROLLED_TURN_SPEED;
+            }
+
             if (currentAngle > angleTarget) {
-                m_subsystem.setSpeeds(-TuningParams.CONTROLLED_TURN_SPEED, TuningParams.CONTROLLED_TURN_SPEED);
+                m_subsystem.setSpeeds(-turnSpeed, turnSpeed);
             } else {
-                m_subsystem.setSpeeds(TuningParams.CONTROLLED_TURN_SPEED, -TuningParams.CONTROLLED_TURN_SPEED);
+                m_subsystem.setSpeeds(turnSpeed, -turnSpeed);
             }
         }
     }
