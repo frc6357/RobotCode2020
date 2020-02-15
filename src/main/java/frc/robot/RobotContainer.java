@@ -45,10 +45,12 @@ import frc.robot.utils.filters.FilterDeadband;
  * scheduler calls). Instead, the structure of the robot (including subsystems,
  * commands, and button mappings) should be declared here.
  */
-public class RobotContainer {
+public class RobotContainer 
+{
     public static UsbCamera camera;
 
-    private enum testModeChoice {
+    private enum testModeChoice 
+    {
         DRIVE, LAUNCHER, CLIMB, INTAKE, COLOR_WHEEL, OTHER
     };
 
@@ -94,7 +96,8 @@ public class RobotContainer {
 
     public static Button runBallHandler = new Button();
 
-    public RobotContainer() {
+    public RobotContainer() 
+    {
 
         joystickDriver.setFilter(Ports.OIDriverLeftDrive, new FilterDeadband(0.06, -1.0));
         joystickDriver.setFilter(Ports.OIDriverRightDrive, new FilterDeadband(0.06, -1.0));
@@ -120,7 +123,8 @@ public class RobotContainer {
      * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
      * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
-    private void configureButtonBindings() {
+    private void configureButtonBindings() 
+    {
         // Sets buttons for gear shifting
         setLowGear.whenPressed(new SetGear(m_driveSubsystem, Gear.LOW));
         setHighGear.whenPressed(new SetGear(m_driveSubsystem, Gear.HIGH));
@@ -155,8 +159,10 @@ public class RobotContainer {
         runBallHandler.whenReleased(new DefaultBallHandlingCommand(m_ballHandlingSubsystem));
     }
 
-    public void testSelector() {
-        switch (testModeSelector.getSelected()) {
+    public void testSelector() 
+    {
+        switch (testModeSelector.getSelected()) 
+        {
         case OTHER:
             // add later:
             // CommandScheduler.getInstance().schedule(Command);
@@ -186,12 +192,14 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand() {
+    public Command getAutonomousCommand() 
+    {
         // TODO: Get the selected autonomous command from the driver station chooser!
         return (Command) null;
     }
 
-    public boolean isClimbArmed() {
+    public boolean isClimbArmed() 
+    {
         String debugger = DriverStation.getInstance().getGameSpecificMessage();
         double time = DriverStation.getInstance().getMatchTime();
 
