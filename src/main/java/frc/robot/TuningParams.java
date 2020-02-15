@@ -61,7 +61,7 @@ public final class TuningParams
     // Intake Params
     //////////////////////////////
     public static final double INTAKE_MAX_SPEED                = 0.5;
-    public static final int INTAKE_ENCODER_PULSES              = 2048; // TODO: Check this.
+    public static final int INTAKE_ENCODER_PULSES              = 2048;
     // TODO: This must be metric!
     public static final double INTAKE_WHEEL_DIAMETER           = 2.0; // 2.0 Inches
     public static final boolean INTAKE_BALL_CHECK_INVERT       = false;
@@ -86,9 +86,16 @@ public final class TuningParams
     ///////////////////////////////
     // Auto Params
     ///////////////////////////////
-    public static final double AUTO_STRAIGHTSTMOVE_DRIVE_DISTANCE = 3.0;
-    public static final double AUTO_OFFSETSTMOVE_DRIVE_DISTANCE = 3.0;
-    public static final double LAUNCHER_START_UP_TIME       = 2.0;
+    public static final double AUTO_STRAIGHTSTMOVE_DRIVE_DISTANCE       = -1000.0;
+    public static final double AUTO_OFFSETSTMOVE_DRIVE_DISTANCE         = -1000.0;
+    public static final double LAUNCHER_START_UP_TIME                   = 2.0;
+
+    public static final int AUTO_STRAIGHTSTTRENCH_TURN_ANGLE            = 90;
+    public static final double AUTO_STRAIGHTSTTRENCH_DRIVE_DISTANCE_1   = 192.024;
+
+    public static final double AUTO_TRENCH_DRIVE_DISTANCE               = 670.56;
+
+    public static final int AUTO_OFFSETSTTRENCH_TURN_ANGLE_1            = -148;
 
     ///////////////////////////////
     // Test Params

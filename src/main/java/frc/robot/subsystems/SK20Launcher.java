@@ -13,8 +13,6 @@ import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.BaseRoller;
 
-// TODO: I don't see anything here that relates to determining the number of balls
-//       currently stored in the mechanism. Is this an oversight?
 /**
  * This is the launcher subsystem that controls everything that has to do with 
  * the launcher including the transfer from the handling system to the launcher
