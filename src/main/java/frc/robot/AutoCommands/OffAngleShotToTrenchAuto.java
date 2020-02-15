@@ -1,5 +1,6 @@
 package frc.robot.AutoCommands;
 
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.TuningParams;
@@ -23,7 +24,7 @@ public class OffAngleShotToTrenchAuto
     private SK20Intake m_intakeSubsystem;
     private SK20Launcher m_launcherSubsystem;
 
-    private SequentialCommandGroup commandGroup;
+    public SequentialCommandGroup commandGroup;
 
     public OffAngleShotToTrenchAuto(SK20Drive m_driveSubsystem, SK20Intake m_intakeSubsystem, SK20Launcher m_launcherSubsystem)
     {
@@ -38,6 +39,10 @@ public class OffAngleShotToTrenchAuto
         commandGroup.addCommands(new ToggleIntakeCommand(this.m_intakeSubsystem));
         commandGroup.addCommands(new DriveStraightCommand(this.m_driveSubsystem, TuningParams.AUTO_TRENCH_DRIVE_DISTANCE));
         commandGroup.addCommands(new ToggleIntakeCommand(this.m_intakeSubsystem));
+    }
+
+    public CommandGroupBase getCommandGroup() {
+        return commandGroup;
     }
 
     public void schedule()

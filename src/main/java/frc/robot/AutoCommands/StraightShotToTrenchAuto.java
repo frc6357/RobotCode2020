@@ -1,5 +1,6 @@
 package frc.robot.AutoCommands;
 
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.TuningParams;
@@ -46,6 +47,10 @@ public class StraightShotToTrenchAuto
         commandGroup.addCommands(new ToggleIntakeCommand(this.m_intakeSubsystem));
         commandGroup.addCommands(new DriveStraightCommand(this.m_driveSubsystem, TuningParams.AUTO_TRENCH_DRIVE_DISTANCE));
         commandGroup.addCommands(new ToggleIntakeCommand(this.m_intakeSubsystem));
+    }
+
+    public CommandGroupBase getCommandGroup() {
+        return commandGroup;
     }
 
     public void schedule()

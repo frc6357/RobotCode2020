@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -26,6 +25,8 @@ public class Robot extends TimedRobot
         DRIVE, LAUNCHER, CLIMB, INTAKE, COLOR_WHEEL, OTHER
     };
 
+    
+
     // private enum driveTestModeChoice{TestStraightCommandGroup,
     // TestStraightInterruptCommandGroup, TestTurnCommandGroup,
     // TestTurnInterruptCommandGroup}
@@ -33,6 +34,7 @@ public class Robot extends TimedRobot
     private RobotContainer m_robotContainer;
 
     SendableChooser<testModeChoice> testModeSelector = new SendableChooser<testModeChoice>();
+    
     // SendableChooser<driveTestModeChoice> driveTestModeSelector = new
     // SendableChooser<driveTestModeChoice>();
 
@@ -73,6 +75,8 @@ public class Robot extends TimedRobot
         // driveTestModeChoice.TestTurnCommandGroup);
         // driveTestModeSelector.addOption("TestTurnInterruptCommandGroup",
         // driveTestModeChoice.TestTurnInterruptCommandGroup);
+
+        
 
     }
 
@@ -120,7 +124,9 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit() 
     {
+        
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
 
         // schedule the autonomous command (example)
         if (m_autonomousCommand != null) 
@@ -131,7 +137,12 @@ public class Robot extends TimedRobot
         
         m_robotContainer.testSelector();
 
+
+
+
         
+
+        }
 
         // switch(){
         // case driveTestModeChoice.TestStraightCommandGroup:
@@ -149,7 +160,7 @@ public class Robot extends TimedRobot
         // }
         
         
-    }
+    
 
     /**
      * This function is called periodically during autonomous.

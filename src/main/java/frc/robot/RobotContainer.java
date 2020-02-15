@@ -17,6 +17,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.AutoCommands.OffAngleShotToMoveAuto;
+import frc.robot.AutoCommands.OffAngleShotToTrenchAuto;
+import frc.robot.AutoCommands.StraightShotToMoveAuto;
+import frc.robot.AutoCommands.StraightShotToTrenchAuto;
 import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.LaunchBallCommand;
 import frc.robot.commands.SetGear;
@@ -53,8 +57,12 @@ public class RobotContainer
     {
         DRIVE, LAUNCHER, CLIMB, INTAKE, COLOR_WHEEL, OTHER
     };
+    private enum AutoCommands{
+        OffAngleShot,OffAngleRecollectShot, StraightShot, StraightRecollectShot
+    };
 
     SendableChooser<testModeChoice> testModeSelector = new SendableChooser<testModeChoice>();
+    SendableChooser<AutoCommands> autoCommandSelector = new SendableChooser<AutoCommands>();
 
     // The robot's subsystems and commands are defined here...
     private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
@@ -98,6 +106,11 @@ public class RobotContainer
 
     public RobotContainer() 
     {
+        //auto commands
+        autoCommandSelector.addOption("OffAngleShooting", AutoCommands.OffAngleShot);
+        autoCommandSelector.addOption("OffAngleShooting/Recollection", AutoCommands.OffAngleRecollectShot);
+        autoCommandSelector.addOption("StraightShooting", AutoCommands.StraightShot);
+        autoCommandSelector.addOption("StraightShooting/Recollection", AutoCommands.StraightRecollectShot);
 
         joystickDriver.setFilter(Ports.OIDriverLeftDrive, new FilterDeadband(0.06, -1.0));
         joystickDriver.setFilter(Ports.OIDriverRightDrive, new FilterDeadband(0.06, -1.0));
@@ -193,11 +206,30 @@ public class RobotContainer
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() 
-    {
-        // TODO: Get the selected autonomous command from the driver station chooser!
-        return (Command) null;
-    }
+    { 
+        AutoCommands myAuto = autoCommandSelector.getSelected();
+        switch (myAuto) {
+            case OffAngleShot:
+                OffAngleShotToMoveAuto m_autoPath = new OffAngleShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
+                return m_autoPath.getCommandGroup();
 
+            case OffAngleRecollectShot:
+                OffAngleShotToTrenchAuto m_autoPath1 = new OffAngleShotToTrenchAuto(m_driveSubsystem, m_intakeSubsystem, m_launcherSubsystem);
+                return m_autoPath1.getCommandGroup();
+
+            case StraightShot:
+                StraightShotToMoveAuto m_autoPath2 = new StraightShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
+
+                return m_autoPath2.getCommandGroup();
+            case StraightRecollectShot:
+                StraightShotToTrenchAuto m_autoPath3 = new StraightShotToTrenchAuto(m_driveSubsystem, m_launcherSubsystem, m_intakeSubsystem);
+
+                return m_autoPath3.getCommandGroup();
+            default:
+                return (Command) null;
+        }
+    }
+    
     public boolean isClimbArmed() 
     {
         String debugger = DriverStation.getInstance().getGameSpecificMessage();

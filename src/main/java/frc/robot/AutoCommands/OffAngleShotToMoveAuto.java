@@ -1,5 +1,6 @@
 package frc.robot.AutoCommands;
 
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.TuningParams;
@@ -20,7 +21,7 @@ import frc.robot.subsystems.SK20Launcher;
  */
 public class OffAngleShotToMoveAuto
 {
-    private SequentialCommandGroup commandGroup;
+    public SequentialCommandGroup commandGroup;
 
     public OffAngleShotToMoveAuto(SK20Drive m_driveSubsystem, SK20Launcher m_launcherSubsystem)
     {
@@ -28,6 +29,10 @@ public class OffAngleShotToMoveAuto
         commandGroup.addCommands(new WaitCommand(TuningParams.LAUNCHER_START_UP_TIME));
         commandGroup.addCommands(new FireNumberBallsCommand(3, m_launcherSubsystem));
         commandGroup.addCommands(new DriveStraightCommand(m_driveSubsystem, TuningParams.AUTO_OFFSETSTMOVE_DRIVE_DISTANCE));
+    }
+
+    public CommandGroupBase getCommandGroup() {
+        return commandGroup;
     }
 
     public void schedule()
