@@ -23,6 +23,7 @@ import frc.robot.AutoCommands.StraightShotToMoveAuto;
 import frc.robot.AutoCommands.StraightShotToTrenchAuto;
 import frc.robot.commands.ClimbReleaseCommand;
 import frc.robot.commands.LaunchBallCommand;
+import frc.robot.commands.ManualColorWheelControlCommand;
 import frc.robot.commands.SetGear;
 import frc.robot.commands.SetAngleCommand;
 import frc.robot.commands.SetSlowmodeCommand;
@@ -165,6 +166,8 @@ public class RobotContainer
         startThreeRotate
                 .whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
         startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
+        manualColorWheelControl.whenPressed(new ManualColorWheelControlCommand(m_colorWheelSubsystem, true));
+        manualColorWheelControl.whenReleased(new ManualColorWheelControlCommand(m_colorWheelSubsystem, false));
         
 
         // Sets the buttons to activate/deactivate intake
