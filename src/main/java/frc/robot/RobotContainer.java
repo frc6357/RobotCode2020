@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import frc.robot.AutoCommands.StraightShotToTrenchAuto;
 // import frc.robot.commands.ClimbReleaseCommand;
 // import frc.robot.commands.LaunchBallCommand;
+// import frc.robot.commands.ManualColorWheelControlCommand;
 import frc.robot.commands.SetGear;
 // import frc.robot.commands.SetAngleCommand;
 import frc.robot.commands.SetSlowmodeCommand;
@@ -31,8 +32,8 @@ import frc.robot.commands.SetSlowmodeCommand;
 // import frc.robot.commands.ToggleIntakeCommand;
 // import frc.robot.commands.TurnToColorCommandGroup;
 // import frc.robot.commands.WinchRobotCommand;
-import frc.robot.commands.DefaultBallHandlingCommand;
-import frc.robot.subsystems.SK20BallHandling;
+//import frc.robot.commands.DefaultBallHandlingCommand;
+//import frc.robot.subsystems.SK20BallHandling;
 // import frc.robot.subsystems.SK20Climb;
 // import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.SK20Drive;
@@ -70,7 +71,7 @@ public class RobotContainer
     // private final SK20Climb m_climbSubsystem = new SK20Climb();
     // private final SK20Intake m_intakeSubsystem = new SK20Intake();
     // private final SK20Launcher m_launcherSubsystem = new SK20Launcher();
-    private final SK20BallHandling m_ballHandlingSubsystem = new SK20BallHandling();
+    //private final SK20BallHandling m_ballHandlingSubsystem = new SK20BallHandling();
 
     public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
     public static Joystick joystickOperator = new Joystick(Ports.OIOperatorJoystick);
@@ -101,6 +102,7 @@ public class RobotContainer
             Ports.OIOperatorStartThreeRotate);
     public static JoystickButton startSetColor = new JoystickButton(joystickOperator, Ports.OIOperatorStartSetColor);
     public static JoystickButton stopColorWheel = new JoystickButton(joystickOperator, Ports.OIOperatorStopColorWheel);
+    public static JoystickButton manualColorWheelControl = new JoystickButton(joystickOperator, Ports.OIOperatorManualColorWheelControl);
 
     public static Button runBallHandler = new Button();
 
@@ -160,10 +162,14 @@ public class RobotContainer
         // launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
 
         // Sets robot buttons for the control panel command
+        //TODO: Enter code back in again.
         // stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
         // startThreeRotate
-                // .whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
+        //         .whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
         // startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
+        // manualColorWheelControl.whenPressed(new ManualColorWheelControlCommand(m_colorWheelSubsystem, true));
+        // manualColorWheelControl.whenReleased(new ManualColorWheelControlCommand(m_colorWheelSubsystem, false));
+        
 
         // Sets the buttons to activate/deactivate intake
         // toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));

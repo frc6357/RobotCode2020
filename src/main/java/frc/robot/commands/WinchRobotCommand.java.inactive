@@ -26,7 +26,7 @@ public class WinchRobotCommand extends CommandBase {
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
-
+ 
     @Override
     public void initialize() {
         // when true start winch

@@ -9,7 +9,7 @@ import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.commands.DefaultBallHandlingCommand;
 import frc.robot.subsystems.base.BaseRoller;
-import frc.robot.subsystems.base.LimitSensor;
+//import frc.robot.subsystems.base.LimitSensor;
 
 /**
  * Sets the methods that are used to hold and control the balls inside of the
@@ -20,7 +20,7 @@ public class SK20BallHandling extends SubsystemBase {
     private CANSparkMax beltMotor2;
     private CANEncoder beltEncoder1;
     private BaseRoller ballBelt1;
-    private CANEncoder beltEncoder2;
+    //private CANEncoder beltEncoder2;
     private BaseRoller ballBelt2;
     private final DefaultBallHandlingCommand ballHandling;
 
@@ -38,7 +38,7 @@ public class SK20BallHandling extends SubsystemBase {
         beltMotor1 = new CANSparkMax(Ports.ballHandlingBelt, MotorType.kBrushless);
         beltMotor2 = new CANSparkMax(Ports.ballHandlingBelt2, MotorType.kBrushless);
         beltEncoder1 = new CANEncoder(beltMotor1);
-        beltEncoder2 = new CANEncoder(beltMotor2);
+        //beltEncoder2 = new CANEncoder(beltMotor2);
         ballBelt1 = new BaseRoller(beltMotor1, TuningParams.BALL_HANDLING_MAX_SPEED);
         ballBelt2 = new BaseRoller(beltMotor2, TuningParams.BALL_HANDLING_MAX_SPEED);
         ballHandling = new DefaultBallHandlingCommand(this);

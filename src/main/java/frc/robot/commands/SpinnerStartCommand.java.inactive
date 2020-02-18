@@ -40,10 +40,8 @@ public class SpinnerStartCommand extends CommandBase {
    */
   @Override
   public void execute() {
-        if(m_subsystem.isUnderControlPanel() == true){
-            m_subsystem.activateSpinnerRoller();
-            isFinished = true;
-      }
+      m_subsystem.activateSpinnerRoller();
+      isFinished = true;
   }
 
   // Called once the command ends or is interrupted.

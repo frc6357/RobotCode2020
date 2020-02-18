@@ -29,6 +29,7 @@ public class SK20ColorWheel extends SubsystemBase {
     private ColorSensor2020 colorSensor;
     private CANEncoder spinnerRollerEncoder;
     private static Color2020[] fieldColors = { Color2020.RED, Color2020.GREEN, Color2020.CYAN, Color2020.YELLOW };
+    private CANSparkMax wheelSpinnerManual;
 
     /**
      * Creates the SK20ColorWheel object and all hardware resources it uses.
@@ -39,6 +40,7 @@ public class SK20ColorWheel extends SubsystemBase {
         spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.COLOR_WHEEL_SPEED);
         spinnerLifter = new Solenoid(Ports.colorSpinnerExtend, Ports.colorSpinnerRetract);
         spinnerRollerEncoder = new CANEncoder(spinnerRollerMotor);
+        wheelSpinnerManual = new CANSparkMax(Ports.OIOperatorManualColorWheelControl,MotorType.kBrushless);
     }
 
     /**
@@ -62,6 +64,7 @@ public class SK20ColorWheel extends SubsystemBase {
     public void activateSpinnerRoller() {
         spinnerRoller.setForwards();
     }
+
 
     /**
      * Turns off the motor which rotates the spinner which, when in contact with the
@@ -167,23 +170,6 @@ public class SK20ColorWheel extends SubsystemBase {
     }
 
     /**
-     * Uses the proximity sensor on the mechanism to decide whether the sensor is
-     * below the color wheel on the control panel or not. The mechanism is assumed
-     * to be under the control panel when the proximity sensor detects any object
-     * within its working range above it.
-     * 
-     * @return True if the proximity sensor detects an object above it, false
-     *         otherwise.
-     */
-    public boolean isUnderControlPanel() {
-        if (colorSensor.getProximity() < TuningParams.COLOR_WHEEL_PROXIMITY_THRESHOLD) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
      * It takes in a color and reports back to Smart Dashboard to see what color the sensor
      * is detecting.
      * @param color
@@ -199,5 +185,9 @@ public class SK20ColorWheel extends SubsystemBase {
         SmartDashboard.putBoolean("isGreen",  green);
         SmartDashboard.putBoolean("isCyan",   cyan);
         SmartDashboard.putBoolean("isYellow", yellow);
+    }
+
+    public void startManuallySpinColorWheel(){
+        wheelSpinnerManual.set(TuningParams.COLOR_WHEEL_SPEED);
     }
 }

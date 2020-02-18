@@ -86,6 +86,8 @@ public class Ports
     public static final int colorSpinnerExtend          = 0;    // PCM 2, Output 0
     public static final int colorSpinnerRetract         = 1;    // PCM 2, Output 1
 
+
+
     ///////////////////////////////
     // Additional hardware
     ///////////////////////////////
@@ -112,6 +114,7 @@ public class Ports
     public static final int OIOperatorStopColorWheel    = 1;    // Button A
     public static final int OIOperatorStartThreeRotate  = 9;    // Left Joystick press button
     public static final int OIOperatorStartSetColor     = 10;   // Right Joystick press button
+    public static final int OIOperatorManualColorWheelControl = 7;// Back button
 
     //TODO: Remove these later. This button is only for test use.
     public static final int OIDriverIncrementDriveDistance =  0;
@@ -130,4 +133,9 @@ public class Ports
     public static final int OIOperatorArmClimb          = 4;    // Button Y
     public static final int OIOperatorDeployArm         = 5;    // Pneumatic for releasing the arm (Left Bumper)
     public static final int OIOperatorRunWinchArm       = 6;    // Motor for Winching arm while held (RightBumper)
+
+
+
+
+    
 }
