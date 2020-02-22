@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANEncoder;
+//import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -18,7 +18,7 @@ import frc.robot.subsystems.base.BaseRoller;
 public class SK20BallHandling extends SubsystemBase {
     private CANSparkMax beltMotor1;
     private CANSparkMax beltMotor2;
-    private CANEncoder beltEncoder1;
+    //private CANEncoder beltEncoder1;
     private BaseRoller ballBelt1;
     //private CANEncoder beltEncoder2;
     private BaseRoller ballBelt2;
@@ -37,7 +37,8 @@ public class SK20BallHandling extends SubsystemBase {
     {
         beltMotor1 = new CANSparkMax(Ports.ballHandlingBelt, MotorType.kBrushless);
         beltMotor2 = new CANSparkMax(Ports.ballHandlingBelt2, MotorType.kBrushless);
-        beltEncoder1 = new CANEncoder(beltMotor1);
+        // TODO: Encoders commented out since no-one currently uses getRollerSpeed().
+        //beltEncoder1 = new CANEncoder(beltMotor1);
         //beltEncoder2 = new CANEncoder(beltMotor2);
         ballBelt1 = new BaseRoller(beltMotor1, TuningParams.BALL_HANDLING_MAX_SPEED);
         ballBelt2 = new BaseRoller(beltMotor2, TuningParams.BALL_HANDLING_MAX_SPEED);
@@ -67,10 +68,10 @@ public class SK20BallHandling extends SubsystemBase {
      * Returns the speed that the belts are currently running off
      * @return The speed of the belt
      */
-    public double getRollerSpeed()
-    {
-        return beltEncoder1.getVelocity();
-    }
+    //public double getRollerSpeed()
+    //{
+    //    return beltEncoder1.getVelocity();
+    //}
 
     /**
      * This counts the number of activated sensors and counts the number of balls that are there
