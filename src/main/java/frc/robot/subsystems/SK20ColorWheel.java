@@ -5,7 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.*;
 
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
@@ -23,13 +23,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class SK20ColorWheel extends SubsystemBase {
     private BaseRoller spinnerRoller;
-    private Solenoid spinnerLifter;
+    private DoubleSolenoid spinnerLifter;
     private CANSparkMax spinnerRollerMotor;
     private int spinnerTransitionCount = 0;
     private ColorSensor2020 colorSensor;
     private CANEncoder spinnerRollerEncoder;
     private static Color2020[] fieldColors = { Color2020.RED, Color2020.GREEN, Color2020.CYAN, Color2020.YELLOW };
-    private CANSparkMax wheelSpinnerManual;
 
     /**
      * Creates the SK20ColorWheel object and all hardware resources it uses.
@@ -38,23 +37,22 @@ public class SK20ColorWheel extends SubsystemBase {
         colorSensor = new ColorSensor2020(I2C.Port.kOnboard);
         spinnerRollerMotor = new CANSparkMax(Ports.colorWheelSpinner, MotorType.kBrushless);
         spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.COLOR_WHEEL_SPEED);
-        spinnerLifter = new Solenoid(Ports.colorSpinnerExtend, Ports.colorSpinnerRetract);
+        spinnerLifter = new DoubleSolenoid(Ports.colorSpinnerExtend, Ports.colorSpinnerRetract);
         spinnerRollerEncoder = new CANEncoder(spinnerRollerMotor);
-        wheelSpinnerManual = new CANSparkMax(Ports.OIOperatorManualColorWheelControl,MotorType.kBrushless);
     }
 
     /**
      * This function energizes the solenoid to lift the color wheel mechanism.
      */
     public void extendLifter() {
-        spinnerLifter.set(true);
+        spinnerLifter.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
      * This function de-energies the solenoid to retract the color wheel mechanism.
      */
     public void retractLifter() {
-        spinnerLifter.set(false);
+        spinnerLifter.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**
@@ -80,7 +78,7 @@ public class SK20ColorWheel extends SubsystemBase {
      * @return True for extended, false for retracted.
      */
     public boolean getIsLifterExtended() {
-        return spinnerLifter.get();
+        return (spinnerLifter.get() == DoubleSolenoid.Value.kForward) ? true : false;
     }
 
     /**
@@ -185,9 +183,5 @@ public class SK20ColorWheel extends SubsystemBase {
         SmartDashboard.putBoolean("isGreen",  green);
         SmartDashboard.putBoolean("isCyan",   cyan);
         SmartDashboard.putBoolean("isYellow", yellow);
-    }
-
-    public void startManuallySpinColorWheel(){
-        wheelSpinnerManual.set(TuningParams.COLOR_WHEEL_SPEED);
     }
 }

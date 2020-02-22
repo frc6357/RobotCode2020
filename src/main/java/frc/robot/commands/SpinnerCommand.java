@@ -1,8 +1,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.SK20ColorWheel;
+
+// TODO: I strongly suspect this file can be deleted since it's never used.
 
 /**
  * A SpinnerCommand that uses SK20ColorWheel subsystem
@@ -13,7 +14,8 @@ public class SpinnerCommand extends CommandBase {
   private boolean isFinished = false;
 
   /**
-   * Creates a new SipnnerCommand.
+   * Creates a new SpinnerCommand.
+   * TODO: This is a completely useless comment! What is a SpinnerCommand and what does it do???
    *
    * @param SK20ColorWheel The subsystem used by this command.
    * @param startMotor

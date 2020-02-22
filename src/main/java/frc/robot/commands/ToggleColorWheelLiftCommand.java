@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SK20ColorWheel;
 
 /**
- * This command toggles the intake position to be extended or retracted.
+ * This command toggles the control panel color wheel subsystem position.
  */
-public class ToggleColorWheelCommand extends CommandBase 
+public class ToggleColorWheelLiftCommand extends CommandBase 
 {
     private SK20ColorWheel subsystem;
-    public ToggleColorWheelCommand(SK20ColorWheel subsystem) 
+    public ToggleColorWheelLiftCommand(SK20ColorWheel subsystem) 
     {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

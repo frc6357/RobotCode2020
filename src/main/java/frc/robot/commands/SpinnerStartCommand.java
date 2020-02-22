@@ -15,7 +15,7 @@ public class SpinnerStartCommand extends CommandBase {
   private boolean isFinished = false;
 
   /**
-   * Creates a new SpinnerCommand instance that sets up the member subsystem
+   * Creates a new SpinnerStartCommand instance that sets up the member subsystem
    * and sets startSpinner if the instance wants to start the motor.
    *
    * @param SK20ColorWheel The subsystem used by this command to see if the mechanism is extended.

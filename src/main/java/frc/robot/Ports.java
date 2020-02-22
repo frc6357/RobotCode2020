@@ -114,7 +114,8 @@ public class Ports
     public static final int OIOperatorStopColorWheel    = 1;    // Button A
     public static final int OIOperatorStartThreeRotate  = 9;    // Left Joystick press button
     public static final int OIOperatorStartSetColor     = 10;   // Right Joystick press button
-    public static final int OIOperatorManualColorWheelControl = 7;// Back button
+    public static final int OIOperatorColorWheelSpin    = 8;    // Start button
+    public static final int OIOperatorColorWheelLift    = 7;    // Back button
 
     public static final int OIOperatorShootBall         = 2;    // Button B
     public static final int OIOperatorToggleIntake      = 3;    // Button X
