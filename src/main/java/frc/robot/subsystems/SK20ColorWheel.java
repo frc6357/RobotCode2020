@@ -1,18 +1,18 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.*;
-
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
+import frc.robot.commands.DefaultColorWheelCommand;
 import frc.robot.subsystems.base.BaseRoller;
-import frc.robot.subsystems.base.ColorSensor2020;
 import frc.robot.subsystems.base.Color2020;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.base.ColorSensor2020;
 
 /**
  * The SK20ColorWheel class is the subsystem that interacts with roller and
@@ -33,6 +33,7 @@ public class SK20ColorWheel extends SubsystemBase {
     private int indexOfColorArray = 0;
     private boolean colorArrayIsFull = false;
     private Color2020 colorDebounced = Color2020.NONE;
+    private final DefaultColorWheelCommand colorWheelDefaultCommand;
 
     /**
      * Creates the SK20ColorWheel object and all hardware resources it uses.
@@ -43,6 +44,9 @@ public class SK20ColorWheel extends SubsystemBase {
         spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.COLOR_WHEEL_SPEED);
         spinnerLifter = new DoubleSolenoid(Ports.colorSpinnerExtend, Ports.colorSpinnerRetract);
         spinnerRollerEncoder = new CANEncoder(spinnerRollerMotor);
+
+        colorWheelDefaultCommand = new DefaultColorWheelCommand(this);
+        setDefaultCommand(colorWheelDefaultCommand);
     }
 
     /**
