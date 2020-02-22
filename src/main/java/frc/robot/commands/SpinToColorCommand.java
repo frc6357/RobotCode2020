@@ -110,6 +110,9 @@ public class SpinToColorCommand extends CommandBase {
 
             // Sets what the field color is reading.
             currentFieldColor = colorArray[0];
+
+            // Update the driver station.
+            m_subsystem.reportColor(currentFieldColor);
         }
 
         // Checks to see that the current field color we are reading is the color we

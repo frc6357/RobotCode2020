@@ -19,21 +19,22 @@ public class ManualColorWheelControlCommand extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-        if (startMotor) {
+    public void initialize()
+    {
+        if (startMotor)
+        {
             m_subsystem.activateSpinnerRoller();
-        } else {
+        }
+        else
+        {
             m_subsystem.deactivateSpinnerRoller();
         }
     }
 
-    @Override
-    public void execute() {
-    }
-
     // Returns true when the command should end.
     @Override
-    public boolean isFinished() {
+    public boolean isFinished()
+    {
         return true;
     }
 }

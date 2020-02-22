@@ -29,6 +29,10 @@ public class SK20ColorWheel extends SubsystemBase {
     private ColorSensor2020 colorSensor;
     private CANEncoder spinnerRollerEncoder;
     private static Color2020[] fieldColors = { Color2020.RED, Color2020.GREEN, Color2020.CYAN, Color2020.YELLOW };
+    private Color2020[] colorArray = new Color2020[TuningParams.COLOR_WHEEL_ARRAY_SIZE];
+    private int indexOfColorArray = 0;
+    private boolean colorArrayIsFull = false;
+    private Color2020 colorDebounced = Color2020.NONE;
 
     /**
      * Creates the SK20ColorWheel object and all hardware resources it uses.
@@ -125,6 +129,8 @@ public class SK20ColorWheel extends SubsystemBase {
     /**
      * Returns the color currently detected by the color sensor or NONE if the
      * proximity sensor indicates that it is not currently under the control panel.
+     * This method merely reads the current value from the sensor. No debouncing
+     * is performed.
      * 
      * @return The game color closest to the color currently being detected.
      */
@@ -133,6 +139,50 @@ public class SK20ColorWheel extends SubsystemBase {
             return colorSensor.getGameColor();
         }
         return Color2020.NONE;
+    }
+
+    /**
+     * Returns the color currently detected by the color sensor or NONE if the
+     * proximity sensor indicates that it is not currently under the control panel.
+     * 
+     * This function debounces the read color so other commands and subsystems do
+     * not need to do it.
+     * 
+     * @return The game color closest to the color currently being detected.
+     */
+    public Color2020 getDebouncedColor() {
+        // Updates the color array.
+        colorArray[indexOfColorArray] = getDetectedColor();
+
+        // This line is used to make sure that the index values don't go out of bounds.
+        indexOfColorArray = (indexOfColorArray + 1) % TuningParams.COLOR_WHEEL_ARRAY_SIZE;
+
+        // This checks that the color array has been filled
+        if (indexOfColorArray == 0) {
+            colorArrayIsFull = true;
+        }
+
+        // This code is to run once the color array has been filled in at least once.
+        if (colorArrayIsFull)
+        {
+            // This part checks that all of values in the color array are the same to
+            // unbounce the reading.
+            for (int i = 1; i < TuningParams.COLOR_WHEEL_ARRAY_SIZE; i++)
+            {
+                // If we detect a difference, return the last color because we've not finished
+                // debouncing yet.
+                if (colorArray[i] != colorArray[0])
+                {
+                    return colorDebounced;
+                }
+            }
+
+            // If we get here, we read the same value the appropriate number of times
+            // back-to-back so we assume that the reading is stable.
+            colorDebounced = colorArray[0];
+        }
+
+        return colorDebounced;
     }
 
     /**
@@ -164,7 +214,44 @@ public class SK20ColorWheel extends SubsystemBase {
         }
 
         return Color2020.UNKNOWN;
+    }
 
+    /**
+     * Returns the color which should be detected by the field's control panel color
+     * sensor based on the color the robot is currently detecting. If the proximity
+     * sensor indicates that it is not currently under the control panel, returns
+     * UNKNOWN.
+     * 
+     * This function debounces the color read to guard against transitional weirdness.
+     * 
+     * @return The game color we expect the field is currently detecting or UNKNOWN
+     *         if the robot is not currently reading a color.
+     */
+    public Color2020 getDebouncedFieldDetectedColor()
+    {
+        /**
+         * @return the color the the fieldsensor is detecting and if the detected color
+         *         is NONE which is determined by getDetectedColor() it will return just
+         *         NONE. And if finally the code never matches any of these conditions
+         *         if will just return UNKNOWN
+         */
+        Color2020 col = getDebouncedColor();
+        if (col == Color2020.NONE)
+        {
+            return col;
+        }
+        else
+        {
+            for (int i = 0; i < fieldColors.length; i++)
+            {
+                if (col == fieldColors[i])
+                {
+                    return fieldColors[(i + 2) % 4];
+                }
+            }
+        }
+
+        return Color2020.UNKNOWN;
     }
 
     /**

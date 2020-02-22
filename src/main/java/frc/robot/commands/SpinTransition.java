@@ -54,7 +54,7 @@ public class SpinTransition extends CommandBase {
     @Override
     public void execute() {
         // Updates the color array.
-        colorRay[indexOfColorRay] = m_subsystem.getDetectedColor();
+        colorRay[indexOfColorRay] = m_subsystem.getFieldDetectedColor();
 
         // This line is used to make sure that the index values don't go out of bounds.
         indexOfColorRay = (indexOfColorRay + 1) % TuningParams.COLOR_WHEEL_ARRAY_SIZE;
@@ -87,6 +87,9 @@ public class SpinTransition extends CommandBase {
             if (colorRay[0] != colorPrevious) {
                 m_subsystem.incrementSpinnerTransitionCount();
                 colorPrevious = colorRay[0];
+
+                // Update the driver station.
+                m_subsystem.reportColor(colorPrevious);
             }
         }
 
