@@ -116,15 +116,6 @@ public class Ports
     public static final int OIOperatorStartSetColor     = 10;   // Right Joystick press button
     public static final int OIOperatorManualColorWheelControl = 7;// Back button
 
-    //TODO: Remove these later. This button is only for test use.
-    public static final int OIDriverIncrementDriveDistance =  0;
-    public static final int OIDriverDecrementDriveDistance = 180;
-    public static final int OIDriverIncrementTurnAngle = 90;
-    public static final int OIDriverDecrementTurnAngle = 270;
-    public static final int OIDriverDummyDriveCommand = 3;    //Dummy command that interupts the drive commands. (X)
-    public static final int OIDriverDriveCommand = 4;   //This is the drive straight command(Y)
-    public static final int OIDriverTurnCommand = -1;    //This is the turn command.
-
     public static final int OIOperatorShootBall         = 2;    // Button B
     public static final int OIOperatorToggleIntake      = 3;    // Button X
 

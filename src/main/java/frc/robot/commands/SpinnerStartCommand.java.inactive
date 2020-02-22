@@ -30,7 +30,6 @@ public class SpinnerStartCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-      m_subsystem.extendLifter();
       isFinished = false;
   }
 
@@ -48,7 +47,7 @@ public class SpinnerStartCommand extends CommandBase {
   // For safety if something were to happen then we should just deactivate the motor.
   @Override
   public void end(boolean interrupted) {
-      m_subsystem.deactivateSpinnerRoller();
+    // We deliberately leave the motor running when the command ends.
   }
 
   // Returns true when the command should end.

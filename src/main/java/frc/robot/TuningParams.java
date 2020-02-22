@@ -57,9 +57,9 @@ public final class TuningParams
     public static final double RELEASE_MOTOR_SPEED             = 0.75;
     public static final int MAX_RPM                            = 5700;
     public static final int RELEASE_MOTOR_RUNTIME              = 1000; // In Milliseconds
-    public static final int LAUNCHER_P_VALUE                   = 1;
-    public static final int LAUNCHER_I_VALUE                   = 1;
-    public static final int LAUNCHER_D_VALUE                   = 1;
+    public static final double LAUNCHER_P_VALUE                = 0.05; //TODO: Tune these PID values later
+    public static final double LAUNCHER_I_VALUE                = 0.005;
+    public static final double LAUNCHER_D_VALUE                = 0.005;
 
     //////////////////////////////
     // Intake Params
