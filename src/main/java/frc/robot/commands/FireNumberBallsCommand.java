@@ -33,7 +33,7 @@ public class FireNumberBallsCommand extends WaitCommand
     @Override
     public void initialize() 
     {
-        m_launcher.activateTransfer();
+        m_launcher.startLaunchReleaseMotor();
     }
 
     // Called once after timeout
@@ -41,7 +41,7 @@ public class FireNumberBallsCommand extends WaitCommand
     public void end (boolean interrupted) 
     {
         super.end(interrupted);
-        m_launcher.deactivateTransfer();
+        m_launcher.stopLaunchReleaseMotor();
     }
 
     public boolean isFinished()
