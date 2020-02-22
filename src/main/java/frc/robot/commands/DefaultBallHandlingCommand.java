@@ -4,7 +4,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SK20BallHandling;
 
 /**
- * A command that launches the ball
+ * A command that runs the ball transfer motors. Motors run whenever we do not
+ * have a full compliment of 5 balls in the intake/transfer mechanism.
  */
 public class DefaultBallHandlingCommand extends CommandBase {
     private final SK20BallHandling subsystem;

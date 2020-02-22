@@ -12,17 +12,19 @@ import frc.robot.TuningParams;
 import frc.robot.subsystems.SK20Launcher;
 
 /**
- * Add your docs here.
+ * TODO: Add your docs here.
  */
 public class FireNumberBallsCommand extends WaitCommand 
 {
     SK20Launcher m_launcher;
     /**
-     * Add your docs here.
+     * TODO: Add your docs here.
      */
     public FireNumberBallsCommand(int numBalls, SK20Launcher launcherSubsystem) 
     {
-        super(TuningParams.RELEASE_MOTOR_RUNTIME * numBalls);
+        // Beware! RELEASE_MOTOR_RUNTIME is a millisecond count whereas WaitCommand's 
+        // constructor expects a number of seconds!
+        super(((double)TuningParams.RELEASE_MOTOR_RUNTIME * (double)numBalls) / 1000.0);
         addRequirements(launcherSubsystem);
         m_launcher = launcherSubsystem;
     }
@@ -44,6 +46,6 @@ public class FireNumberBallsCommand extends WaitCommand
 
     public boolean isFinished()
     {
-        return true;
+        return super.isFinished();
     }
 }
