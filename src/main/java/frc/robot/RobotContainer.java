@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import frc.robot.AutoCommands.*;
 import frc.robot.commands.*;
@@ -24,6 +23,10 @@ import frc.robot.subsystems.*;
 import frc.robot.subsystems.base.SuperClasses.Gear;
 import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.filters.FilterDeadband;
+
+// TODO: IMPORTANT! This class doesn't wire up any command to run in auto mode
+//       yet. At the very least, we need to have the robot move forward and
+//       clear the auto line.
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -143,7 +146,7 @@ public class RobotContainer
         launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
 
         // Sets robot buttons for the control panel command
-        //TODO: Enter code back in again.
+        //TODO: IMPORTANT! Enter code back in again once we're testing the color wheel subsystem.
         // stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
         // startThreeRotate.whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
         // startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));

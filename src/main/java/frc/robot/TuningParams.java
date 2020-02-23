@@ -30,10 +30,6 @@ public final class TuningParams
 
     public static final double  SLOWMODE_MULTIPLIER             = 0.25;
 
-    //TODO: Remove these values later. This is for testing purposes only.
-    public static final int TEST_DRIVE_DISTANCE_CHANGE_AMOUNT         = 50;    //In Centimeters
-    public static final int TEST_DRIVE_ANGLE_CHANGE_AMOUNT            = 15;    //In Degrees
-
     //////////////////////////////
     // Color Wheel Params
     //////////////////////////////
@@ -57,7 +53,7 @@ public final class TuningParams
     public static final double RELEASE_MOTOR_SPEED             = 0.75;
     public static final int MAX_RPM                            = 5700;
     public static final int RELEASE_MOTOR_RUNTIME              = 1000; // In Milliseconds
-    public static final double LAUNCHER_P_VALUE                = 0.05; //TODO: Tune these PID values later
+    public static final double LAUNCHER_P_VALUE                = 0.05; //TODO: IMPORTANT! Tune these PID values later
     public static final double LAUNCHER_I_VALUE                = 0.005;
     public static final double LAUNCHER_D_VALUE                = 0.005;
 
@@ -66,8 +62,7 @@ public final class TuningParams
     //////////////////////////////
     public static final double INTAKE_MAX_SPEED                = 0.5;
     public static final int INTAKE_ENCODER_PULSES              = 2048;
-    // TODO: This must be metric!
-    public static final double INTAKE_WHEEL_DIAMETER           = 2.0; // 2.0 Inches
+    public static final double INTAKE_WHEEL_DIAMETER           = 5.08; // 2.0 Inches in centimetres
     public static final boolean INTAKE_BALL_CHECK_INVERT       = false;
 
     //////////////////////////////

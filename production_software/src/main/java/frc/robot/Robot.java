@@ -31,6 +31,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        // TODO: IMPORTANT! This appears to be duplicated in RobotContainer.java (which also
+        // contains code to create a chooser for the auto command). I suspect this is redundant
+        // and should be removed (DW).
         m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
         m_chooser.addOption("My Auto", kCustomAuto);
         SmartDashboard.putData("Auto choices", m_chooser);
@@ -61,6 +64,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
+        // TODO: IMPORTANT! I suspect this should be using the code in RobotContainer.java
+        // rather than m_chooser which doesn't contain any auto mode program selections as
+        // it stands today. This should call the RobotContainer getAutonomousCommand method.
         m_autoSelected = m_chooser.getSelected();
         // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
         System.out.println("Auto selected: " + m_autoSelected);
@@ -71,6 +77,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
+        // TODO: IMPORTANT! The autonomousInit() method should schedule the command to run.
+        // We shouldn't need any code here at all.
         switch (m_autoSelected) {
         case kCustomAuto:
             // Put custom auto code here
