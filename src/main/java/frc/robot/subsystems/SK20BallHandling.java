@@ -99,7 +99,6 @@ public class SK20BallHandling extends SubsystemBase {
         int count = 0;
 
         count += getBallCount();
-        // TODO: This also needs to check the intake ball sensor, but the intake class has not been implemented into robot.
 
         return count >= 5;
     }

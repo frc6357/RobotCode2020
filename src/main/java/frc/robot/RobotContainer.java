@@ -61,9 +61,9 @@ public class RobotContainer
     SendableChooser<AutoCommands> autoCommandSelector = new SendableChooser<AutoCommands>();
 
     // The robot's subsystems and commands are defined here...
-    //private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
+    private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
     private final SK20Drive m_driveSubsystem = new SK20Drive();
-    // private final SK20Climb m_climbSubsystem = new SK20Climb();
+    private final SK20Climb m_climbSubsystem = new SK20Climb();
     private final SK20Intake m_intakeSubsystem = new SK20Intake();
     private final SK20Launcher m_launcherSubsystem = new SK20Launcher();
     private final SK20BallHandling m_ballHandlingSubsystem = new SK20BallHandling();
@@ -146,9 +146,9 @@ public class RobotContainer
         slowmodeRight.whenReleased(new SetSlowmodeCommand(m_driveSubsystem, false));
 
         // Sets robot buttons for the climb command
-        // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
-        // runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
-        // runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
+        operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
+        runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
+        runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
 
         // Set the ball launcher buttons to do correct commands
         setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true));
@@ -157,12 +157,12 @@ public class RobotContainer
 
         // Sets robot buttons for the control panel command
         //TODO: IMPORTANT! Enter code back in again once we're testing the color wheel subsystem.
-        // stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
-        // startThreeRotate.whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
-        // startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
-        // spinColorWheel.whenPressed(new ManualColorWheelControlCommand(m_colorWheelSubsystem, true));
-        // spinColorWheel.whenReleased(new ManualColorWheelControlCommand(m_colorWheelSubsystem, false));
-        // toggleColorWheelLift.whenPressed(new ToggleColorWheelLiftCommand(m_colorWheelSubsystem));
+        stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
+        startThreeRotate.whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
+        startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
+        spinColorWheel.whenPressed(new ManualColorWheelControlCommand(m_colorWheelSubsystem, true));
+        spinColorWheel.whenReleased(new ManualColorWheelControlCommand(m_colorWheelSubsystem, false));
+        toggleColorWheelLift.whenPressed(new ToggleColorWheelLiftCommand(m_colorWheelSubsystem));
 
         // Sets the buttons to activate/deactivate intake
         toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));

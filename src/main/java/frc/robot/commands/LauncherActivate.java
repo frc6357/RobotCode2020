@@ -34,7 +34,7 @@ public class LauncherActivate extends CommandBase
     @Override
     public void initialize() 
     {
-        m_subsystem.setLauncherSpeed(TuningParams.MAX_RPM);
+        m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -47,6 +47,7 @@ public class LauncherActivate extends CommandBase
     @Override
     public void end(boolean interrupted) 
     {
+        m_subsystem.setLauncherSpeed(0.0);
     }
 
     // Returns true when the command should end.

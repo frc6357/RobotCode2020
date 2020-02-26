@@ -51,7 +51,7 @@ public final class TuningParams
     //////////////////////////////
     public static final double LOADER_MAX_SPEED                = 0.75;
     public static final double RELEASE_MOTOR_SPEED             = 0.75;
-    public static final int MAX_RPM                            = 5700;
+    public static final double LAUNCHER_SET_PERCENTAGE         = 0.25; // TODO: IMPORTANT! Tune this
     public static final int RELEASE_MOTOR_RUNTIME              = 1000; // In Milliseconds
     public static final double LAUNCHER_P_VALUE                = 0.05; //TODO: IMPORTANT! Tune these PID values later
     public static final double LAUNCHER_I_VALUE                = 0.005;

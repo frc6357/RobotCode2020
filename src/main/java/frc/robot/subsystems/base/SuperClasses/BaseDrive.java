@@ -56,13 +56,11 @@ public class BaseDrive {
      *                   controller is going to be set to, 1 for full forwards and
      *                   -1 for full back
      */
-    public void SetSpeed(double speedLeft, double speedRight) {
-        if ((speedLeft != lastLeftSetSpeed) || (speedRight != lastRightSetSpeed)) {
+    public void SetSpeed(double speedLeft, double speedRight) 
+    {
             driveDiff.tankDrive(speedLeft, speedRight);
             speedLeft = lastLeftSetSpeed;
-            speedRight = lastRightSetSpeed;
-        }
-        
+            speedRight = lastRightSetSpeed;        
     }
 
     /**

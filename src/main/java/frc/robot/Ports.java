@@ -14,8 +14,7 @@ public class Ports
     //////////////////////////////
     // Robot Infrastructure
     //////////////////////////////
-    public static final int pcm1                        = 1;  // CAN ID
-    public static final int pcm2                        = 2;  // CAN ID
+    public static final int pcm                         = 1;  // CAN ID
 
     //////////////////////////////
     // I2C device addresses
@@ -29,6 +28,8 @@ public class Ports
     public static final int frontRightDrive             = 11; // CAN ID
     public static final int backLeftDrive               = 12; // CAN ID
     public static final int backRightDrive              = 13; // CAN ID
+
+    public static final int gearShifter                 = 7; // PCM 0 ID 7
 
     public static final int leftEncoderA                = 0;  // DIO
     public static final int leftEncoderB                = 1;  // DIO
@@ -83,8 +84,8 @@ public class Ports
     ///////////////////////////////
     public static final int colorWheelSpinner           = 40; // CAN ID
 
-    public static final int colorSpinnerExtend          = 0;  // PCM 2, Output 0
-    public static final int colorSpinnerRetract         = 1;  // PCM 2, Output 1
+    public static final int colorSpinnerExtend          = 2;  // PCM 2, Output 0
+    public static final int colorSpinnerRetract         = 3;  // PCM 2, Output 1
 
 
 

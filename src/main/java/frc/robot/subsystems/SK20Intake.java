@@ -33,7 +33,7 @@ public class SK20Intake extends SubsystemBase
         intakeRollerEncoder = new CANEncoder(intakeRollerMotor);
         intakeBallDetector = new LimitSensor(Ports.intakeBallCheck, TuningParams.INTAKE_BALL_CHECK_INVERT);
 
-        intakeMover = new DoubleSolenoid(Ports.intakeMoverExtend, Ports.intakeMoverRetract);
+        intakeMover = new DoubleSolenoid(Ports.pcm, Ports.intakeMoverExtend, Ports.intakeMoverRetract);
     }
 
     /**

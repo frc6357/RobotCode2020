@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
+import frc.robot.commands.LauncherActivate;
 import frc.robot.subsystems.base.BaseRoller;
 
 // TODO: IMPORTANT! This class contains a PID controller for the launcher speed
@@ -36,7 +37,7 @@ public class SK20Launcher extends SubsystemBase
     private final CANSparkMax releaseMotor = new CANSparkMax(Ports.ballReleaseMotor, MotorType.kBrushless);
     private final BaseRoller releaseRoller = new BaseRoller(releaseMotor, TuningParams.RELEASE_MOTOR_SPEED);
 
-    private final DoubleSolenoid hoodMover = new DoubleSolenoid(Ports.launcherHoodExtend, Ports.launcherHoodRetract);
+    private final DoubleSolenoid hoodMover = new DoubleSolenoid(Ports.pcm, Ports.launcherHoodExtend, Ports.launcherHoodRetract);
 
     /**
      * This does nothing as everything is intialized inside of the class before the constructor is even called so that 
@@ -49,6 +50,7 @@ public class SK20Launcher extends SubsystemBase
         // to this subsystem!
         launcherMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
         setPIDValues();
+        setDefaultCommand(new LauncherActivate(this));
     }
 
     /**
