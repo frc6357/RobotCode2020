@@ -22,7 +22,7 @@ public class SK20Climb extends SubsystemBase
     //assigns values to instantiated objects
     public SK20Climb()
     { 
-        armReleaseSolenoid = new Solenoid(Ports.armLockDown);
+        armReleaseSolenoid = new Solenoid(Ports.pcm, Ports.armLockDown);
         winchClimbLeft = new CANSparkMax(Ports.winchClimbLeft, MotorType.kBrushed);
         winchClimbRight = new CANSparkMax(Ports.winchClimbRight,MotorType.kBrushed);
         winchMotorGroup = new SpeedControllerGroup(winchClimbLeft, winchClimbRight);

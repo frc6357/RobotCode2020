@@ -42,7 +42,7 @@ public class SK20ColorWheel extends SubsystemBase {
         colorSensor = new ColorSensor2020(I2C.Port.kOnboard);
         spinnerRollerMotor = new CANSparkMax(Ports.colorWheelSpinner, MotorType.kBrushless);
         spinnerRoller = new BaseRoller(spinnerRollerMotor, TuningParams.COLOR_WHEEL_SPEED);
-        spinnerLifter = new DoubleSolenoid(Ports.colorSpinnerExtend, Ports.colorSpinnerRetract);
+        spinnerLifter = new DoubleSolenoid(Ports.pcm, Ports.colorSpinnerExtend, Ports.colorSpinnerRetract);
         spinnerRollerEncoder = new CANEncoder(spinnerRollerMotor);
 
         colorWheelDefaultCommand = new DefaultColorWheelCommand(this);
