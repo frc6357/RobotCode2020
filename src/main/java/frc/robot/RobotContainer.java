@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.AutoCommands.OffAngleShotToMoveAuto;
 import frc.robot.AutoCommands.OffAngleShotToTrenchAuto;
 import frc.robot.AutoCommands.StraightShotToMoveAuto;
@@ -87,7 +88,7 @@ public class RobotContainer
 
     // Launcher control buttons
     public static JoystickButton launchBall = new JoystickButton(joystickOperator, Ports.OIOperatorShootBall);
-    public static JoystickButton setHighAngle = new JoystickButton(joystickOperator, Ports.OIOperatorSetHighAngle);
+    public static POVButton setHighAngle = new POVButton(joystickOperator, Ports.OIOperatorSetHighAngle);
 
     // Climb Buttons
     public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator,
