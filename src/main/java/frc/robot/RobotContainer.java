@@ -16,10 +16,20 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.AutoCommands.OffAngleShotToMoveAuto;
+import frc.robot.AutoCommands.OffAngleShotToTrenchAuto;
+import frc.robot.AutoCommands.StraightShotToMoveAuto;
+import frc.robot.AutoCommands.StraightShotToTrenchAuto;
 //import frc.robot.AutoCommands.*;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
-
+import frc.robot.commands.LaunchBallCommand;
+import frc.robot.commands.SetAngleCommand;
+import frc.robot.commands.SetGear;
+import frc.robot.commands.SetSlowmodeCommand;
+import frc.robot.commands.ToggleIntakeCommand;
+import frc.robot.subsystems.SK20BallHandling;
+import frc.robot.subsystems.SK20Drive;
+import frc.robot.subsystems.SK20Intake;
+import frc.robot.subsystems.SK20Launcher;
 import frc.robot.subsystems.base.SuperClasses.Gear;
 import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.filters.FilterDeadband;
@@ -193,24 +203,25 @@ public class RobotContainer
      */
     public Command getAutonomousCommand() 
     { 
+
         AutoCommands myAuto = autoCommandSelector.getSelected();
         switch (myAuto) {
             case OffAngleShot:
-                // OffAngleShotToMoveAuto m_autoPath = new OffAngleShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
-                // return m_autoPath.getCommandGroup();
+                OffAngleShotToMoveAuto m_autoPath = new OffAngleShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
+                return m_autoPath.getCommandGroup();
 
             case OffAngleRecollectShot:
-                // OffAngleShotToTrenchAuto m_autoPath1 = new OffAngleShotToTrenchAuto(m_driveSubsystem, m_intakeSubsystem, m_launcherSubsystem);
-                // return m_autoPath1.getCommandGroup();
+                OffAngleShotToTrenchAuto m_autoPath1 = new OffAngleShotToTrenchAuto(m_driveSubsystem, m_intakeSubsystem, m_launcherSubsystem);
+                return m_autoPath1.getCommandGroup();
 
             case StraightShot:
-                // StraightShotToMoveAuto m_autoPath2 = new StraightShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
+                StraightShotToMoveAuto m_autoPath2 = new StraightShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
 
-                // return m_autoPath2.getCommandGroup();
+                return m_autoPath2.getCommandGroup();
             case StraightRecollectShot:
-                // StraightShotToTrenchAuto m_autoPath3 = new StraightShotToTrenchAuto(m_driveSubsystem, m_launcherSubsystem, m_intakeSubsystem);
+                StraightShotToTrenchAuto m_autoPath3 = new StraightShotToTrenchAuto(m_driveSubsystem, m_launcherSubsystem, m_intakeSubsystem);
 
-                // return m_autoPath3.getCommandGroup();
+                return m_autoPath3.getCommandGroup();
             default:
                 return (Command) null;
         }
