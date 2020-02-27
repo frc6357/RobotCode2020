@@ -68,7 +68,8 @@ public final class TuningParams
     //////////////////////////////
     // Ball Handling Params
     //////////////////////////////
-    public static final double BALL_HANDLING_MAX_SPEED      = 0.75;
+    public static final double BALL_OUTER_SPEED             = 0.75;
+    public static final double BALL_INNER_SPEED             = -0.75;
     public static final boolean BALL_SENSOR_1_INVERT        = false;
     public static final boolean BALL_SENSOR_2_INVERT        = false;
     public static final boolean BALL_SENSOR_3_INVERT        = false;
