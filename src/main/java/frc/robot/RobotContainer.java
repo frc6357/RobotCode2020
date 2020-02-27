@@ -67,7 +67,7 @@ public class RobotContainer
     // The robot's subsystems and commands are defined here...
     private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
     private final SK20Drive m_driveSubsystem = new SK20Drive();
-    private final SK20Climb m_climbSubsystem = new SK20Climb();
+    // private final SK20Climb m_climbSubsystem = new SK20Climb();
     private final SK20Intake m_intakeSubsystem = new SK20Intake();
     private final SK20Launcher m_launcherSubsystem = new SK20Launcher();
     private final SK20BallHandling m_ballHandlingSubsystem = new SK20BallHandling();
@@ -150,9 +150,9 @@ public class RobotContainer
         slowmodeRight.whenReleased(new SetSlowmodeCommand(m_driveSubsystem, false));
 
         // Sets robot buttons for the climb command
-        operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
-        runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
-        runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
+        // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
+        // runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
+        // runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
 
         // Set the ball launcher buttons to do correct commands
         setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true));
