@@ -60,7 +60,7 @@ public final class TuningParams
     //////////////////////////////
     // Intake Params
     //////////////////////////////
-    public static final double INTAKE_MAX_SPEED                = 0.5;
+    public static final double INTAKE_MAX_SPEED                = 0.75;
     public static final int INTAKE_ENCODER_PULSES              = 2048;
     public static final double INTAKE_WHEEL_DIAMETER           = 5.08; // 2.0 Inches in centimetres
     public static final boolean INTAKE_BALL_CHECK_INVERT       = false;
