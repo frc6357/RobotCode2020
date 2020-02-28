@@ -41,8 +41,8 @@ public class Ports
     //////////////////////////////
     public static final int intakeMotor                 = 20; // CAN ID
 
-    public static final int intakeMoverExtend           = 0;  // PCM 1, Output 0
-    public static final int intakeMoverRetract          = 1;  // PCM 1, Output 1
+    public static final int intakeMoverExtend           = 2;  // PCM 1, Output 0
+    public static final int intakeMoverRetract          = 3;  // PCM 1, Output 1
 
     public static final int intakeOpenCheck             = 4;  // DIO
     public static final int intakeSpeedCheckA           = 5;  // DIO
@@ -84,8 +84,8 @@ public class Ports
     ///////////////////////////////
     public static final int colorWheelSpinner           = 40; // CAN ID
 
-    public static final int colorSpinnerExtend          = 2;  // PCM 2, Output 0
-    public static final int colorSpinnerRetract         = 3;  // PCM 2, Output 1
+    public static final int colorSpinnerExtend          = 0;  // PCM 2, Output 0
+    public static final int colorSpinnerRetract         = 1;  // PCM 2, Output 1
 
 
 
@@ -120,8 +120,9 @@ public class Ports
 
     public static final int OIOperatorShootBall         = 2;    // Button B
     public static final int OIOperatorToggleIntake      = 3;    // Button X
+    public static final int OIOperatorToggleBallManagement  = 180;  // POV Angle
 
-    public static final int OIOperatorSetHighAngle      = 0;    // POV 0
+    public static final int OIOperatorSetHighAngle      = 0;    // POV Angle
 
     public static final int OIOperatorArmClimb          = 4;    // Button Y
     public static final int OIOperatorDeployArm         = 5;    // Pneumatic for releasing the arm (Left Bumper)

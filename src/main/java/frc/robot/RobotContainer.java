@@ -15,26 +15,31 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.InternalButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.AutoCommands.OffAngleShotToMoveAuto;
 import frc.robot.AutoCommands.OffAngleShotToTrenchAuto;
 import frc.robot.AutoCommands.StraightShotToMoveAuto;
 import frc.robot.AutoCommands.StraightShotToTrenchAuto;
 //import frc.robot.AutoCommands.*;
 import frc.robot.commands.LaunchBallCommand;
+import frc.robot.commands.ManualColorWheelControlCommand;
 import frc.robot.commands.SetAngleCommand;
 import frc.robot.commands.SetGear;
 import frc.robot.commands.SetSlowmodeCommand;
+import frc.robot.commands.StopColorWheelCommand;
+import frc.robot.commands.ThreeRotateCommandGroup;
+import frc.robot.commands.ToggleBallManagementCommand;
+import frc.robot.commands.ToggleColorWheelLiftCommand;
 import frc.robot.commands.ToggleIntakeCommand;
+import frc.robot.commands.TurnToColorCommandGroup;
 import frc.robot.subsystems.SK20BallHandling;
+import frc.robot.subsystems.SK20ColorWheel;
 import frc.robot.subsystems.SK20Drive;
 import frc.robot.subsystems.SK20Intake;
 import frc.robot.subsystems.SK20Launcher;
-import frc.robot.subsystems.SK20ColorWheel;
-import frc.robot.subsystems.SK20Climb;
+// import frc.robot.subsystems.SK20Climb;
 import frc.robot.subsystems.base.SuperClasses.Gear;
-import frc.robot.commands.*;
 import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.filters.FilterDeadband;
 
@@ -86,9 +91,13 @@ public class RobotContainer
     // Intake control button
     public static JoystickButton toggleIntake = new JoystickButton(joystickOperator, Ports.OIOperatorToggleIntake);
 
+    // Ball Management POV Button
+    public static InternalButton toggleBallManagement = new InternalButton();
+
+
     // Launcher control buttons
     public static JoystickButton launchBall = new JoystickButton(joystickOperator, Ports.OIOperatorShootBall);
-    public static POVButton setHighAngle = new POVButton(joystickOperator, Ports.OIOperatorSetHighAngle);
+    public static JoystickButton setHighAngle = new JoystickButton(joystickOperator, Ports.OIOperatorColorWheelSpin);
 
     // Climb Buttons
     public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator,
@@ -101,7 +110,7 @@ public class RobotContainer
             Ports.OIOperatorStartThreeRotate);
     public static JoystickButton startSetColor = new JoystickButton(joystickOperator, Ports.OIOperatorStartSetColor);
     public static JoystickButton stopColorWheel = new JoystickButton(joystickOperator, Ports.OIOperatorStopColorWheel);
-    public static JoystickButton spinColorWheel = new JoystickButton(joystickOperator, Ports.OIOperatorColorWheelSpin);
+    public static InternalButton spinColorWheel = new InternalButton();
     public static JoystickButton toggleColorWheelLift = new JoystickButton(joystickOperator, Ports.OIOperatorColorWheelLift);
 
     public RobotContainer() 
@@ -153,6 +162,12 @@ public class RobotContainer
         // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
         // runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
         // runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
+        
+        // Sets the buttons to activate/deactivate intake
+        toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));
+
+        // Toggles ball management on and off
+        toggleBallManagement.whileHeld(new ToggleBallManagementCommand(m_ballHandlingSubsystem));
 
         // Set the ball launcher buttons to do correct commands
         setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true));
@@ -168,8 +183,6 @@ public class RobotContainer
         spinColorWheel.whenReleased(new ManualColorWheelControlCommand(m_colorWheelSubsystem, false));
         toggleColorWheelLift.whenPressed(new ToggleColorWheelLiftCommand(m_colorWheelSubsystem));
 
-        // Sets the buttons to activate/deactivate intake
-        toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));
     }
 
     public void testSelector() 

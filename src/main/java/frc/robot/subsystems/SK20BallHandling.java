@@ -23,6 +23,7 @@ public class SK20BallHandling extends SubsystemBase {
     //private CANEncoder beltEncoder2;
     private BaseRoller ballBelt2;
     private final DefaultBallHandlingCommand ballHandling;
+    private boolean systemMotorsAreEnabled = false;
 
     // private LimitSensor[] ballSensors = {new LimitSensor(Ports.ballSensor1, TuningParams.BALL_SENSOR_1_INVERT), 
                                             // new LimitSensor(Ports.ballSensor2, TuningParams.BALL_SENSOR_2_INVERT),
@@ -53,6 +54,7 @@ public class SK20BallHandling extends SubsystemBase {
     {
         ballBelt1.setForwards();
         ballBelt2.setForwards();
+        systemMotorsAreEnabled = true;
     }
 
     /**
@@ -62,6 +64,13 @@ public class SK20BallHandling extends SubsystemBase {
     {
         ballBelt1.setStop();
         ballBelt2.setStop();
+        systemMotorsAreEnabled = false;
+    }
+
+
+    public boolean motorsAreEnabled()
+    {
+        return systemMotorsAreEnabled;
     }
 
     /**

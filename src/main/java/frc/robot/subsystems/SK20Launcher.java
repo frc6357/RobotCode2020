@@ -1,9 +1,9 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
+// import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
+// import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -31,7 +31,7 @@ import frc.robot.subsystems.base.BaseRoller;
 public class SK20Launcher extends SubsystemBase
 {
     private final CANSparkMax launcherMotor = new CANSparkMax(Ports.ballLauncherMotor, MotorType.kBrushless);
-    private final CANPIDController PIDControl = launcherMotor.getPIDController();
+    // private final CANPIDController PIDControl = launcherMotor.getPIDController();
     private final CANEncoder launcherMotorEncoder = new CANEncoder(launcherMotor);
 
     private final CANSparkMax releaseMotor = new CANSparkMax(Ports.ballReleaseMotor, MotorType.kBrushless);
@@ -49,7 +49,7 @@ public class SK20Launcher extends SubsystemBase
         // there's a very good chance we'll damage something since there's a large flywheel attached 
         // to this subsystem!
         launcherMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
-        setPIDValues();
+        // setPIDValues();
         setDefaultCommand(new LauncherActivate(this));
     }
 
@@ -69,12 +69,12 @@ public class SK20Launcher extends SubsystemBase
      * @param iVal The integral value
      * @param dVal The derivative value
      */
-    private void setPIDValues()
+    /**private void setPIDValues()
     {
         PIDControl.setP(TuningParams.LAUNCHER_P_VALUE);
         PIDControl.setI(TuningParams.LAUNCHER_I_VALUE);
         PIDControl.setD(TuningParams.LAUNCHER_D_VALUE);
-    }
+    }*/
 
     /**
      * Sets the setpoint of the PID controller
@@ -82,7 +82,8 @@ public class SK20Launcher extends SubsystemBase
      */
     private void setSetpoint(double value)
     {
-        PIDControl.setReference(value, ControlType.kVelocity);
+        // PIDControl.setReference(value, ControlType.kVelocity);
+        launcherMotor.set(value);
     }
 
     /**

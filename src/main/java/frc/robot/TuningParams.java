@@ -49,11 +49,11 @@ public final class TuningParams
     //////////////////////////////
     // Launcher Params
     //////////////////////////////
-    public static final double LOADER_MAX_SPEED                = 0.75;
-    public static final double RELEASE_MOTOR_SPEED             = 0.75;
-    public static final double LAUNCHER_SET_PERCENTAGE         = 0.25; // TODO: IMPORTANT! Tune this
-    public static final int RELEASE_MOTOR_RUNTIME              = 1000; // In Milliseconds
-    public static final double LAUNCHER_P_VALUE                = 0.05; //TODO: IMPORTANT! Tune these PID values later
+    public static final double LOADER_MAX_SPEED                = 1.0;
+    public static final double RELEASE_MOTOR_SPEED             = 1.0;
+    public static final double LAUNCHER_SET_PERCENTAGE         = -0.25; // TODO: IMPORTANT! Tune this
+    public static final int RELEASE_MOTOR_RUNTIME              = 1250; // In Milliseconds
+    public static final double LAUNCHER_P_VALUE                = 0.005; //TODO: IMPORTANT! Tune these PID values later
     public static final double LAUNCHER_I_VALUE                = 0.005;
     public static final double LAUNCHER_D_VALUE                = 0.005;
 

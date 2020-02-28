@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 /**
@@ -99,6 +100,10 @@ public class Robot extends TimedRobot
     @Override
     public void robotPeriodic() 
     {
+        boolean IBMToggle = SmartDashboard.getBoolean("Ball Mangement Toggle", true);
+        RobotContainer.toggleBallManagement.setPressed(IBMToggle);
+        boolean colorWheelActivate = SmartDashboard.getBoolean("Spin Color Wheel Manually", false);
+        RobotContainer.spinColorWheel.setPressed(colorWheelActivate);
         // Runs the Scheduler. This is responsible for polling buttons, adding
         // newly-scheduled
         // commands, running already-scheduled commands, removing finished or
