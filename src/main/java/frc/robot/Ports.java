@@ -128,6 +128,9 @@ public class Ports
     public static final int OIOperatorDeployArm         = 5;    // Pneumatic for releasing the arm (Left Bumper)
     public static final int OIOperatorRunWinchArm       = 6;    // Motor for Winching arm while held (RightBumper)
 
+    public static final int OIOperatorLeftTrigger       = 2;    // Reactivate Transfer motor
+    public static final int OIOperatorRightTrigger      = 3;    // Deactivate Transfer Motor
+
 
 
 

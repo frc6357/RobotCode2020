@@ -84,6 +84,8 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit() 
     {
+        SmartDashboard.putBoolean("Ball Management Toggle", true);
+        SmartDashboard.putBoolean("Spin Color Wheel Manually", false);
         m_robotContainer = new RobotContainer();
 
     }
@@ -100,10 +102,6 @@ public class Robot extends TimedRobot
     @Override
     public void robotPeriodic() 
     {
-        boolean IBMToggle = SmartDashboard.getBoolean("Ball Mangement Toggle", true);
-        RobotContainer.toggleBallManagement.setPressed(IBMToggle);
-        boolean colorWheelActivate = SmartDashboard.getBoolean("Spin Color Wheel Manually", false);
-        RobotContainer.spinColorWheel.setPressed(colorWheelActivate);
         // Runs the Scheduler. This is responsible for polling buttons, adding
         // newly-scheduled
         // commands, running already-scheduled commands, removing finished or
@@ -112,6 +110,10 @@ public class Robot extends TimedRobot
         // robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+        // boolean IBMToggle = SmartDashboard.getBoolean("Ball Mangement Toggle", true);
+        // RobotContainer.toggleBallManagement.setPressed(IBMToggle);
+        boolean colorWheelActivate = SmartDashboard.getBoolean("Spin Color Wheel Manually", false);
+        RobotContainer.spinColorWheel.setPressed(colorWheelActivate);
     }
 
     /**

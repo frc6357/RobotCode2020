@@ -1,8 +1,9 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
@@ -14,8 +15,8 @@ import frc.robot.TuningParams;
 public class SK20Climb extends SubsystemBase 
 {
     //instantiates climb mechanisms
-    private CANSparkMax winchClimbLeft;
-    private CANSparkMax winchClimbRight;
+    private SpeedController winchClimbLeft;
+    private SpeedController winchClimbRight;
     private SpeedControllerGroup winchMotorGroup;
     private Solenoid armReleaseSolenoid = null;
     
@@ -23,8 +24,8 @@ public class SK20Climb extends SubsystemBase
     public SK20Climb()
     { 
         armReleaseSolenoid = new Solenoid(Ports.pcm, Ports.armLockDown);
-        winchClimbLeft = new CANSparkMax(Ports.winchClimbLeft, MotorType.kBrushed);
-        winchClimbRight = new CANSparkMax(Ports.winchClimbRight,MotorType.kBrushed);
+        winchClimbLeft = new WPI_VictorSPX(Ports.winchClimbLeft);
+        winchClimbRight = new WPI_VictorSPX(Ports.winchClimbRight);
         winchMotorGroup = new SpeedControllerGroup(winchClimbLeft, winchClimbRight);
     }
 

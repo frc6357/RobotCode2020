@@ -50,7 +50,8 @@ public class SK20Launcher extends SubsystemBase
         // to this subsystem!
         launcherMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
         // setPIDValues();
-        setDefaultCommand(new LauncherActivate(this));
+        // TODO: IMPORTANT: RENEBALE THIS TO MAKE LAUNCHER WORK
+        // setDefaultCommand(new LauncherActivate(this));
     }
 
     /**

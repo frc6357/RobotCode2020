@@ -29,10 +29,14 @@ We'll flesh this out into a real coding standard soon but, for now, here are a f
 
 12. No magic numbers!
 
-## JavaDoc Instructions
-13. JavaDoc documentation must be created for all classes. Each class will be preceded with a javadoc comment and be followed by a short description of the function of the class. For those interested, html commands like \<p>text\</p> is available. Further information on JavaDoc markup can be found at http://www.write-technical.com/126581/javadoc/javadoc-info.htm.
+13. Thou shalt not hack!!! (Unless it is fully documented)
 
-14. JavaDoc documentation must be created for all class methods. Every method will have documentation according to the following format:
+14. Commit all code, and if the code is fully working and adds new features, shall be commited to master.
+
+## JavaDoc Instructions
+15. JavaDoc documentation must be created for all classes. Each class will be preceded with a javadoc comment and be followed by a short description of the function of the class. For those interested, html commands like \<p>text\</p> is available. Further information on JavaDoc markup can be found at http://www.write-technical.com/126581/javadoc/javadoc-info.htm.
+
+16. JavaDoc documentation must be created for all class methods. Every method will have documentation according to the following format:
 
 <code>
 /**<br/>

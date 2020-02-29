@@ -29,7 +29,7 @@ import frc.robot.commands.SetGear;
 import frc.robot.commands.SetSlowmodeCommand;
 import frc.robot.commands.StopColorWheelCommand;
 import frc.robot.commands.ThreeRotateCommandGroup;
-import frc.robot.commands.ToggleBallManagementCommand;
+// import frc.robot.commands.ToggleBallManagementCommand;
 import frc.robot.commands.ToggleColorWheelLiftCommand;
 import frc.robot.commands.ToggleIntakeCommand;
 import frc.robot.commands.TurnToColorCommandGroup;
@@ -90,10 +90,6 @@ public class RobotContainer
 
     // Intake control button
     public static JoystickButton toggleIntake = new JoystickButton(joystickOperator, Ports.OIOperatorToggleIntake);
-
-    // Ball Management POV Button
-    public static InternalButton toggleBallManagement = new InternalButton();
-
 
     // Launcher control buttons
     public static JoystickButton launchBall = new JoystickButton(joystickOperator, Ports.OIOperatorShootBall);
@@ -167,7 +163,7 @@ public class RobotContainer
         toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));
 
         // Toggles ball management on and off
-        toggleBallManagement.whileHeld(new ToggleBallManagementCommand(m_ballHandlingSubsystem));
+        // toggleBallManagement.whileHeld(new ToggleBallManagementCommand(m_ballHandlingSubsystem));
 
         // Set the ball launcher buttons to do correct commands
         setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true));
