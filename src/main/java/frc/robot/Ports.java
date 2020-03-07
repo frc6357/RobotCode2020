@@ -29,7 +29,8 @@ public class Ports
     public static final int backLeftDrive               = 12; // CAN ID
     public static final int backRightDrive              = 13; // CAN ID
 
-    public static final int gearShifter                 = 7; // PCM 0 ID 7
+    public static final int gearShifterA                = 3; // PCM 0 ID 7 TODO: THERE NEEDS TO BE A 5 HERE
+    public static final int gearShifterB                = 4;
 
     public static final int leftEncoderA                = 0;  // DIO
     public static final int leftEncoderB                = 1;  // DIO
@@ -41,8 +42,8 @@ public class Ports
     //////////////////////////////
     public static final int intakeMotor                 = 20; // CAN ID
 
-    public static final int intakeMoverExtend           = 2;  // PCM 1, Output 0
-    public static final int intakeMoverRetract          = 3;  // PCM 1, Output 1
+    public static final int intakeMoverExtend           = 5;  // PCM 1, Output 0
+    public static final int intakeMoverRetract          = 2;  // PCM 1, Output 1
 
     public static final int intakeOpenCheck             = 4;  // DIO
     public static final int intakeSpeedCheckA           = 5;  // DIO
@@ -68,8 +69,8 @@ public class Ports
     public static final int ballLoaderMotor             = 24; // CAN ID
     public static final int ballReleaseMotor            = 25; // CAN ID
 
-    public static final int launcherHoodExtend          = 4;  // PCM 1, Output 4
-    public static final int launcherHoodRetract         = 5;  // PCM 1, Output 5
+    public static final int launcherHoodExtend          = 0;  // PCM 1, Output 4
+    public static final int launcherHoodRetract         = 7;  // PCM 1, Output 5
 
     ///////////////////////////////
     // Climb Addresses
@@ -84,8 +85,8 @@ public class Ports
     ///////////////////////////////
     public static final int colorWheelSpinner           = 40; // CAN ID
 
-    public static final int colorSpinnerExtend          = 0;  // PCM 2, Output 0
-    public static final int colorSpinnerRetract         = 1;  // PCM 2, Output 1
+    public static final int colorSpinnerExtend          = 1;  // PCM 2, Output 0
+    public static final int colorSpinnerRetract         = 6;  // PCM 2, Output 1
 
 
 
@@ -113,7 +114,7 @@ public class Ports
     public static final int OIOperatorJoystick          = 1;
 
     public static final int OIOperatorStopColorWheel    = 1;    // Button A
-    public static final int OIOperatorStartThreeRotate  = 9;    // Left Joystick press button
+    // public static final int OIOperatorStartThreeRotate  = 9;    // Left Joystick press button
     public static final int OIOperatorStartSetColor     = 10;   // Right Joystick press button
     public static final int OIOperatorColorWheelSpin    = 8;    // Start button
     public static final int OIOperatorColorWheelLift    = 7;    // Back button
@@ -121,6 +122,7 @@ public class Ports
     public static final int OIOperatorShootBall         = 2;    // Button B
     public static final int OIOperatorToggleIntake      = 3;    // Button X
     public static final int OIOperatorToggleBallManagement  = 180;  // POV Angle
+    public static final int OIOperatorLeftJoystickClick = 9;
 
     public static final int OIOperatorSetHighAngle      = 0;    // POV Angle
 
