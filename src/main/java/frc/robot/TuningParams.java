@@ -90,7 +90,7 @@ public final class TuningParams
     ///////////////////////////////
     // Auto Params
     ///////////////////////////////
-    public static final double AUTO_STRAIGHTSTMOVE_DRIVE_DISTANCE       = 50.0;
+    public static final double AUTO_STRAIGHTSTMOVE_DRIVE_DISTANCE       = 50.0; //cm
     public static final double AUTO_OFFSETSTMOVE_DRIVE_DISTANCE         = -1000.0;
     public static final double LAUNCHER_START_UP_TIME                   = 3.0;
 
@@ -100,6 +100,10 @@ public final class TuningParams
     public static final double AUTO_TRENCH_DRIVE_DISTANCE               = 670.56;
 
     public static final int AUTO_OFFSETSTTRENCH_TURN_ANGLE_1            = -148;
+
+    // Distance to drive forward or backward to get off the line in "Drive forwards" and "Drive backwards"
+    public static final double AUTO_DRIVE_DISTANCE                      = 100.0;
+    public static final double AUTO_DRIVE_DISTANCE_TO_WALL              = 294.0; //10ft start line to wall
 
     ///////////////////////////////
     // Test Params

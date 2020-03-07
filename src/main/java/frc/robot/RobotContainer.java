@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.InternalButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveStraightCommand;
+import frc.robot.AutoCommands.*;
 //import frc.robot.AutoCommands.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -39,7 +40,7 @@ public class RobotContainer
         DRIVE, LAUNCHER, CLIMB, INTAKE, COLOR_WHEEL, OTHER
     };
     private enum AutoCommands{
-        OffAngleShot,OffAngleRecollectShot, StraightShot, StraightRecollectShot
+        DriveForward, DriveBackward, DriveForwardShoot, ShootDriveForward, OffAngleShot,OffAngleRecollectShot, StraightShot, StraightRecollectShot
     };
 
     SendableChooser<testModeChoice> testModeSelector = new SendableChooser<testModeChoice>();
@@ -85,22 +86,22 @@ public class RobotContainer
     public RobotContainer() 
     {
         //auto commands
-        autoCommandSelector.addOption("OffAngleShooting", AutoCommands.OffAngleShot);
-        autoCommandSelector.addOption("OffAngleShooting/Recollection", AutoCommands.OffAngleRecollectShot);
-        autoCommandSelector.addOption("StraightShooting", AutoCommands.StraightShot);
-        autoCommandSelector.addOption("StraightShooting/Recollection", AutoCommands.StraightRecollectShot);
+        autoCommandSelector.addOption("Drive forwards", AutoCommands.DriveForward);
+        autoCommandSelector.addOption("Drive backwards", AutoCommands.DriveBackward);
+        autoCommandSelector.addOption("Drive forward then shoot", AutoCommands.DriveForwardShoot);
+        autoCommandSelector.addOption("Shoot then drive forwards", AutoCommands.ShootDriveForward);
+
+        //TODO: add extra auto commands once tested
+        //autoCommandSelector.addOption("OffAngleShooting", AutoCommands.OffAngleShot);
+        //autoCommandSelector.addOption("OffAngleShooting/Recollection", AutoCommands.OffAngleRecollectShot);
+        //autoCommandSelector.addOption("StraightShooting", AutoCommands.StraightShot);
+        //autoCommandSelector.addOption("StraightShooting/Recollection", AutoCommands.StraightRecollectShot);
 
         joystickDriver.setFilter(Ports.OIDriverLeftDrive, new FilterDeadband(0.06, -1.0));
         joystickDriver.setFilter(Ports.OIDriverRightDrive, new FilterDeadband(0.06, -1.0));
 
         // Configure the button bindings
         configureButtonBindings();
-        testModeSelector.setDefaultOption("OTHER", testModeChoice.OTHER);
-        testModeSelector.addOption("DRIVE", testModeChoice.DRIVE);
-        testModeSelector.addOption("COLOR_WHEEL", testModeChoice.COLOR_WHEEL);
-        testModeSelector.addOption("CLIMB", testModeChoice.CLIMB);
-        testModeSelector.addOption("INTAKE", testModeChoice.INTAKE);
-        testModeSelector.addOption("LAUNCHER", testModeChoice.LAUNCHER);
 
         // Driver camera configuration.
         camera = CameraServer.getInstance().startAutomaticCapture("Driver Front Camera", 0);
@@ -184,34 +185,54 @@ public class RobotContainer
     public Command getAutonomousCommand() 
     { 
 
-        return new DriveStraightCommand(m_driveSubsystem, 50);
+        AutoCommands myAuto = autoCommandSelector.getSelected();
+        
         // StraightShotToMoveAuto autoCommand = new StraightShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem, m_ballHandlingSubsystem);
         // return autoCommand.getCommandGroup();
 
         // TODO: Put this back in later!!
-        /*
-        AutoCommands myAuto = autoCommandSelector.getSelected();
+        
+        
         switch (myAuto) {
-            case OffAngleShot:
-                OffAngleShotToMoveAuto m_autoPath = new OffAngleShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
-                return m_autoPath.getCommandGroup();
+            case DriveForward:
+                return new DriveStraightCommand(m_driveSubsystem, TuningParams.AUTO_DRIVE_DISTANCE);
+                
+            case DriveBackward:
+                return new DriveStraightCommand(m_driveSubsystem, -(TuningParams.AUTO_DRIVE_DISTANCE));
+                
+            case DriveForwardShoot:
+                DriveForwardShootAuto m_DriveShoot = new DriveForwardShootAuto(m_driveSubsystem, m_launcherSubsystem);
+                return m_DriveShoot.getCommandGroup();
 
-            case OffAngleRecollectShot:
-                OffAngleShotToTrenchAuto m_autoPath1 = new OffAngleShotToTrenchAuto(m_driveSubsystem, m_intakeSubsystem, m_launcherSubsystem);
-                return m_autoPath1.getCommandGroup();
+            case ShootDriveForward:
+                ShootDriveForwardAuto m_ShootDrive = new ShootDriveForwardAuto(m_driveSubsystem, m_launcherSubsystem);
+                return m_ShootDrive.getCommandGroup();
 
-            case StraightShot:
-                StraightShotToMoveAuto m_autoPath2 = new StraightShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
+                
+            // case OffAngleShot:
+            //     OffAngleShotToMoveAuto m_autoPath = new OffAngleShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem);
+            //     return m_autoPath.getCommandGroup();
 
-                return m_autoPath2.getCommandGroup();
-            case StraightRecollectShot:
-                StraightShotToTrenchAuto m_autoPath3 = new StraightShotToTrenchAuto(m_driveSubsystem, m_launcherSubsystem, m_intakeSubsystem);
+            // case OffAngleRecollectShot:
+            //     OffAngleShotToTrenchAuto m_autoPath1 = new OffAngleShotToTrenchAuto(m_driveSubsystem, m_intakeSubsystem, m_launcherSubsystem);
+            //     return m_autoPath1.getCommandGroup();
 
-                return m_autoPath3.getCommandGroup();
+            // case StraightShot:
+            //     StraightShotToMoveAuto m_autoPath2 = new StraightShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem,m_ballHandlingSubsystem);
+
+            //     return m_autoPath2.getCommandGroup();
+            // case StraightRecollectShot:
+            //     StraightShotToTrenchAuto m_autoPath3 = new StraightShotToTrenchAuto(m_driveSubsystem, m_launcherSubsystem, m_intakeSubsystem);
+
+            //     return m_autoPath3.getCommandGroup();
             default:
                 return (Command) null;
+                
+                
+            
         }
-        */
+        //return new DriveStraightCommand(m_driveSubsystem, 50);
+        
     }
     
     public boolean isClimbArmed() 

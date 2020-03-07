@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SK20Launcher;
 
 /**
- * An example command that uses an subsystem.
+ * A command that sets the launcher angle.
  */
 public class SetAngleCommand extends CommandBase 
 {
