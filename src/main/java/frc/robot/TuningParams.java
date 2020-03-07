@@ -52,9 +52,10 @@ public final class TuningParams
     //////////////////////////////
     public static final double LOADER_MAX_SPEED                = 1.0;
     public static final double RELEASE_MOTOR_SPEED             = 1.0;
-    public static final double LAUNCHER_SET_PERCENTAGE_LOW     = -0.56;
-    public static final double LAUNCHER_SET_PERCENTAGE_HIGH    = -0.8; // TODO: IMPORTANT! Tune this
-    public static final int RELEASE_MOTOR_RUNTIME              = 1000; // In Milliseconds
+    // TODO: Fix these later
+    public static final double LAUNCHER_SET_PERCENTAGE_LOW     = 0;//-0.56;
+    public static final double LAUNCHER_SET_PERCENTAGE_HIGH    = 0;//-0.8; // TODO: IMPORTANT! Tune this
+    public static final int RELEASE_MOTOR_RUNTIME              = 300; // In Milliseconds
     //TODO: IMPORTANT! Tune these PID values later
     public static final double LAUNCHER_P_VALUE                = 0.005;
     public static final double LAUNCHER_I_VALUE                = 0.005;
@@ -103,7 +104,8 @@ public final class TuningParams
 
     // Distance to drive forward or backward to get off the line in "Drive forwards" and "Drive backwards"
     public static final double AUTO_DRIVE_DISTANCE                      = 100.0;
-    public static final double AUTO_DRIVE_DISTANCE_TO_WALL              = 294.0; //10ft start line to wall
+    public static final double AUTO_DRIVE_DISTANCE_TO_WALL              = 294.0;   //10ft start line to wall
+    public static final double AUTO_FIRE_ALL_BALLS_TIME                 = 4000.0;  // Milliseconds
 
     ///////////////////////////////
     // Test Params

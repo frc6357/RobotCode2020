@@ -112,25 +112,23 @@ public class Ports
 
     public static final int OIOperatorJoystick          = 1;
 
-    public static final int OIOperatorStopColorWheel    = 1;    // Button A
+    // public static final int OIOperatorStopColorWheel    = 1;    // Button A
     // public static final int OIOperatorStartThreeRotate  = 9;    // Left Joystick press button
     public static final int OIOperatorStartSetColor     = 10;   // Right Joystick press button
-    public static final int OIOperatorColorWheelSpin    = 8;    // Start button
     public static final int OIOperatorColorWheelLift    = 7;    // Back button
-
-    public static final int OIOperatorShootBall         = 2;    // Button B
+    
     public static final int OIOperatorToggleIntake      = 3;    // Button X
-    public static final int OIOperatorToggleBallManagement  = 180;  // POV Angle
-    public static final int OIOperatorLeftJoystickClick = 9;
-
-    public static final int OIOperatorSetHighAngle      = 0;    // POV Angle
+    public static final int OIOperatorReverseIntake     = 9;    // Left Joystick Button
+    
+    public static final int OIOperatorActivateIBM       = 2;    // Left Trigger Axis
+    public static final int OIOperatorDeactivateBMI     = 3;    // Right Trigger Axis
+    
+    public static final int OIOperatorHighHoodAngle     = 1;;    // A button
+    public static final int OIOperatorShootBall         = 2;    // Button B
 
     public static final int OIOperatorArmClimb          = 4;    // Button Y
-    public static final int OIOperatorDeployArm         = 5;    // Pneumatic for releasing the arm (Left Bumper)
     public static final int OIOperatorRunWinchArm       = 6;    // Motor for Winching arm while held (RightBumper)
 
-    public static final int OIOperatorLeftTrigger       = 2;    // Reactivate Transfer motor
-    public static final int OIOperatorRightTrigger      = 3;    // Deactivate Transfer Motor
 
 
 

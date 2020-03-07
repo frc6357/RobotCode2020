@@ -72,7 +72,7 @@ public class DriveStraightCommand extends CommandBase {
             }
         }
 
-        if (deltaLeftEncoderDistance >= distanceTarget || deltaRightEncoderDistance >= distanceTarget) {
+        if (deltaLeftEncoderDistance >= Math.abs(distanceTarget) || deltaRightEncoderDistance >= Math.abs(distanceTarget)) {
             m_subsystem.setSpeeds(0.0, 0.0);
             isDone = true;
         }

@@ -26,7 +26,7 @@ public class SetAngleCommand extends CommandBase
     @Override
     public void initialize() 
     {
-        subsystem.setHoodUp(setHighAngle);
+        subsystem.setHoodForHighAngleShot(setHighAngle);
     }
 
     // Returns true when the command should end.

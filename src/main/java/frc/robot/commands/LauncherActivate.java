@@ -43,7 +43,7 @@ public class LauncherActivate extends CommandBase
     @Override
     public void execute() 
     {
-        if (m_subsystem.isHoodPositionHigh())
+        if (m_subsystem.isHoodSetToShootHigh())
         {
             m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE_HIGH);
         }

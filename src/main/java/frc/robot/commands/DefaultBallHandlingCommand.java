@@ -41,11 +41,11 @@ public class DefaultBallHandlingCommand extends CommandBase {
     // Runs once every 20ms
     @Override
     public void execute() {
-        if (RobotContainer.joystickOperator.getRawAxis(Ports.OIOperatorLeftTrigger) > TuningParams.TRIGGER_THRESHOLD) 
+        if (RobotContainer.joystickOperator.getRawAxis(Ports.OIOperatorActivateIBM) > TuningParams.TRIGGER_THRESHOLD) 
         {
             subsystem.stopRoller();
         } 
-        else if (RobotContainer.joystickOperator.getRawAxis(Ports.OIOperatorRightTrigger) > TuningParams.TRIGGER_THRESHOLD)
+        else if (RobotContainer.joystickOperator.getRawAxis(Ports.OIOperatorDeactivateBMI) > TuningParams.TRIGGER_THRESHOLD)
         {
             subsystem.startRoller();
         }

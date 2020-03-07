@@ -63,11 +63,11 @@ public class RobotContainer
 
     // Intake control button
     public static JoystickButton toggleIntake = new JoystickButton(joystickOperator, Ports.OIOperatorToggleIntake);
-    public static JoystickButton reverseIntake = new JoystickButton(joystickOperator, Ports.OIOperatorLeftJoystickClick);
+    public static JoystickButton reverseIntake = new JoystickButton(joystickOperator, Ports.OIOperatorReverseIntake);
 
     // Launcher control buttons
     public static JoystickButton launchBall = new JoystickButton(joystickOperator, Ports.OIOperatorShootBall);
-    public static JoystickButton setHighAngle = new JoystickButton(joystickOperator, Ports.OIOperatorColorWheelSpin);
+    public static JoystickButton setHighAngle = new JoystickButton(joystickOperator, Ports.OIOperatorHighHoodAngle);
 
     // Climb Buttons
     // public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator,
@@ -75,13 +75,14 @@ public class RobotContainer
     public static JoystickButton runWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorRunWinchArm);
     public static JoystickButton armClimbSystem = new JoystickButton(joystickOperator, Ports.OIOperatorArmClimb);
 
+    // TODO: Reinstate color wheel later
     // Color wheel buttons
     // public static JoystickButton startThreeRotate = new JoystickButton(joystickOperator,
             // Ports.OIOperatorStartThreeRotate);
-    public static JoystickButton startSetColor = new JoystickButton(joystickOperator, Ports.OIOperatorStartSetColor);
-    public static JoystickButton stopColorWheel = new JoystickButton(joystickOperator, Ports.OIOperatorStopColorWheel);
-    public static InternalButton spinColorWheel = new InternalButton();
-    public static JoystickButton toggleColorWheelLift = new JoystickButton(joystickOperator, Ports.OIOperatorColorWheelLift);
+    // public static JoystickButton startSetColor = new JoystickButton(joystickOperator, Ports.OIOperatorStartSetColor);
+    // public static JoystickButton stopColorWheel = new JoystickButton(joystickOperator, Ports.OIOperatorStopColorWheel);
+    // public static InternalButton spinColorWheel = new InternalButton();
+    // public static JoystickButton toggleColorWheelLift = new JoystickButton(joystickOperator, Ports.OIOperatorColorWheelLift);
 
     public RobotContainer() 
     {
