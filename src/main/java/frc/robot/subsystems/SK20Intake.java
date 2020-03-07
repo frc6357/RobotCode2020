@@ -11,7 +11,6 @@ import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.BaseRoller;
 import frc.robot.subsystems.base.LimitSensor;
-import frc.robot.subsystems.base.BaseRoller.Direction;
 
 /**
  * The SK20Intake class is the subsystem that interacts with the intake to both set its speed and deploy or retract it and get its status.

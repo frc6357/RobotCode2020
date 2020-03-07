@@ -24,8 +24,7 @@ public class FireNumberBallsCommand extends WaitCommand
     {
         // Beware! RELEASE_MOTOR_RUNTIME is a millisecond count whereas WaitCommand's 
         // constructor expects a number of seconds!
-        // TODO: Make sure that the unit of measurement that is put in is correct.
-        super(((double)TuningParams.RELEASE_MOTOR_RUNTIME * (double)numBalls));
+        super(((double)TuningParams.RELEASE_MOTOR_RUNTIME * (double)numBalls) / 1000.0);
         addRequirements(launcherSubsystem);
         m_launcher = launcherSubsystem;
     }

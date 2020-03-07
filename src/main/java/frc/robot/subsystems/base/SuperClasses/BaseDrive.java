@@ -14,7 +14,6 @@ public class BaseDrive {
     private final DifferentialDrive driveDiff;
     private final ScaledEncoder encoderLeft, encoderRight;
     private final DoubleSolenoid gearShiftSolenoid;
-    private final ShiftPolarity shiftPolarity;
     private double lastLeftSetSpeed = 0;
     private double lastRightSetSpeed = 0;
 
@@ -35,14 +34,12 @@ public class BaseDrive {
      *                          robot
      */
     public BaseDrive(SpeedControllerGroup motorGroupLeft, SpeedControllerGroup motorGroupRight,
-            ScaledEncoder encoderLeft, ScaledEncoder encoderRight, DoubleSolenoid gearShiftSolenoid,
-            ShiftPolarity shiftPolarity) {
+            ScaledEncoder encoderLeft, ScaledEncoder encoderRight, DoubleSolenoid gearShiftSolenoid) {
         this.motorGroupLeft = motorGroupLeft;
         this.motorGroupRight = motorGroupRight;
         this.encoderLeft = encoderLeft;
         this.encoderRight = encoderRight;
         this.gearShiftSolenoid = gearShiftSolenoid;
-        this.shiftPolarity = shiftPolarity;
         driveDiff = new DifferentialDrive(motorGroupLeft, motorGroupRight);
     }
 
