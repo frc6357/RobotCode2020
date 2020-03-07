@@ -12,13 +12,16 @@ import frc.robot.TuningParams;
 import frc.robot.subsystems.SK20Launcher;
 
 /**
- * TODO: Add your docs here.
+ * This command is used to fire a given amount of balls.
  */
 public class FireNumberBallsCommand extends WaitCommand 
 {
     SK20Launcher m_launcher;
     /**
-     * TODO: Add your docs here.
+     * This constructor creates a new command and gets the needed info
+     * 
+     * @param numBalls Tell us how many balls we want to shoot
+     * @param launcherSubsystem The subsystem needed to shoot
      */
     public FireNumberBallsCommand(int numBalls, SK20Launcher launcherSubsystem) 
     {
