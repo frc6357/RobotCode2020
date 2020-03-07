@@ -9,10 +9,7 @@ package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.InternalButton;
@@ -25,10 +22,6 @@ import frc.robot.subsystems.*;
 import frc.robot.subsystems.base.SuperClasses.Gear;
 import frc.robot.utils.FilteredJoystick;
 import frc.robot.utils.filters.FilterDeadband;
-
-// TODO: IMPORTANT! This class doesn't wire up any command to run in auto mode
-//       yet. At the very least, we need to have the robot move forward and
-//       clear the auto line.
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -63,14 +56,9 @@ public class RobotContainer
     public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
     public static Joystick joystickOperator = new Joystick(Ports.OIOperatorJoystick);
 
-    // TODO: Check and clarify the slowmode and gear shifter buttons
-    // Slowmode Buttons
-    public static JoystickButton slowmodeLeft = new JoystickButton(joystickDriver, Ports.OIDriverSetLowGear);
-    public static JoystickButton slowmodeRight = new JoystickButton(joystickDriver, Ports.OIDriverSetHighGear);
-
     // Gear Shifter Button
-    public static JoystickButton setLowGear = new JoystickButton(joystickDriver, Ports.OIDriverSetSlowmodeLeft);
-    public static JoystickButton setHighGear = new JoystickButton(joystickDriver, Ports.OIDriverSetSlowmodeRight);
+    public static JoystickButton setLowGear = new JoystickButton(joystickDriver, Ports.OIDriverSetLowGear);
+    public static JoystickButton setHighGear = new JoystickButton(joystickDriver, Ports.OIDriverSetHighGear);
 
     // Intake control button
     public static JoystickButton toggleIntake = new JoystickButton(joystickOperator, Ports.OIOperatorToggleIntake);
@@ -132,13 +120,6 @@ public class RobotContainer
         setLowGear.whenPressed(new SetGear(m_driveSubsystem, Gear.LOW));
         setHighGear.whenPressed(new SetGear(m_driveSubsystem, Gear.HIGH));
 
-        // Sets buttons for slowmode activation/deactivation
-        slowmodeLeft.whenPressed(new SetSlowmodeCommand(m_driveSubsystem, true));
-        slowmodeLeft.whenReleased(new SetSlowmodeCommand(m_driveSubsystem, false));
-
-        slowmodeRight.whenPressed(new SetSlowmodeCommand(m_driveSubsystem, true));
-        slowmodeRight.whenReleased(new SetSlowmodeCommand(m_driveSubsystem, false));
-
         // Sets robot buttons for the climb command
         // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
         runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
@@ -157,7 +138,7 @@ public class RobotContainer
         launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
 
         // Sets robot buttons for the control panel command
-        //TODO: IMPORTANT! Enter code back in again once we're testing the color wheel subsystem.
+        //TODO: Enter code back in again once we're testing the color wheel subsystem.
         // stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
         // startThreeRotate.whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
         // startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));

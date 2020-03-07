@@ -29,6 +29,7 @@ public final class TuningParams
     public static final double  AUTONOMOUS_SLOW_DISTANCE_AREA   = 40;       // In Centimeters
 
     public static final double  SLOWMODE_MULTIPLIER             = 0.25;
+    public static final double  SLOWMODE_TRIGGER_THRESHOLD      = 0.75;     // Joystick Trigger Required Value
 
     //////////////////////////////
     // Color Wheel Params
@@ -51,10 +52,11 @@ public final class TuningParams
     //////////////////////////////
     public static final double LOADER_MAX_SPEED                = 1.0;
     public static final double RELEASE_MOTOR_SPEED             = 1.0;
-    public static final double LAUNCHER_SET_PERCENTAGE_LOW     = -0.56; // TODO: IMPORTANT! Tune this
-    public static final double LAUNCHER_SET_PERCENTAGE_HIGH    = -0.8;
-    public static final int RELEASE_MOTOR_RUNTIME              = 300; // In Milliseconds
-    public static final double LAUNCHER_P_VALUE                = 0.005; //TODO: IMPORTANT! Tune these PID values later
+    public static final double LAUNCHER_SET_PERCENTAGE_LOW     = -0.56;
+    public static final double LAUNCHER_SET_PERCENTAGE_HIGH    = -0.8; // TODO: IMPORTANT! Tune this
+    public static final int RELEASE_MOTOR_RUNTIME              = 1000; // In Milliseconds
+    //TODO: IMPORTANT! Tune these PID values later
+    public static final double LAUNCHER_P_VALUE                = 0.005;
     public static final double LAUNCHER_I_VALUE                = 0.005;
     public static final double LAUNCHER_D_VALUE                = 0.005;
 

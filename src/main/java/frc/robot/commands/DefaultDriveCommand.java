@@ -2,8 +2,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Ports;
-import frc.robot.subsystems.SK20Drive;
 import frc.robot.RobotContainer;
+import frc.robot.TuningParams;
+import frc.robot.subsystems.SK20Drive;
 
 /**
  * A default drive command that takes in the filtered joysticks such that the
@@ -38,6 +39,9 @@ public class DefaultDriveCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        double rightTriggerValue = RobotContainer.joystickDriver.getRawAxis(Ports.OIDriverSlowmode);
+        m_subsystem.setSlowmode((rightTriggerValue >= TuningParams.SLOWMODE_TRIGGER_THRESHOLD) ? true : false);
+
         double speedLeft = RobotContainer.joystickDriver.getFilteredAxis(Ports.OIDriverLeftDrive);
         double speedRight = RobotContainer.joystickDriver.getFilteredAxis(Ports.OIDriverRightDrive);
         m_subsystem.setSpeeds(speedLeft, speedRight);
