@@ -11,6 +11,7 @@ import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.subsystems.base.BaseRoller;
 import frc.robot.subsystems.base.LimitSensor;
+import frc.robot.subsystems.base.BaseRoller.Direction;
 
 /**
  * The SK20Intake class is the subsystem that interacts with the intake to both set its speed and deploy or retract it and get its status.
@@ -58,6 +59,14 @@ public class SK20Intake extends SubsystemBase
     public void startIntakeRoller()
     {
         intakeRoller.setForwards();
+    }
+
+    /**
+     * When activate intake is called the motor on the intake turns on up to the set speed until it is deactivated
+     */
+    public void reverseIntakeRoller()
+    {
+        intakeRoller.setBackwards();
     }
 
     /**

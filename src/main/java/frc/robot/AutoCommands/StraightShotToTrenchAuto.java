@@ -38,7 +38,7 @@ public class StraightShotToTrenchAuto
 
         // This command group follows a path of starting launcher, shooting balls, then moving to pick
         // up in the trench run.
-        commandGroup = new SequentialCommandGroup(new LauncherActivate(this.m_launcherSubsystem));
+        commandGroup = new SequentialCommandGroup(new LauncherActivate(this.m_launcherSubsystem, true));
         commandGroup.addCommands(new WaitCommand(TuningParams.LAUNCHER_START_UP_TIME));
         commandGroup.addCommands(new FireNumberBallsCommand(3, this.m_launcherSubsystem));
         commandGroup.addCommands(new TurnRelativeCommand(this.m_driveSubsystem, TuningParams.AUTO_STRAIGHTSTTRENCH_TURN_ANGLE));

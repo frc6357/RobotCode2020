@@ -12,21 +12,30 @@ import frc.robot.subsystems.SK20BallHandling;
  */
 public class DefaultBallHandlingCommand extends CommandBase {
     private final SK20BallHandling subsystem;
+    private final boolean endable;
 
     /**
      * The
      */
-    public DefaultBallHandlingCommand(SK20BallHandling subsystem) 
+    public DefaultBallHandlingCommand(SK20BallHandling subsystem, boolean endable) 
     {
         this.subsystem = subsystem;
         addRequirements(subsystem);
+        this.endable = endable;
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() 
     {
-        subsystem.stopRoller();
+        if (endable)
+        {
+            subsystem.startRoller();
+        }
+        else
+        {
+            subsystem.stopRoller();
+        }
     }
 
     // Runs once every 20ms
@@ -46,6 +55,6 @@ public class DefaultBallHandlingCommand extends CommandBase {
     @Override
     public boolean isFinished() 
     {
-        return false;
+        return endable;
     }
 }

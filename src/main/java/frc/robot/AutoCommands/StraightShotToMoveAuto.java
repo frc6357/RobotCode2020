@@ -4,9 +4,12 @@ import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.TuningParams;
+import frc.robot.commands.DefaultBallHandlingCommand;
 import frc.robot.commands.DriveStraightCommand;
 import frc.robot.commands.FireNumberBallsCommand;
 import frc.robot.commands.LauncherActivate;
+import frc.robot.commands.SetAngleCommand;
+import frc.robot.subsystems.SK20BallHandling;
 import frc.robot.subsystems.SK20Drive;
 import frc.robot.subsystems.SK20Launcher;
 
@@ -27,12 +30,16 @@ public class StraightShotToMoveAuto
 {
     public SequentialCommandGroup commandGroup;
 
-    public StraightShotToMoveAuto(SK20Drive m_driveSubsystem, SK20Launcher m_launcherSubsystem)
+    public StraightShotToMoveAuto(SK20Drive m_driveSubsystem, SK20Launcher m_launcherSubsystem, SK20BallHandling m_ballHandlingSubsystem)
     {
-        commandGroup = new SequentialCommandGroup(new LauncherActivate(m_launcherSubsystem));
+        commandGroup = new SequentialCommandGroup(new SetAngleCommand(m_launcherSubsystem, true));
+        commandGroup.addCommands(new LauncherActivate(m_launcherSubsystem, true));
+        commandGroup.addCommands(new DefaultBallHandlingCommand(m_ballHandlingSubsystem, true));
         commandGroup.addCommands(new WaitCommand(TuningParams.LAUNCHER_START_UP_TIME));
         commandGroup.addCommands(new FireNumberBallsCommand(3, m_launcherSubsystem));
         commandGroup.addCommands(new DriveStraightCommand(m_driveSubsystem, TuningParams.AUTO_STRAIGHTSTMOVE_DRIVE_DISTANCE));
+        commandGroup.addCommands(new SetAngleCommand(m_launcherSubsystem, false));
+        commandGroup.addCommands(new LauncherActivate(m_launcherSubsystem, true));
     }
 
     public CommandGroupBase getCommandGroup() {

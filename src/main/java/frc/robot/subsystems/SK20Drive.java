@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -30,7 +30,7 @@ public class SK20Drive extends SubsystemBase {
     private final ScaledEncoder encoderRight = new ScaledEncoder(Ports.rightEncoderA, Ports.rightEncoderB,
             TuningParams.ENCODER_RIGHT_REVERSED, TuningParams.ENCODER_PULSES, TuningParams.WHEEL_DIAMETER);
 
-    private final Solenoid gearShiftSolenoid = new Solenoid(Ports.pcm, Ports.gearShifter);
+    private final DoubleSolenoid gearShiftSolenoid = new DoubleSolenoid(Ports.pcm, Ports.gearShifterA, Ports.gearShifterB);
     private final ShiftPolarity shiftPolarity = ShiftPolarity.PRESSURE_IS_LOW;
 
     private final BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight,

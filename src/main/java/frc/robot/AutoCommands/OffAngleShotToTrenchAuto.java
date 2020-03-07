@@ -32,7 +32,7 @@ public class OffAngleShotToTrenchAuto
         this.m_intakeSubsystem = m_intakeSubsystem;
         this.m_launcherSubsystem = m_launcherSubsystem;
 
-        commandGroup = new SequentialCommandGroup(new LauncherActivate(this.m_launcherSubsystem));
+        commandGroup = new SequentialCommandGroup(new LauncherActivate(this.m_launcherSubsystem, true));
         commandGroup.addCommands(new WaitCommand(TuningParams.LAUNCHER_START_UP_TIME));
         commandGroup.addCommands(new FireNumberBallsCommand(3, this.m_launcherSubsystem));
         commandGroup.addCommands(new TurnRelativeCommand(this.m_driveSubsystem, TuningParams.AUTO_OFFSETSTTRENCH_TURN_ANGLE_1));

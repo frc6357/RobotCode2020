@@ -1,6 +1,6 @@
 package frc.robot.subsystems.base.SuperClasses;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.utils.ScaledEncoder;
@@ -13,7 +13,7 @@ public class BaseDrive {
     private final SpeedControllerGroup motorGroupLeft, motorGroupRight;
     private final DifferentialDrive driveDiff;
     private final ScaledEncoder encoderLeft, encoderRight;
-    private final Solenoid gearShiftSolenoid;
+    private final DoubleSolenoid gearShiftSolenoid;
     private final ShiftPolarity shiftPolarity;
     private double lastLeftSetSpeed = 0;
     private double lastRightSetSpeed = 0;
@@ -35,7 +35,7 @@ public class BaseDrive {
      *                          robot
      */
     public BaseDrive(SpeedControllerGroup motorGroupLeft, SpeedControllerGroup motorGroupRight,
-            ScaledEncoder encoderLeft, ScaledEncoder encoderRight, Solenoid gearShiftSolenoid,
+            ScaledEncoder encoderLeft, ScaledEncoder encoderRight, DoubleSolenoid gearShiftSolenoid,
             ShiftPolarity shiftPolarity) {
         this.motorGroupLeft = motorGroupLeft;
         this.motorGroupRight = motorGroupRight;
@@ -127,14 +127,8 @@ public class BaseDrive {
      * @param newGear The gear value that we want the robot to achieve.
      */
     public void setGear(Gear newGear) {
-        switch (shiftPolarity) {
-        case PRESSURE_IS_LOW:
-            gearShiftSolenoid.set(newGear == Gear.LOW);
-            break;
-        case PRESSURE_IS_HIGH:
-            gearShiftSolenoid.set(newGear == Gear.HIGH);
-            break;
-        }
+            DoubleSolenoid.Value check = (newGear == Gear.HIGH) ? DoubleSolenoid.Value.kForward: DoubleSolenoid.Value.kReverse;
+            gearShiftSolenoid.set(check);
     }
 
     /**
@@ -144,17 +138,10 @@ public class BaseDrive {
      *         is on.
      */
     public Gear getGear() {
-        Gear toReturn = Gear.LOW;
-        switch (shiftPolarity) {
-        case PRESSURE_IS_LOW:
-            toReturn = gearShiftSolenoid.get() ? Gear.LOW : Gear.HIGH;
-            break;
-        case PRESSURE_IS_HIGH:
-            toReturn = gearShiftSolenoid.get() ? Gear.HIGH : Gear.LOW;
-            break;
-        }
+        Gear toReturn = Gear.HIGH;
+        toReturn = (gearShiftSolenoid.get() == DoubleSolenoid.Value.kForward) ? Gear.HIGH: Gear.LOW;
+        
         return toReturn;
-
     }
 
     /**

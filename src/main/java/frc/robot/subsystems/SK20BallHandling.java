@@ -43,7 +43,7 @@ public class SK20BallHandling extends SubsystemBase {
         //beltEncoder2 = new CANEncoder(beltMotor2);
         ballBelt1 = new BaseRoller(beltMotor1, TuningParams.BALL_INNER_SPEED);
         ballBelt2 = new BaseRoller(beltMotor2, TuningParams.BALL_OUTER_SPEED);
-        ballHandling = new DefaultBallHandlingCommand(this);
+        ballHandling = new DefaultBallHandlingCommand(this, false);
         setDefaultCommand(ballHandling);
     }
 

@@ -14,20 +14,18 @@ import frc.robot.subsystems.SK20Launcher;
 /**
  * An example command that uses an example subsystem.
  */
-public class LauncherActivate extends CommandBase 
+public class LauncherActivateAuto extends CommandBase 
 {
     private final SK20Launcher m_subsystem;
-    private final boolean endable;
 
     /**
      * Creates a new ExampleCommand.
      *
      * @param subsystem The subsystem used by this command.
      */
-    public LauncherActivate(SK20Launcher subsystem, boolean endable) 
+    public LauncherActivateAuto(SK20Launcher subsystem) 
     {
         m_subsystem = subsystem;
-        this.endable = endable;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
@@ -43,21 +41,13 @@ public class LauncherActivate extends CommandBase
     @Override
     public void execute() 
     {
-        if (m_subsystem.isHoodPositionHigh())
-        {
-            m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE_HIGH);
-        }
-
-        else
-        {
-            m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE_LOW);
-        }
+        m_subsystem.
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() 
     {
-        return endable;
+        return false;
     }
 }

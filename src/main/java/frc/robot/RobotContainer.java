@@ -17,27 +17,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.InternalButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.AutoCommands.OffAngleShotToMoveAuto;
-import frc.robot.AutoCommands.OffAngleShotToTrenchAuto;
-import frc.robot.AutoCommands.StraightShotToMoveAuto;
-import frc.robot.AutoCommands.StraightShotToTrenchAuto;
+import frc.robot.commands.DriveStraightCommand;
 //import frc.robot.AutoCommands.*;
-import frc.robot.commands.LaunchBallCommand;
-import frc.robot.commands.ManualColorWheelControlCommand;
-import frc.robot.commands.SetAngleCommand;
-import frc.robot.commands.SetGear;
-import frc.robot.commands.SetSlowmodeCommand;
-import frc.robot.commands.StopColorWheelCommand;
-import frc.robot.commands.ThreeRotateCommandGroup;
-// import frc.robot.commands.ToggleBallManagementCommand;
-import frc.robot.commands.ToggleColorWheelLiftCommand;
-import frc.robot.commands.ToggleIntakeCommand;
-import frc.robot.commands.TurnToColorCommandGroup;
-import frc.robot.subsystems.SK20BallHandling;
-import frc.robot.subsystems.SK20ColorWheel;
-import frc.robot.subsystems.SK20Drive;
-import frc.robot.subsystems.SK20Intake;
-import frc.robot.subsystems.SK20Launcher;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 // import frc.robot.subsystems.SK20Climb;
 import frc.robot.subsystems.base.SuperClasses.Gear;
 import frc.robot.utils.FilteredJoystick;
@@ -70,9 +53,9 @@ public class RobotContainer
     SendableChooser<AutoCommands> autoCommandSelector = new SendableChooser<AutoCommands>();
 
     // The robot's subsystems and commands are defined here...
-    private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
+    // private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
     private final SK20Drive m_driveSubsystem = new SK20Drive();
-    // private final SK20Climb m_climbSubsystem = new SK20Climb();
+    private final SK20Climb m_climbSubsystem = new SK20Climb();
     private final SK20Intake m_intakeSubsystem = new SK20Intake();
     private final SK20Launcher m_launcherSubsystem = new SK20Launcher();
     private final SK20BallHandling m_ballHandlingSubsystem = new SK20BallHandling();
@@ -80,30 +63,32 @@ public class RobotContainer
     public static FilteredJoystick joystickDriver = new FilteredJoystick(Ports.OIDriverJoystick);
     public static Joystick joystickOperator = new Joystick(Ports.OIOperatorJoystick);
 
+    // TODO: Check and clarify the slowmode and gear shifter buttons
     // Slowmode Buttons
-    public static JoystickButton slowmodeLeft = new JoystickButton(joystickDriver, Ports.OIDriverSetSlowmodeLeft);
-    public static JoystickButton slowmodeRight = new JoystickButton(joystickDriver, Ports.OIDriverSetSlowmodeRight);
+    public static JoystickButton slowmodeLeft = new JoystickButton(joystickDriver, Ports.OIDriverSetLowGear);
+    public static JoystickButton slowmodeRight = new JoystickButton(joystickDriver, Ports.OIDriverSetHighGear);
 
     // Gear Shifter Button
-    public static JoystickButton setLowGear = new JoystickButton(joystickDriver, Ports.OIDriverSetLowGear);
-    public static JoystickButton setHighGear = new JoystickButton(joystickDriver, Ports.OIDriverSetHighGear);
+    public static JoystickButton setLowGear = new JoystickButton(joystickDriver, Ports.OIDriverSetSlowmodeLeft);
+    public static JoystickButton setHighGear = new JoystickButton(joystickDriver, Ports.OIDriverSetSlowmodeRight);
 
     // Intake control button
     public static JoystickButton toggleIntake = new JoystickButton(joystickOperator, Ports.OIOperatorToggleIntake);
+    public static JoystickButton reverseIntake = new JoystickButton(joystickOperator, Ports.OIOperatorLeftJoystickClick);
 
     // Launcher control buttons
     public static JoystickButton launchBall = new JoystickButton(joystickOperator, Ports.OIOperatorShootBall);
     public static JoystickButton setHighAngle = new JoystickButton(joystickOperator, Ports.OIOperatorColorWheelSpin);
 
     // Climb Buttons
-    public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator,
-            Ports.OIOperatorDeployArm);
+    // public static JoystickButton operatorClimbArmDeploy = new JoystickButton(joystickOperator,
+    //         Ports.OIOperatorDeployArm);
     public static JoystickButton runWinchRobot = new JoystickButton(joystickOperator, Ports.OIOperatorRunWinchArm);
     public static JoystickButton armClimbSystem = new JoystickButton(joystickOperator, Ports.OIOperatorArmClimb);
 
     // Color wheel buttons
-    public static JoystickButton startThreeRotate = new JoystickButton(joystickOperator,
-            Ports.OIOperatorStartThreeRotate);
+    // public static JoystickButton startThreeRotate = new JoystickButton(joystickOperator,
+            // Ports.OIOperatorStartThreeRotate);
     public static JoystickButton startSetColor = new JoystickButton(joystickOperator, Ports.OIOperatorStartSetColor);
     public static JoystickButton stopColorWheel = new JoystickButton(joystickOperator, Ports.OIOperatorStopColorWheel);
     public static InternalButton spinColorWheel = new InternalButton();
@@ -156,11 +141,12 @@ public class RobotContainer
 
         // Sets robot buttons for the climb command
         // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
-        // runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
-        // runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
+        runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
+        runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
         
         // Sets the buttons to activate/deactivate intake
         toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));
+        reverseIntake.whenPressed(new ReverseIntakeCommand(m_intakeSubsystem));
 
         // Toggles ball management on and off
         // toggleBallManagement.whileHeld(new ToggleBallManagementCommand(m_ballHandlingSubsystem));
@@ -172,12 +158,12 @@ public class RobotContainer
 
         // Sets robot buttons for the control panel command
         //TODO: IMPORTANT! Enter code back in again once we're testing the color wheel subsystem.
-        stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
-        startThreeRotate.whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
-        startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
-        spinColorWheel.whenPressed(new ManualColorWheelControlCommand(m_colorWheelSubsystem, true));
-        spinColorWheel.whenReleased(new ManualColorWheelControlCommand(m_colorWheelSubsystem, false));
-        toggleColorWheelLift.whenPressed(new ToggleColorWheelLiftCommand(m_colorWheelSubsystem));
+        // stopColorWheel.whenPressed(new StopColorWheelCommand(m_colorWheelSubsystem));
+        // startThreeRotate.whenPressed(new ThreeRotateCommandGroup(m_colorWheelSubsystem, TuningParams.COLOR_WHEEL_TRANSITIONS));
+        // startSetColor.whenPressed(new TurnToColorCommandGroup(m_colorWheelSubsystem));
+        // spinColorWheel.whenPressed(new ManualColorWheelControlCommand(m_colorWheelSubsystem, true));
+        // spinColorWheel.whenReleased(new ManualColorWheelControlCommand(m_colorWheelSubsystem, false));
+        // toggleColorWheelLift.whenPressed(new ToggleColorWheelLiftCommand(m_colorWheelSubsystem));
 
     }
 
@@ -217,6 +203,12 @@ public class RobotContainer
     public Command getAutonomousCommand() 
     { 
 
+        return new DriveStraightCommand(m_driveSubsystem, 50);
+        // StraightShotToMoveAuto autoCommand = new StraightShotToMoveAuto(m_driveSubsystem, m_launcherSubsystem, m_ballHandlingSubsystem);
+        // return autoCommand.getCommandGroup();
+
+        // TODO: Put this back in later!!
+        /*
         AutoCommands myAuto = autoCommandSelector.getSelected();
         switch (myAuto) {
             case OffAngleShot:
@@ -238,6 +230,7 @@ public class RobotContainer
             default:
                 return (Command) null;
         }
+        */
     }
     
     public boolean isClimbArmed() 

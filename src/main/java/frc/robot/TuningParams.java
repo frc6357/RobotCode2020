@@ -51,8 +51,9 @@ public final class TuningParams
     //////////////////////////////
     public static final double LOADER_MAX_SPEED                = 1.0;
     public static final double RELEASE_MOTOR_SPEED             = 1.0;
-    public static final double LAUNCHER_SET_PERCENTAGE         = -0.25; // TODO: IMPORTANT! Tune this
-    public static final int RELEASE_MOTOR_RUNTIME              = 1250; // In Milliseconds
+    public static final double LAUNCHER_SET_PERCENTAGE_LOW     = -0.56; // TODO: IMPORTANT! Tune this
+    public static final double LAUNCHER_SET_PERCENTAGE_HIGH    = -0.8;
+    public static final int RELEASE_MOTOR_RUNTIME              = 300; // In Milliseconds
     public static final double LAUNCHER_P_VALUE                = 0.005; //TODO: IMPORTANT! Tune these PID values later
     public static final double LAUNCHER_I_VALUE                = 0.005;
     public static final double LAUNCHER_D_VALUE                = 0.005;
@@ -60,7 +61,7 @@ public final class TuningParams
     //////////////////////////////
     // Intake Params
     //////////////////////////////
-    public static final double INTAKE_MAX_SPEED                = 0.75;
+    public static final double INTAKE_MAX_SPEED                = 1.0;
     public static final int INTAKE_ENCODER_PULSES              = 2048;
     public static final double INTAKE_WHEEL_DIAMETER           = 5.08; // 2.0 Inches in centimetres
     public static final boolean INTAKE_BALL_CHECK_INVERT       = false;
@@ -87,9 +88,9 @@ public final class TuningParams
     ///////////////////////////////
     // Auto Params
     ///////////////////////////////
-    public static final double AUTO_STRAIGHTSTMOVE_DRIVE_DISTANCE       = -1000.0;
+    public static final double AUTO_STRAIGHTSTMOVE_DRIVE_DISTANCE       = 50.0;
     public static final double AUTO_OFFSETSTMOVE_DRIVE_DISTANCE         = -1000.0;
-    public static final double LAUNCHER_START_UP_TIME                   = 2.0;
+    public static final double LAUNCHER_START_UP_TIME                   = 3.0;
 
     public static final int AUTO_STRAIGHTSTTRENCH_TURN_ANGLE            = 90;
     public static final double AUTO_STRAIGHTSTTRENCH_DRIVE_DISTANCE_1   = 192.024;

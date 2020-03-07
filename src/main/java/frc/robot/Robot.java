@@ -133,7 +133,8 @@ public class Robot extends TimedRobot
     {
         
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+        // TODO: GET A REAL AUTO CHOOSER IN LATER!!!
+        
         // schedule the autonomous command (example)
         if (m_autonomousCommand != null) 
         {

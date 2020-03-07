@@ -25,7 +25,7 @@ public class OffAngleShotToMoveAuto
 
     public OffAngleShotToMoveAuto(SK20Drive m_driveSubsystem, SK20Launcher m_launcherSubsystem)
     {
-        commandGroup = new SequentialCommandGroup(new LauncherActivate(m_launcherSubsystem));
+        commandGroup = new SequentialCommandGroup(new LauncherActivate(m_launcherSubsystem, true));
         commandGroup.addCommands(new WaitCommand(TuningParams.LAUNCHER_START_UP_TIME));
         commandGroup.addCommands(new FireNumberBallsCommand(3, m_launcherSubsystem));
         commandGroup.addCommands(new DriveStraightCommand(m_driveSubsystem, TuningParams.AUTO_OFFSETSTMOVE_DRIVE_DISTANCE));
