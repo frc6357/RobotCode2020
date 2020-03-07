@@ -2,7 +2,6 @@ package frc.robot.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.TuningParams;
 import frc.robot.commands.DriveStraightCommand;
 import frc.robot.commands.FireNumberBallsCommand;
