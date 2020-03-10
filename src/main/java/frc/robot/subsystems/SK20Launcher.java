@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Ports;
@@ -36,6 +37,8 @@ public class SK20Launcher extends SubsystemBase
     private final BaseRoller releaseRoller = new BaseRoller(releaseMotor, TuningParams.RELEASE_MOTOR_SPEED);
 
     private final DoubleSolenoid hoodMover = new DoubleSolenoid(Ports.pcm, Ports.launcherHoodExtend, Ports.launcherHoodRetract);
+
+    private double launcherSetpoint = 0.0;
 
     /**
      * This does nothing as everything is intialized inside of the class before the constructor is even called so that 
@@ -70,6 +73,9 @@ public class SK20Launcher extends SubsystemBase
         PIDControl.setP(TuningParams.LAUNCHER_P_VALUE);
         PIDControl.setI(TuningParams.LAUNCHER_I_VALUE);
         PIDControl.setD(TuningParams.LAUNCHER_D_VALUE);
+        PIDControl.setOutputRange(-1, 0);
+        PIDControl.setIZone(TuningParams.LAUNCHER_IZONE_VALUE);
+        PIDControl.setFF(0.0);
     }
 
     /**
@@ -78,7 +84,9 @@ public class SK20Launcher extends SubsystemBase
      */
     private void setSetpoint(double value)
     {
-        PIDControl.setReference(value, ControlType.kVelocity);
+        launcherSetpoint = value * TuningParams.LAUNCHER_MAX_RPM;
+        PIDControl.setReference(launcherSetpoint, ControlType.kVelocity);
+        SmartDashboard.putNumber("Launcher Setpoint", launcherSetpoint);
     }
 
     /**
@@ -125,5 +133,11 @@ public class SK20Launcher extends SubsystemBase
     public void stopLaunchReleaseMotor()
     {
         releaseRoller.setStop();
+    }
+
+    @Override
+    public void periodic()
+    {
+        SmartDashboard.putNumber("Launcher Encoder Value", launcherMotorEncoder.getVelocity());
     }
 }

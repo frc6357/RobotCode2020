@@ -53,15 +53,18 @@ public final class TuningParams
     public static final double LOADER_MAX_SPEED                = 1.0;
     public static final double RELEASE_MOTOR_SPEED             = 1.0;
     // TODO: Fix these later
-    public static final double LAUNCHER_SET_PERCENTAGE_LOW     = 0;//-0.56;
-    public static final double LAUNCHER_SET_PERCENTAGE_HIGH    = 0;//-0.8; // TODO: IMPORTANT! Tune this
+    public static final double LAUNCHER_SET_PERCENTAGE_SLOW     = -0.56;
+    public static final double LAUNCHER_SET_PERCENTAGE_FAST    = -0.8; // TODO: IMPORTANT! Tune this
     public static final int RELEASE_MOTOR_RUNTIME              = 300; // In Milliseconds
     //TODO: IMPORTANT! Tune these PID values later
     // After reading information from Chief Delphi and RevRobotics people, these values are supposed to be insanely small as their
     // software is different than most other PID controllers
-    public static final double LAUNCHER_P_VALUE                = 0.00000005;
-    public static final double LAUNCHER_I_VALUE                = 0.00000005;
-    public static final double LAUNCHER_D_VALUE                = 0.00000005;
+    public static final double LAUNCHER_P_VALUE                = 0.001;
+    public static final double LAUNCHER_I_VALUE                = 0.0000005;
+    public static final double LAUNCHER_D_VALUE                = 0.00001;
+
+    public static final double LAUNCHER_MAX_RPM                = 5700.0;
+    public static final double LAUNCHER_IZONE_VALUE            = 2500;
 
     //////////////////////////////
     // Intake Params
