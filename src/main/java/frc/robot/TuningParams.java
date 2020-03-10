@@ -7,10 +7,10 @@ public final class TuningParams
     //////////////////////////////
     // Drive Params
     //////////////////////////////
-    public static final double  ACCEL_MAX_TOWARDS_FORWARD       =  0.075;
-    public static final double  ACCEL_MAX_TOWARDS_BACKWARD      = -0.075;
-    public static final double  DECEL_MAX_TOWARDS_FORWARD       =  0.075;
-    public static final double  DECEL_MAX_TOWARDS_BACKWARD      = -0.075;
+    public static final double  ACCEL_MAX_TOWARDS_FORWARD       =  0.125;
+    public static final double  ACCEL_MAX_TOWARDS_BACKWARD      = -0.125;
+    public static final double  DECEL_MAX_TOWARDS_FORWARD       =  0.125;
+    public static final double  DECEL_MAX_TOWARDS_BACKWARD      = -0.125;
 
     public static final double  CONTROLLED_TURN_SPEED           = 0.5;
     public static final double  SLOW_CONTROLLED_TURN_SPEED      = 0.2;
@@ -57,9 +57,11 @@ public final class TuningParams
     public static final double LAUNCHER_SET_PERCENTAGE_HIGH    = 0;//-0.8; // TODO: IMPORTANT! Tune this
     public static final int RELEASE_MOTOR_RUNTIME              = 300; // In Milliseconds
     //TODO: IMPORTANT! Tune these PID values later
-    public static final double LAUNCHER_P_VALUE                = 0.005;
-    public static final double LAUNCHER_I_VALUE                = 0.005;
-    public static final double LAUNCHER_D_VALUE                = 0.005;
+    // After reading information from Chief Delphi and RevRobotics people, these values are supposed to be insanely small as their
+    // software is different than most other PID controllers
+    public static final double LAUNCHER_P_VALUE                = 0.00000005;
+    public static final double LAUNCHER_I_VALUE                = 0.00000005;
+    public static final double LAUNCHER_D_VALUE                = 0.00000005;
 
     //////////////////////////////
     // Intake Params
