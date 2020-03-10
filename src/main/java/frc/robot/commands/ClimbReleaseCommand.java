@@ -23,10 +23,11 @@ public class ClimbReleaseCommand extends CommandBase {
 
     
     // Called every time the scheduler runs while the command is scheduled.
+    // TODO: IMPORTANT MAKE THIS WORK
     @Override
     public void initialize() {
         if (robotContainer.isClimbArmed()) {
-            m_subsystem.deployArm();
+            // m_subsystem.deployArm();
         }
     }
 

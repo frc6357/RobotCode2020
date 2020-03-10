@@ -69,8 +69,8 @@ public class Ports
     public static final int ballLoaderMotor             = 24; // CAN ID
     public static final int ballReleaseMotor            = 25; // CAN ID
 
-    public static final int launcherHoodExtend          = 0;  // PCM 1, Output
-    public static final int launcherHoodRetract         = 7;  // PCM 1, Output
+    public static final int launcherHoodExtend          = 1;  // PCM 1, Output
+    public static final int launcherHoodRetract         = 6;  // PCM 1, Output
 
     ///////////////////////////////
     // Climb Addresses
@@ -85,8 +85,8 @@ public class Ports
     ///////////////////////////////
     public static final int colorWheelSpinner           = 40; // CAN ID
 
-    public static final int colorSpinnerExtend          = 1;  // PCM 2, Output
-    public static final int colorSpinnerRetract         = 6;  // PCM 2, Output
+    public static final int colorSpinnerExtend          = 0;  // PCM 2, Output 
+    public static final int colorSpinnerRetract         = 7;  // PCM 2, Output
 
 
 
