@@ -12,7 +12,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.InternalButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveStraightCommand;
 import frc.robot.AutoCommands.*;
