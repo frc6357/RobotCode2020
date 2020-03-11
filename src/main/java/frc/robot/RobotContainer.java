@@ -11,6 +11,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveStraightCommand;
@@ -86,11 +87,13 @@ public class RobotContainer
     public RobotContainer() 
     {
         //auto commands
-        autoCommandSelector.addOption("Drive forwards", AutoCommands.DriveForward);
+        autoCommandSelector.setDefaultOption("Drive forwards", AutoCommands.DriveForward);
         autoCommandSelector.addOption("Drive backwards", AutoCommands.DriveBackward);
         autoCommandSelector.addOption("Drive forward then shoot", AutoCommands.DriveForwardShoot);
         autoCommandSelector.addOption("Shoot then drive forwards", AutoCommands.ShootDriveForward);
 
+        SmartDashboard.putData("Auto Chooser", autoCommandSelector);
+    
         //TODO: add extra auto commands once tested
         //autoCommandSelector.addOption("OffAngleShooting", AutoCommands.OffAngleShot);
         //autoCommandSelector.addOption("OffAngleShooting/Recollection", AutoCommands.OffAngleRecollectShot);

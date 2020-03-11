@@ -48,6 +48,7 @@ public class SK20Drive extends SubsystemBase {
         setDefaultCommand(driveCommand);
         SmartDashboard.putNumber("left Encoder", encoderLeft.getRotations());
         SmartDashboard.putNumber("right Encoder", encoderRight.getRotations());
+        setGear(Gear.LOW);
     }
 
     /**

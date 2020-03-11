@@ -53,7 +53,7 @@ public final class TuningParams
     public static final double LOADER_MAX_SPEED                = 1.0;
     public static final double RELEASE_MOTOR_SPEED             = 1.0;
     // TODO: Fix these later
-    public static final double LAUNCHER_SET_PERCENTAGE_SLOW     = -0.56;
+    public static final double LAUNCHER_SET_PERCENTAGE_SLOW     = -0.53;
     public static final double LAUNCHER_SET_PERCENTAGE_FAST    = -0.8; // TODO: IMPORTANT! Tune this
     public static final int RELEASE_MOTOR_RUNTIME              = 300; // In Milliseconds
     //TODO: IMPORTANT! Tune these PID values later
