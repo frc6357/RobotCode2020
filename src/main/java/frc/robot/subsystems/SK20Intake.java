@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -37,6 +37,9 @@ public class SK20Intake extends SubsystemBase
         intakeMover = new DoubleSolenoid(Ports.pcm, Ports.intakeMoverExtend, Ports.intakeMoverRetract);
 
         forward = true;
+
+        SmartDashboard.putBoolean("Intake Roller Forwards", forward);
+        SmartDashboard.putBoolean("Intake Roller Running", false);
     }
 
     /**
@@ -62,6 +65,8 @@ public class SK20Intake extends SubsystemBase
     {
         forward = true;
         intakeRoller.setForwards();
+        SmartDashboard.putBoolean("Intake Roller Forwards", true);
+        SmartDashboard.putBoolean("Intake Roller Running", true);
     }
 
     /**
@@ -71,6 +76,8 @@ public class SK20Intake extends SubsystemBase
     {
         forward = false;
         intakeRoller.setBackwards();
+        SmartDashboard.putBoolean("Intake Roller Forwards", false);
+        SmartDashboard.putBoolean("Intake Roller Running", true);
     }
 
     /**
@@ -81,12 +88,22 @@ public class SK20Intake extends SubsystemBase
     {
         return forward;
     }
+
+    /**
+     * Return true if the intake roller is currently running, false if stopped.
+     */
+    public boolean IsIntakeRollerRunning()
+    {
+        return ((intakeRoller.returnSpeed() == 0.0) ? false : true);
+    }
+    
     /**
      * When deactivate intake is called on the motor the intake is turned completely off
      */
     public void stopIntakeRoller()
     {
         intakeRoller.setStop();
+        SmartDashboard.putBoolean("Intake Roller Running", false);
     }
 
     /**
