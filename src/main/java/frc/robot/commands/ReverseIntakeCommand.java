@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SK20Intake;
 
 /**
- * This command toggles the intake position to be extended or retracted.
+ * This command toggles the direction of the intake motors.
  */
 public class ReverseIntakeCommand extends CommandBase 
 {
@@ -28,7 +28,16 @@ public class ReverseIntakeCommand extends CommandBase
     @Override
     public void initialize() 
     {
-        subsystem.reverseIntakeRoller();
+        boolean isForward = subsystem.IsIntakeRollerDirectionForwards();
+
+        if(isForward)
+        {
+            subsystem.reverseIntakeRoller();
+        }
+        else
+        {
+            subsystem.startIntakeRoller();
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run

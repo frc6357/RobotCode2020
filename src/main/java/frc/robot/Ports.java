@@ -109,7 +109,6 @@ public class Ports
     public static final int OIDriverSlowmode            = 3;  // Right Trigger Axis
 
 
-
     public static final int OIOperatorJoystick          = 1;
 
     // public static final int OIOperatorStopColorWheel    = 1;    // Button A
@@ -123,7 +122,7 @@ public class Ports
     public static final int OIOperatorActivateIBM       = 2;    // Left Trigger Axis
     public static final int OIOperatorDeactivateBMI     = 3;    // Right Trigger Axis
     
-    public static final int OIOperatorHighHoodAngle     = 5;;    // Left Bumper
+    public static final int OIOperatorHighHoodAngle     = 5;;   // Left Bumper
     public static final int OIOperatorShootBall         = 2;    // Button B
 
     public static final int OIOperatorArmClimb          = 4;    // Button Y

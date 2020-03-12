@@ -22,6 +22,7 @@ public class SK20Intake extends SubsystemBase
     private CANSparkMax intakeRollerMotor;
     private CANEncoder intakeRollerEncoder;
     private LimitSensor intakeBallDetector;
+    private boolean forward;
 
     /**
      * Sets up the intake control such that it takes the values that are declared for it in Ports and assigns them to a BaseRoller and a double solenoid.
@@ -34,6 +35,8 @@ public class SK20Intake extends SubsystemBase
         intakeBallDetector = new LimitSensor(Ports.intakeBallCheck, TuningParams.INTAKE_BALL_CHECK_INVERT);
 
         intakeMover = new DoubleSolenoid(Ports.pcm, Ports.intakeMoverExtend, Ports.intakeMoverRetract);
+
+        forward = true;
     }
 
     /**
@@ -57,17 +60,27 @@ public class SK20Intake extends SubsystemBase
      */
     public void startIntakeRoller()
     {
+        forward = true;
         intakeRoller.setForwards();
     }
 
     /**
-     * When activate intake is called the motor on the intake turns on up to the set speed until it is deactivated
+     * This method sets the intake motor to run in the reverse direction.
      */
     public void reverseIntakeRoller()
     {
+        forward = false;
         intakeRoller.setBackwards();
     }
 
+    /**
+     * Return true if the intake roller is set to run in the forward direction,
+     * false if set to run in reverse.
+     */
+    public boolean IsIntakeRollerDirectionForwards()
+    {
+        return forward;
+    }
     /**
      * When deactivate intake is called on the motor the intake is turned completely off
      */
