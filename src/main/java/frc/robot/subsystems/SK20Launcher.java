@@ -13,12 +13,6 @@ import frc.robot.TuningParams;
 import frc.robot.commands.LauncherActivate;
 import frc.robot.subsystems.base.BaseRoller;
 
-// TODO: IMPORTANT! This class contains a PID controller for the launcher speed
-// but this has never actually been tested or tuned. If we don't have time to do
-// this or if it ends up taking longer than we can affort, it may be a good idea
-// to have a fallback which merely sets the motor speed and leaves it running
-// open loop (without a controller) (DW).
-
 /**
  * This is the launcher subsystem that controls everything that has to do with 
  * the launcher including the transfer from the handling system to the launcher
@@ -57,8 +51,8 @@ public class SK20Launcher extends SubsystemBase
 
     /**
      * This returns the current encoder speed of the launcher
-     * TODO: We need to test this method to see if it actually works the way that we think it does.
-     * @return The current encoder speed of the launcher
+     * 
+     * @return The current speed of the launcher motor in RPM.
      */
     public double getLauncherSpeed()
     {
