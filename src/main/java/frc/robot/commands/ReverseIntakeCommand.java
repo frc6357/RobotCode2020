@@ -28,15 +28,21 @@ public class ReverseIntakeCommand extends CommandBase
     @Override
     public void initialize() 
     {
+        boolean isRunning = subsystem.IsIntakeRollerRunning();
         boolean isForward = subsystem.IsIntakeRollerDirectionForwards();
 
-        if(isForward)
+        // This command does nothing at all if the intake roller is 
+        // already turned off.
+        if(isRunning)
         {
-            subsystem.reverseIntakeRoller();
-        }
-        else
-        {
-            subsystem.startIntakeRoller();
+            if(isForward)
+            {
+                subsystem.reverseIntakeRoller();
+            }
+            else
+            {
+                subsystem.startIntakeRoller();
+            }
         }
     }
 
