@@ -49,7 +49,7 @@ public class RobotContainer
     // The robot's subsystems and commands are defined here...
     // private final SK20ColorWheel m_colorWheelSubsystem = new SK20ColorWheel();
     private final SK20Drive m_driveSubsystem = new SK20Drive();
-    private final SK20Climb m_climbSubsystem = new SK20Climb();
+    // private final SK20Climb m_climbSubsystem = new SK20Climb(); TODO: Renable later
     private final SK20Intake m_intakeSubsystem = new SK20Intake();
     private final SK20Launcher m_launcherSubsystem = new SK20Launcher();
     private final SK20BallHandling m_ballHandlingSubsystem = new SK20BallHandling();
@@ -126,8 +126,8 @@ public class RobotContainer
 
         // Sets robot buttons for the climb command
         // operatorClimbArmDeploy.whenPressed(new ClimbReleaseCommand(m_climbSubsystem, this));
-        runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this));
-        runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this));
+        // runWinchRobot.whenPressed(new WinchRobotCommand(m_climbSubsystem, true, this)); TODO: Renable later
+        // runWinchRobot.whenReleased(new WinchRobotCommand(m_climbSubsystem, false, this)); TODO: Renable later
         
         // Sets the buttons to activate/deactivate intake
         toggleIntake.whenPressed(new ToggleIntakeCommand(m_intakeSubsystem));
@@ -137,9 +137,9 @@ public class RobotContainer
         // toggleBallManagement.whileHeld(new ToggleBallManagementCommand(m_ballHandlingSubsystem));
 
         // Set the ball launcher buttons to do correct commands
-        setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true));
-        setHighAngle.whenReleased(new SetAngleCommand(m_launcherSubsystem, false));
-        launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem));
+        setHighAngle.whenPressed(new SetAngleCommand(m_launcherSubsystem, true)); 
+        setHighAngle.whenReleased(new SetAngleCommand(m_launcherSubsystem, false)); 
+        launchBall.whenPressed(new LaunchBallCommand(m_launcherSubsystem)); 
 
         // Sets robot buttons for the control panel command
         //TODO: Enter code back in again once we're testing the color wheel subsystem.
@@ -207,7 +207,7 @@ public class RobotContainer
                 DriveForwardShootAuto m_DriveShoot = new DriveForwardShootAuto(m_driveSubsystem, m_launcherSubsystem);
                 return m_DriveShoot.getCommandGroup();
 
-            case ShootDriveForward:
+            case ShootDriveForward: 
                 ShootDriveForwardAuto m_ShootDrive = new ShootDriveForwardAuto(m_driveSubsystem, m_launcherSubsystem);
                 return m_ShootDrive.getCommandGroup();
 
