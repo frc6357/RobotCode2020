@@ -36,7 +36,7 @@ public class LauncherActivate extends CommandBase
     @Override
     public void initialize() 
     {
-        // m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE_SLOW);
+        m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE_SLOW);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -45,12 +45,12 @@ public class LauncherActivate extends CommandBase
     {
         if (m_subsystem.isHoodSetToShootHigh())
         {
-            // m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE_SLOW);
+            m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE_SLOW);
         }
 
         else
         {
-            // m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE_FAST);
+            m_subsystem.setLauncherSpeed(TuningParams.LAUNCHER_SET_PERCENTAGE_FAST);
         }
     }
 
