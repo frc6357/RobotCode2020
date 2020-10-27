@@ -12,7 +12,6 @@ import frc.robot.TuningParams;
 import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.subsystems.base.SuperClasses.BaseDrive;
 import frc.robot.subsystems.base.SuperClasses.Gear;
-import frc.robot.subsystems.base.SuperClasses.ShiftPolarity;
 import frc.robot.utils.ScaledEncoder;
 
 public class SK20Drive extends SubsystemBase {
@@ -31,10 +30,8 @@ public class SK20Drive extends SubsystemBase {
             TuningParams.ENCODER_RIGHT_REVERSED, TuningParams.ENCODER_PULSES, TuningParams.WHEEL_DIAMETER);
 
     private final DoubleSolenoid gearShiftSolenoid = new DoubleSolenoid(Ports.pcm, Ports.gearShifterA, Ports.gearShifterB);
-    private final ShiftPolarity shiftPolarity = ShiftPolarity.PRESSURE_IS_LOW;
 
-    private final BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight,
-            gearShiftSolenoid, shiftPolarity);
+    private final BaseDrive drive = new BaseDrive(motorGroupLeft, motorGroupRight, encoderLeft, encoderRight, gearShiftSolenoid);
     private final SmoothDrive smoothDrive = new SmoothDrive(drive);
     private final DefaultDriveCommand driveCommand;
 
@@ -51,6 +48,7 @@ public class SK20Drive extends SubsystemBase {
         setDefaultCommand(driveCommand);
         SmartDashboard.putNumber("left Encoder", encoderLeft.getRotations());
         SmartDashboard.putNumber("right Encoder", encoderRight.getRotations());
+        setGear(Gear.LOW);
     }
 
     /**

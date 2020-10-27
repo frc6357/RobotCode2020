@@ -8,26 +8,23 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.TuningParams;
 import frc.robot.subsystems.SK20Launcher;
 
 /**
- * This command is used to fire a given amount of balls.
+ * This command is used to fire a given amount of time.
  */
-public class FireNumberBallsCommand extends WaitCommand 
+public class FireForTimeCommand extends WaitCommand 
 {
     SK20Launcher m_launcher;
     /**
      * This constructor creates a new command and gets the needed info
      * 
-     * @param numBalls Tell us how many balls we want to shoot
+     * @param Time_mS The number of milliseconds to run the launcher release motor for.
      * @param launcherSubsystem The subsystem needed to shoot
      */
-    public FireNumberBallsCommand(int numBalls, SK20Launcher launcherSubsystem) 
+    public FireForTimeCommand(double Time_mS, SK20Launcher launcherSubsystem) 
     {
-        // Beware! RELEASE_MOTOR_RUNTIME is a millisecond count whereas WaitCommand's 
-        // constructor expects a number of seconds!
-        super(((double)TuningParams.RELEASE_MOTOR_RUNTIME * (double)numBalls) / 1000.0);
+        super(Time_mS / 1000.0);
         addRequirements(launcherSubsystem);
         m_launcher = launcherSubsystem;
     }

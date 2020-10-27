@@ -84,10 +84,7 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit() 
     {
-        SmartDashboard.putBoolean("Ball Management Toggle", true);
-        SmartDashboard.putBoolean("Spin Color Wheel Manually", false);
         m_robotContainer = new RobotContainer();
-
     }
 
     /**
@@ -113,58 +110,25 @@ public class Robot extends TimedRobot
         // boolean IBMToggle = SmartDashboard.getBoolean("Ball Mangement Toggle", true);
         // RobotContainer.toggleBallManagement.setPressed(IBMToggle);
         boolean colorWheelActivate = SmartDashboard.getBoolean("Spin Color Wheel Manually", false);
-        RobotContainer.spinColorWheel.setPressed(colorWheelActivate);
+        // TODO: Reinstate this later
+        // RobotContainer.spinColorWheel.setPressed(colorWheelActivate);
     }
 
     /**
-     * This autonomous (along with the chooser code above) shows how to select
-     * between different autonomous modes using the dashboard. The sendable chooser
-     * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
-     * remove all of the chooser code and uncomment the getString line to get the
-     * auto name from the text box below the Gyro
-     *
-     * <p>
-     * You can add additional auto modes by adding additional comparisons to the
-     * switch structure below with additional strings. If using the SendableChooser
-     * make sure to add them to the chooser code above as well.
+     * This function is called at the beginning of the Autonomous Phase.
+     * At the start of the Autonomous mode initiates the AutonomousCommand 
      */
     @Override
     public void autonomousInit() 
     {
-        
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-        // TODO: GET A REAL AUTO CHOOSER IN LATER!!!
-        
-        // schedule the autonomous command (example)
+
+        // Schedule the autonomous command (example)
         if (m_autonomousCommand != null) 
         {
             m_autonomousCommand.schedule();
         }
-        
-
-
-
-        
-
-        }
-
-        // switch(){
-        // case driveTestModeChoice.TestStraightCommandGroup:
-
-        // break;
-        // case driveTestModeChoice.TestStraightInterruptCommandGroup:
-
-        // break;
-        // case driveTestModeChoice.TestTurnCommandGroup:
-
-        // break;
-        // case driveTestModeChoice.TestTurnInterruptCommandGroup:
-
-        // break;
-        // }
-        
-        
-    
+    }
 
     /**
      * This function is called periodically during autonomous.

@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.Solenoid;
+// import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,12 +18,12 @@ public class SK20Climb extends SubsystemBase
     private SpeedController winchClimbLeft;
     private SpeedController winchClimbRight;
     private SpeedControllerGroup winchMotorGroup;
-    private Solenoid armReleaseSolenoid = null;
+    // private Solenoid armReleaseSolenoid = null;
     
     //assigns values to instantiated objects
     public SK20Climb()
     { 
-        armReleaseSolenoid = new Solenoid(Ports.pcm, Ports.armLockDown);
+        // armReleaseSolenoid = new Solenoid(Ports.pcm, Ports.armLockDown);
         winchClimbLeft = new WPI_VictorSPX(Ports.winchClimbLeft);
         winchClimbRight = new WPI_VictorSPX(Ports.winchClimbRight);
         winchMotorGroup = new SpeedControllerGroup(winchClimbLeft, winchClimbRight);
@@ -34,10 +34,10 @@ public class SK20Climb extends SubsystemBase
      * procress. After the First arm is deployed the second arm will deploy after
      * which the entire climb mechanism will lock into position
      */
-    public void deployArm() 
-    {
-        armReleaseSolenoid.set(TuningParams.DEPLOY_CLIMB_ARM);
-    }
+    // public void deployArm() 
+    // {
+        // armReleaseSolenoid.set(TuningParams.DEPLOY_CLIMB_ARM);
+    // }
 
     /*
      * When the startWinchRobot method is called a motor will start to winch the

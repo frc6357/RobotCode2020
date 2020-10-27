@@ -1,24 +1,17 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANEncoder;
-// import com.revrobotics.CANPIDController;
-import com.revrobotics.CANSparkMax;
-// import com.revrobotics.ControlType;
+import com.revrobotics.*;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.Ports;
 import frc.robot.TuningParams;
 import frc.robot.commands.LauncherActivate;
 import frc.robot.subsystems.base.BaseRoller;
-
-// TODO: IMPORTANT! This class contains a PID controller for the launcher speed
-// but this has never actually been tested or tuned. If we don't have time to do
-// this or if it ends up taking longer than we can affort, it may be a good idea
-// to have a fallback which merely sets the motor speed and leaves it running
-// open loop (without a controller) (DW).
 
 /**
  * This is the launcher subsystem that controls everything that has to do with 
@@ -31,13 +24,15 @@ import frc.robot.subsystems.base.BaseRoller;
 public class SK20Launcher extends SubsystemBase
 {
     private final CANSparkMax launcherMotor = new CANSparkMax(Ports.ballLauncherMotor, MotorType.kBrushless);
-    // private final CANPIDController PIDControl = launcherMotor.getPIDController();
+    private final CANPIDController PIDControl = launcherMotor.getPIDController();
     private final CANEncoder launcherMotorEncoder = new CANEncoder(launcherMotor);
 
     private final CANSparkMax releaseMotor = new CANSparkMax(Ports.ballReleaseMotor, MotorType.kBrushless);
     private final BaseRoller releaseRoller = new BaseRoller(releaseMotor, TuningParams.RELEASE_MOTOR_SPEED);
 
     private final DoubleSolenoid hoodMover = new DoubleSolenoid(Ports.pcm, Ports.launcherHoodExtend, Ports.launcherHoodRetract);
+
+    private double launcherSetpoint = 0.0;
 
     /**
      * This does nothing as everything is intialized inside of the class before the constructor is even called so that 
@@ -49,14 +44,15 @@ public class SK20Launcher extends SubsystemBase
         // there's a very good chance we'll damage something since there's a large flywheel attached 
         // to this subsystem!
         launcherMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
-        // setPIDValues();
+        setPIDValues();
+        setHoodForHighAngleShot(false);
         setDefaultCommand(new LauncherActivate(this, false));
     }
 
     /**
      * This returns the current encoder speed of the launcher
-     * TODO: We need to test this method to see if it actually works the way that we think it does.
-     * @return The current encoder speed of the launcher
+     * 
+     * @return The current speed of the launcher motor in RPM.
      */
     public double getLauncherSpeed()
     {
@@ -65,16 +61,16 @@ public class SK20Launcher extends SubsystemBase
 
     /**
      * Sets the PID values for the controller
-     * @param pVal The proportianal value
-     * @param iVal The integral value
-     * @param dVal The derivative value
      */
-    /**private void setPIDValues()
+    private void setPIDValues()
     {
         PIDControl.setP(TuningParams.LAUNCHER_P_VALUE);
         PIDControl.setI(TuningParams.LAUNCHER_I_VALUE);
         PIDControl.setD(TuningParams.LAUNCHER_D_VALUE);
-    }*/
+        PIDControl.setOutputRange(-1, 0);
+        PIDControl.setIZone(TuningParams.LAUNCHER_IZONE_VALUE);
+        PIDControl.setFF(0.0);
+    }
 
     /**
      * Sets the setpoint of the PID controller
@@ -82,15 +78,15 @@ public class SK20Launcher extends SubsystemBase
      */
     private void setSetpoint(double value)
     {
-        // TODO: Rework when we enable PID
-        // PIDControl.setReference(value, ControlType.kVelocity);
-        launcherMotor.set(value);
+        launcherSetpoint = value * TuningParams.LAUNCHER_MAX_RPM;
+        PIDControl.setReference(launcherSetpoint, ControlType.kVelocity);
+        SmartDashboard.putNumber("Launcher Setpoint", launcherSetpoint);
     }
 
     /**
      * It sets the hood according to whatever position it is passed
      */
-    public void setHoodUp(boolean value)
+    public void setHoodForHighAngleShot(boolean value)
     {
         DoubleSolenoid.Value sendVal = value ? Value.kForward: Value.kReverse;
         hoodMover.set(sendVal);
@@ -100,7 +96,7 @@ public class SK20Launcher extends SubsystemBase
      * Checks to see what position the hood is in
      * @return The value of the double solenoid
      */
-    public boolean isHoodPositionHigh()
+    public boolean isHoodSetToShootHigh()
     {
         DoubleSolenoid.Value value = hoodMover.get();
 
@@ -131,5 +127,11 @@ public class SK20Launcher extends SubsystemBase
     public void stopLaunchReleaseMotor()
     {
         releaseRoller.setStop();
+    }
+
+    @Override
+    public void periodic()
+    {
+        SmartDashboard.putNumber("Launcher Encoder Value", launcherMotorEncoder.getVelocity());
     }
 }

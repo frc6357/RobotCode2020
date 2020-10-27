@@ -1,15 +1,13 @@
 package frc.robot.subsystems;
 
-//import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
 import frc.robot.TuningParams;
-import frc.robot.commands.DefaultBallHandlingCommand;
 import frc.robot.subsystems.base.BaseRoller;
-//import frc.robot.subsystems.base.LimitSensor;
+import frc.robot.commands.DefaultBallHandlingCommand;
 
 /**
  * Sets the methods that are used to hold and control the balls inside of the
@@ -18,18 +16,10 @@ import frc.robot.subsystems.base.BaseRoller;
 public class SK20BallHandling extends SubsystemBase {
     private CANSparkMax beltMotor1;
     private CANSparkMax beltMotor2;
-    //private CANEncoder beltEncoder1;
     private BaseRoller ballBelt1;
-    //private CANEncoder beltEncoder2;
     private BaseRoller ballBelt2;
     private final DefaultBallHandlingCommand ballHandling;
     private boolean systemMotorsAreEnabled = false;
-
-    // private LimitSensor[] ballSensors = {new LimitSensor(Ports.ballSensor1, TuningParams.BALL_SENSOR_1_INVERT), 
-                                            // new LimitSensor(Ports.ballSensor2, TuningParams.BALL_SENSOR_2_INVERT),
-                                            // new LimitSensor(Ports.ballSensor3, TuningParams.BALL_SENSOR_3_INVERT), 
-                                            // new LimitSensor(Ports.ballSensor4, TuningParams.BALL_SENSOR_4_INVERT),
-                                            // new LimitSensor(Ports.ballSensor5, TuningParams.BALL_SENSOR_5_INVERT)};
 
     /**
      * Activates the roller that is used for the main ballBelt
@@ -38,13 +28,14 @@ public class SK20BallHandling extends SubsystemBase {
     {
         beltMotor1 = new CANSparkMax(Ports.ballHandlingBelt, MotorType.kBrushless);
         beltMotor2 = new CANSparkMax(Ports.ballHandlingBelt2, MotorType.kBrushless);
-        // TODO: Encoders commented out since no-one currently uses getRollerSpeed().
-        //beltEncoder1 = new CANEncoder(beltMotor1);
-        //beltEncoder2 = new CANEncoder(beltMotor2);
+
         ballBelt1 = new BaseRoller(beltMotor1, TuningParams.BALL_INNER_SPEED);
         ballBelt2 = new BaseRoller(beltMotor2, TuningParams.BALL_OUTER_SPEED);
+
         ballHandling = new DefaultBallHandlingCommand(this, false);
         setDefaultCommand(ballHandling);
+
+        SmartDashboard.putBoolean("Ball Handler Active", systemMotorsAreEnabled);
     }
 
     /**
@@ -55,6 +46,7 @@ public class SK20BallHandling extends SubsystemBase {
         ballBelt1.setForwards();
         ballBelt2.setForwards();
         systemMotorsAreEnabled = true;
+        SmartDashboard.putBoolean("Ball Handler Active", systemMotorsAreEnabled);
     }
 
     /**
@@ -65,6 +57,7 @@ public class SK20BallHandling extends SubsystemBase {
         ballBelt1.setStop();
         ballBelt2.setStop();
         systemMotorsAreEnabled = false;
+        SmartDashboard.putBoolean("Ball Handler Active", systemMotorsAreEnabled);
     }
 
 

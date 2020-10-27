@@ -29,7 +29,7 @@ public class Ports
     public static final int backLeftDrive               = 12; // CAN ID
     public static final int backRightDrive              = 13; // CAN ID
 
-    public static final int gearShifterA                = 3; // PCM 0 ID 7 TODO: THERE NEEDS TO BE A 5 HERE
+    public static final int gearShifterA                = 3; // PCM 0 ID
     public static final int gearShifterB                = 4;
 
     public static final int leftEncoderA                = 0;  // DIO
@@ -42,8 +42,8 @@ public class Ports
     //////////////////////////////
     public static final int intakeMotor                 = 20; // CAN ID
 
-    public static final int intakeMoverExtend           = 5;  // PCM 1, Output 0
-    public static final int intakeMoverRetract          = 2;  // PCM 1, Output 1
+    public static final int intakeMoverExtend           = 5;  // PCM 1, Output
+    public static final int intakeMoverRetract          = 2;  // PCM 1, Output
 
     public static final int intakeOpenCheck             = 4;  // DIO
     public static final int intakeSpeedCheckA           = 5;  // DIO
@@ -69,8 +69,8 @@ public class Ports
     public static final int ballLoaderMotor             = 24; // CAN ID
     public static final int ballReleaseMotor            = 25; // CAN ID
 
-    public static final int launcherHoodExtend          = 0;  // PCM 1, Output 4
-    public static final int launcherHoodRetract         = 7;  // PCM 1, Output 5
+    public static final int launcherHoodExtend          = 1;  // PCM 1, Output
+    public static final int launcherHoodRetract         = 6;  // PCM 1, Output
 
     ///////////////////////////////
     // Climb Addresses
@@ -85,8 +85,8 @@ public class Ports
     ///////////////////////////////
     public static final int colorWheelSpinner           = 40; // CAN ID
 
-    public static final int colorSpinnerExtend          = 1;  // PCM 2, Output 0
-    public static final int colorSpinnerRetract         = 6;  // PCM 2, Output 1
+    public static final int colorSpinnerExtend          = 0;  // PCM 2, Output 
+    public static final int colorSpinnerRetract         = 7;  // PCM 2, Output
 
 
 
@@ -103,35 +103,31 @@ public class Ports
     public static final int OIDriverLeftDrive           = 1;  // Left Joystick Y
     public static final int OIDriverRightDrive          = 5;  // Right Joystick Y
 
-    public static final int OIDriverSetLowGear          = 1;  // Sets the low gear (A)
-    public static final int OIDriverSetHighGear         = 4;  // Sets the high gear (Y) 
+    public static final int OIDriverSetLowGear          = 5;  // Set low gear (LeftBumper)
+    public static final int OIDriverSetHighGear         = 6;  // Set high gear (RightBumper)
 
-    public static final int OIDriverSetSlowmodeLeft     = 5;  // Set slowmode (LeftBumper)
-    public static final int OIDriverSetSlowmodeRight    = 6;  // Set slowmode (RightBumper)
-
+    public static final int OIDriverSlowmode            = 3;  // Right Trigger Axis
 
 
     public static final int OIOperatorJoystick          = 1;
 
-    public static final int OIOperatorStopColorWheel    = 1;    // Button A
+    // public static final int OIOperatorStopColorWheel    = 1;    // Button A
     // public static final int OIOperatorStartThreeRotate  = 9;    // Left Joystick press button
     public static final int OIOperatorStartSetColor     = 10;   // Right Joystick press button
-    public static final int OIOperatorColorWheelSpin    = 8;    // Start button
     public static final int OIOperatorColorWheelLift    = 7;    // Back button
-
-    public static final int OIOperatorShootBall         = 2;    // Button B
+    
     public static final int OIOperatorToggleIntake      = 3;    // Button X
-    public static final int OIOperatorToggleBallManagement  = 180;  // POV Angle
-    public static final int OIOperatorLeftJoystickClick = 9;
-
-    public static final int OIOperatorSetHighAngle      = 0;    // POV Angle
+    public static final int OIOperatorReverseIntake     = 9;    // Left Joystick Button
+    
+    public static final int OIOperatorActivateIBM       = 2;    // Left Trigger Axis
+    public static final int OIOperatorDeactivateBMI     = 3;    // Right Trigger Axis
+    
+    public static final int OIOperatorHighHoodAngle     = 5;;   // Left Bumper
+    public static final int OIOperatorShootBall         = 2;    // Button B
 
     public static final int OIOperatorArmClimb          = 4;    // Button Y
-    public static final int OIOperatorDeployArm         = 5;    // Pneumatic for releasing the arm (Left Bumper)
     public static final int OIOperatorRunWinchArm       = 6;    // Motor for Winching arm while held (RightBumper)
 
-    public static final int OIOperatorLeftTrigger       = 2;    // Reactivate Transfer motor
-    public static final int OIOperatorRightTrigger      = 3;    // Deactivate Transfer Motor
 
 
 
