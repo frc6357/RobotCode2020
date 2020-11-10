@@ -1,1 +1,0 @@
-Each member of the software team has a folder under this directory into which they can add their own, personal testcases and experiments - code that isn't going to end up in the build for the robot but which may be useful for reference or test later.

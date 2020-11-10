@@ -1,1 +1,0 @@
-This directory may be used to store experiments or personal code projects that are not intended to be included in the main robot code image.
